@@ -17,6 +17,9 @@ C_TEXT($2;$vt_extraText)  // Optional stuff
   //   Mod: DB (05/22/2017) - Moved to v16 component
   // ----------------------------------------------------
 
+ASSERT(Count parameters>0)
+ASSERT(Count parameters<=2)
+
 C_TEXT($vt_FullMethodName)
 $vt_callingMethod:=$1
 If (Count parameters>=2)
@@ -27,21 +30,16 @@ If ($vt_extraText#"")
 $vt_FullMethodName:=$vt_FullMethodName+" ("+$vt_extraText+")"
 End if 
 
-  //   Mod by: Dani Beaubien (02/16/2015) - To support flame graphs
-$vt_FullLocalMethodName:=$vt_FullMethodName
-For ($i;Size of array(_LOGMETHOD_CallingStack)-1;1;-1)
-$vt_FullLocalMethodName:=_LOGMETHOD_CallingStack{$i}+";"+$vt_FullLocalMethodName
-End for 
 
 Init_ThreadSafe 
 
 C_LONGINT($size)
-$size:=Size of array(_LOGMETHOD_CallingStack)
+$size:=Size of array(_ML_STACK_CallingStack)
 
 If ($size>0)
 
   // # Make sure that the STOPPED method matches what is expected
-If ($vt_callingMethod#_LOGMETHOD_CallingStack{$size}) | ($vt_extraText#_LOGMETHOD_ExtraText{$size})
+If ($vt_callingMethod#_ML_STACK_CallingStack{$size}) | ($vt_extraText#_ML_STACK_ExtraText{$size})
 
   //   Mod: DB (01/28/2014) - Improved error checks
 C_TEXT($vt_msg)
@@ -49,64 +47,47 @@ $vt_msg:=" called with $1 = '"+$vt_callingMethod+"'"
 If ($vt_extraText#"")
 $vt_msg:=$vt_msg+" and $2 = '"+$vt_extraText+"'"
 End if 
-$vt_msg:=$vt_msg+" but expecting $1 = '"+_LOGMETHOD_CallingStack{$size}+"'"
-If (_LOGMETHOD_ExtraText{$size}#"")
-$vt_msg:=$vt_msg+" and $2 = '"+_LOGMETHOD_ExtraText{$size}+"'"
+$vt_msg:=$vt_msg+" but expecting $1 = '"+_ML_STACK_CallingStack{$size}+"'"
+If (_ML_STACK_ExtraText{$size}#"")
+$vt_msg:=$vt_msg+" and $2 = '"+_ML_STACK_ExtraText{$size}+"'"
 End if 
 Log_ERR (Current method name+$vt_msg;"Process")
 
 
   // Try to recover
 If ($size>1)
-If ($1=_LOGMETHOD_CallingStack{$size-1})  // does the item before this one match?
+If ($1=_ML_STACK_CallingStack{$size-1})  // does the item before this one match?
   // If so, then pull the "bad one" off.
-Array_SetSize ($size-1;->_LOGMETHOD_CallingStack;->_LOGMETHOD_ExtraText;->_LOGMETHOD_msStart;->_LOGMETHOD_wasteTime)
+Array_SetSize ($size-1;->_ML_STACK_CallingStack;->_ML_STACK_ExtraText;->_ML_STACK_msStart;->_ML_STACK_wasteTime)
 $size:=$size-1
-
-  //If ($size>0)  //   Mod by: Dani Beaubien (02/16/2015) - To support a flame graph
-  //$vt_FullLocalMethodName:=_LOGMETHOD_CallingStack{$size}+"."+$vt_FullLocalMethodName
-  //End if 
 End if 
 End if 
 End if 
 
 
-C_LONGINT($vl_msStop)
-$vl_msStop:=Milliseconds
+C_REAL($vr_msStop)
+$vr_msStop:=Milliseconds
 
   // # Track the time
 C_LONGINT($vl_timeToExecute)
-$vl_timeToExecute:=$vl_msStop-_LOGMETHOD_msStart{$size}  // time between start & end
-$vl_timeToExecute:=$vl_timeToExecute-_LOGMETHOD_wasteTime{$size}  // remove the child method's time
+$vl_timeToExecute:=$vr_msStop-_ML_STACK_msStart{$size}  // time between start & end
+$vl_timeToExecute:=$vl_timeToExecute-_ML_STACK_wasteTime{$size}  // remove the child method's time
 If ($size>1)  // add our execute time to the calling parent method
-_LOGMETHOD_wasteTime{$size-1}:=_LOGMETHOD_wasteTime{$size-1}+_LOGMETHOD_wasteTime{$size}  // add child method times
-_LOGMETHOD_wasteTime{$size-1}:=_LOGMETHOD_wasteTime{$size-1}+$vl_timeToExecute  // add current method times
+_ML_STACK_wasteTime{$size-1}:=_ML_STACK_wasteTime{$size-1}+_ML_STACK_wasteTime{$size}  // add child method times
+_ML_STACK_wasteTime{$size-1}:=_ML_STACK_wasteTime{$size-1}+$vl_timeToExecute  // add current method times
 End if 
 
+  // Track by method name
+Performance_TrackCall ($vt_FullMethodName;$vl_timeToExecute;->_ML_Perf_Method;->_ML_Perf_minTime;->_ML_Perf_maxTime;->_ML_Perf_totalTime;->_ML_Perf_count)
 
-  // # Add our tracking info to our local arrays
-$pos:=Find in array(_LOGMETHOD_PROF_Method;$vt_FullLocalMethodName)
-If ($pos<1)
-$pos:=Size of array(_LOGMETHOD_PROF_Method)+1
-APPEND TO ARRAY(_LOGMETHOD_PROF_Method;$vt_FullLocalMethodName)
-APPEND TO ARRAY(_LOGMETHOD_PROF_minTime;$vl_timeToExecute)
-APPEND TO ARRAY(_LOGMETHOD_PROF_maxTime;$vl_timeToExecute)
-APPEND TO ARRAY(_LOGMETHOD_PROF_totalTime;$vl_timeToExecute)
-APPEND TO ARRAY(_LOGMETHOD_PROF_count;1)
+  // Track by flamegraph name
+C_TEXT($vt_MethodName_FlameGraph)
+$vt_MethodName_FlameGraph:=STR_GetFlameGraphNameFromStack ($vt_FullMethodName;->_ML_STACK_CallingStack)
+Performance_TrackCall ($vt_MethodName_FlameGraph;$vl_timeToExecute;->_ML_Flame_Method;->_ML_Flame_minTime;->_ML_Flame_maxTime;->_ML_Flame_totalTime;->_ML_Flame_count)
 
-Else 
-If (_LOGMETHOD_PROF_minTime{$pos}>$vl_timeToExecute)
-_LOGMETHOD_PROF_minTime{$pos}:=$vl_timeToExecute
-End if 
-If (_LOGMETHOD_PROF_maxTime{$pos}<$vl_timeToExecute)
-_LOGMETHOD_PROF_maxTime{$pos}:=$vl_timeToExecute
-End if 
-_LOGMETHOD_PROF_totalTime{$pos}:=_LOGMETHOD_PROF_totalTime{$pos}+$vl_timeToExecute
-_LOGMETHOD_PROF_count{$pos}:=_LOGMETHOD_PROF_count{$pos}+1
-End if 
 
   // Pull it off the list
-Array_SetSize ($size-1;->_LOGMETHOD_CallingStack;->_LOGMETHOD_ExtraText;->_LOGMETHOD_msStart;->_LOGMETHOD_wasteTime)
+Array_SetSize ($size-1;->_ML_STACK_CallingStack;->_ML_STACK_ExtraText;->_ML_STACK_msStart;->_ML_STACK_wasteTime)
 End if 
 
 

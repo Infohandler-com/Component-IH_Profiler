@@ -8,11 +8,12 @@ C_LONGINT($1;$vl_ERROR)
   // ----------------------------------------------------
   // HISTORY
   //   Created by: DB (01/14/09)
+  //   Mod: DB (05/22/2017) - Moved to v16 component
   // ----------------------------------------------------
 
 Init_ThreadSafe 
 
-If (Size of array(_LOGMETHOD_CallingStack)>0)
+If (Size of array(_ML_STACK_CallingStack)>0)
 If (Count parameters>=1)
 $vl_ERROR:=$1
 Else 
@@ -33,17 +34,17 @@ $vt_buffer:=$vt_buffer+"]: ###### CALLING CHAIN DUMP"+Char(Carriage return)
 
   // Output the calling chain
 C_LONGINT($i)
-For ($i;1;Size of array(_LOGMETHOD_CallingStack))
-$vt_buffer:=$vt_buffer+" Lvl "+String($i;"##00")+": "+("   "*($i-1))+_LOGMETHOD_CallingStack{$i}
-If (_LOGMETHOD_ExtraText{$i}#"")
-$vt_buffer:=$vt_buffer+" -- "+_LOGMETHOD_ExtraText{$i}
+For ($i;1;Size of array(_ML_STACK_CallingStack))
+$vt_buffer:=$vt_buffer+" Lvl "+String($i;"##00")+": "+("   "*($i-1))+_ML_STACK_CallingStack{$i}
+If (_ML_STACK_ExtraText{$i}#"")
+$vt_buffer:=$vt_buffer+" -- "+_ML_STACK_ExtraText{$i}
 End if 
 $vt_buffer:=$vt_buffer+Char(Carriage return)
 End for 
 
   // Output our ERROR # 
 If ($vl_ERROR#0)
-$vt_buffer:=$vt_buffer+" Lvl "+String(Size of array(_LOGMETHOD_CallingStack);"##00")+": "+("   "*(Size of array(_LOGMETHOD_CallingStack)))+"above method triggered err #"+String($vl_ERROR)+Char(Carriage return)
+$vt_buffer:=$vt_buffer+" Lvl "+String(Size of array(_ML_STACK_CallingStack);"##00")+": "+("   "*(Size of array(_ML_STACK_CallingStack)))+"above method triggered err #"+String($vl_ERROR)+Char(Carriage return)
 End if 
 
 LogNamed_AppendToFile ("MethodStats";$vt_buffer)

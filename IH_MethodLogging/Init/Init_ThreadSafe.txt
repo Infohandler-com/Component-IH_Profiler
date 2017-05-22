@@ -11,22 +11,31 @@
   // ----------------------------------------------------
 
 
-C_BOOLEAN(_LogMethod_inited)
-If (Not(_LogMethod_inited))
-_LogMethod_inited:=True
+C_BOOLEAN(_ML_STACK_inited)
+If (Not(_ML_STACK_inited))
+_ML_STACK_inited:=True
 
 C_LONGINT(__incrementLevel)
 __incrementLevel:=0
 
-ARRAY TEXT(_LOGMETHOD_CallingStack;0)
-ARRAY TEXT(_LOGMETHOD_ExtraText;0)
-ARRAY LONGINT(_LOGMETHOD_msStart;0)  // Holds the start time of the method call
-ARRAY LONGINT(_LOGMETHOD_wasteTime;0)  // Holds time spent on internal calls
+  // arrays used for the method calling chain
+ARRAY TEXT(_ML_STACK_CallingStack;0)
+ARRAY TEXT(_ML_STACK_ExtraText;0)
+ARRAY REAL(_ML_STACK_msStart;0)  // Holds the start time of the method call
+ARRAY REAL(_ML_STACK_wasteTime;0)  // Holds time spent on internal calls
 
+  // arrays used to track the method performance for flamegraph
+ARRAY TEXT(_ML_Flame_Method;0)
+ARRAY LONGINT(_ML_Flame_minTime;0)
+ARRAY LONGINT(_ML_Flame_maxTime;0)
+ARRAY REAL(_ML_Flame_totalTime;0)
+ARRAY LONGINT(_ML_Flame_count;0)
 
-ARRAY TEXT(_LOGMETHOD_PROF_Method;0)
-ARRAY LONGINT(_LOGMETHOD_PROF_minTime;0)
-ARRAY LONGINT(_LOGMETHOD_PROF_maxTime;0)
-ARRAY REAL(_LOGMETHOD_PROF_totalTime;0)
-ARRAY LONGINT(_LOGMETHOD_PROF_count;0)
+  // arrays used to track the method performance for flamegraph
+ARRAY TEXT(_ML_Perf_Method;0)
+ARRAY LONGINT(_ML_Perf_minTime;0)
+ARRAY LONGINT(_ML_Perf_maxTime;0)
+ARRAY REAL(_ML_Perf_totalTime;0)
+ARRAY LONGINT(_ML_Perf_count;0)
+
 End if 

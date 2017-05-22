@@ -2,6 +2,7 @@
   // Method: OnErr_GENERIC
   //   The simplest error handler
   // Modified by: Dani Beaubien (9/9/13) - Enhanced the information that is coming out
+  //   Mod: DB (05/22/2017) - Moved to v16 component
 
 C_LONGINT(gError)
 gError:=Error

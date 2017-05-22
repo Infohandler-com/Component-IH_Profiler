@@ -9,17 +9,17 @@ If (False)
   // ----------------------------------------------------
   // HISTORY
   //   Created by: DB (10/29/10)
+  //   Mod: DB (05/22/2017) - Moved to v16 component
   // ----------------------------------------------------
 End if 
 
 Init_ThreadSafe 
 
-If (Size of array(_LOGMETHOD_PROF_Method)=0)
+If (Size of array(_ML_Flame_Method)=0)
 Log_WARN ("  No method profile statistics";"Process")
 
 Else 
-Log_WARN ("  **** "+String(Size of array(_LOGMETHOD_PROF_Method))+" Method profile statistics records saved directly to the log file";"Process")
+Log_WARN ("  **** "+String(Size of array(_ML_Flame_Method))+" Method profile statistics records saved directly to the log file";"Process")
 LogNamed_AppendToFile ("MethodStats";Logging_Method_ProfileStats2Txt )  //;"noProc#";"noTimeStamp";"beQuiet")
-
-  //Logging_Method_TrackFlameStats("dumpProfileStats")  //   Mod: DB (05/03/2016)
+Logging_Method_TrackFlameStats ("MethodStats")  //   Mod: DB (05/03/2016)
 End if 

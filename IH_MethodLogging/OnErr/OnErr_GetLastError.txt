@@ -10,6 +10,8 @@
   // Parameters
 C_LONGINT($0;gError)
   // ----------------------------------------------------
+  //   Mod: DB (05/22/2017) - Moved to v16 component
+  // ----------------------------------------------------
 
   // gError is set by the other OnErr methods.
 $0:=gError

@@ -7,8 +7,18 @@ Logging_Method_START ("test1")
 
 Logging_Method_START ("test2")
 
+Logging_Method_START ("test3")
+Logging_Method_STOP ("test3")
 
+Logging_Method_START ("test3")
+DELAY PROCESS(Current process;1)
+Logging_Method_STOP ("test3")
+DELAY PROCESS(Current process;1)
 Logging_Method_STOP ("test2")
+
+Logging_Method_START ("test3")
+Logging_Method_STOP ("test3")
+DELAY PROCESS(Current process;1)
 
 Logging_Method_STOP ("test1")
 

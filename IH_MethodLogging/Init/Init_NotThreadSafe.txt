@@ -11,13 +11,13 @@
   // ----------------------------------------------------
 
 
-C_BOOLEAN(<>_LogMethod_inited)
-If (Not(<>_LogMethod_inited))
-<>_LogMethod_inited:=True
+C_BOOLEAN(<>_ML_STACK_inited)
+If (Not(<>_ML_STACK_inited))
+<>_ML_STACK_inited:=True
 
-ARRAY TEXT(<>_LOGMETHOD_GLBL_PROF_Method;0)
-ARRAY LONGINT(<>_LOGMETHOD_GLBL_PROF_minTime;0)
-ARRAY LONGINT(<>_LOGMETHOD_GLBL_PROF_maxTime;0)
-ARRAY REAL(<>_LOGMETHOD_GLBL_PROF_totalTime;0)
-ARRAY LONGINT(<>_LOGMETHOD_GLBL_PROF_count;0)
+ARRAY TEXT(<>_ML_STACK_GLBL_PROF_Method;0)
+ARRAY LONGINT(<>_ML_STACK_GLBL_PROF_minTime;0)
+ARRAY LONGINT(<>_ML_STACK_GLBL_PROF_maxTime;0)
+ARRAY REAL(<>_ML_STACK_GLBL_PROF_totalTime;0)
+ARRAY LONGINT(<>_ML_STACK_GLBL_PROF_count;0)
 End if 
