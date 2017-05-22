@@ -1,0 +1,34 @@
+﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // Logging_Method_START (methodName {;optionalText})
+  // Logging_Method_START (text {;text})
+  // 
+  // DESCRIPTION
+  //   Used to log entering a method.
+  //
+C_TEXT($1)  // method name
+C_TEXT($2)  // OPTIONAL; optional text
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (11/23/07)
+  //   Mod: DB (10/29/2010) - Track start time
+  //   Mod: DB (11/22/2010) - support performance tracking switch
+  //   Mod: DB (01/20/2011) - Method stack always being tracked
+  //   Mod: DB (05/22/2017) - Moved to v16 component
+  // ----------------------------------------------------
+
+Init_ThreadSafe 
+
+C_LONGINT($vl_msStart)
+$vl_msStart:=Milliseconds
+
+  // Add our method to the call stack
+APPEND TO ARRAY(_LOGMETHOD_CallingStack;$1)
+If (Count parameters=2)
+APPEND TO ARRAY(_LOGMETHOD_ExtraText;$2)
+Else 
+APPEND TO ARRAY(_LOGMETHOD_ExtraText;"")
+End if 
+APPEND TO ARRAY(_LOGMETHOD_msStart;$vl_msStart)
+APPEND TO ARRAY(_LOGMETHOD_wasteTime;0)
+
+__incrementLevel:=__incrementLevel+1

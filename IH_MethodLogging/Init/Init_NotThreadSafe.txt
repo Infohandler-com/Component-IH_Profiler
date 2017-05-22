@@ -1,0 +1,23 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"incapable","lang":"en"} comment added and reserved by 4D.
+  // Init_NotThreadSafe ()
+  // 
+  // DESCRIPTION
+  //   This method forces the logging module to be reinitd
+  //   for the global process vars
+  //
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (05/22/2017)
+  // ----------------------------------------------------
+
+
+C_BOOLEAN(<>_LogMethod_inited)
+If (Not(<>_LogMethod_inited))
+<>_LogMethod_inited:=True
+
+ARRAY TEXT(<>_LOGMETHOD_GLBL_PROF_Method;0)
+ARRAY LONGINT(<>_LOGMETHOD_GLBL_PROF_minTime;0)
+ARRAY LONGINT(<>_LOGMETHOD_GLBL_PROF_maxTime;0)
+ARRAY REAL(<>_LOGMETHOD_GLBL_PROF_totalTime;0)
+ARRAY LONGINT(<>_LOGMETHOD_GLBL_PROF_count;0)
+End if 

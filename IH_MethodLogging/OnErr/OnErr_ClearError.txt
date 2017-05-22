@@ -1,0 +1,4 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+
+C_LONGINT(gError)
+gError:=0

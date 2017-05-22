@@ -1,0 +1,49 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // Logging_Method_ProfileStats2Txt () : statsAsText
+  // Logging_Method_ProfileStats2Txt () : text
+  // 
+  // DESCRIPTION
+  //   This method dumps to a text variable contents of
+  //   the profile arrays
+  //
+C_TEXT($0;$vt_buffer)
+  // ----------------------------------------------------
+  // CALLED BY
+  //   Logging_Method_DumpProfileStats
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (05/10/11)
+  //   Mod: DB (01/28/2014) - Added Total to output
+  //   Mod by: Dani Beaubien (03/28/2014) - Changed output to be "-"'s
+  // ----------------------------------------------------
+
+Init_ThreadSafe 
+
+If (Size of array(_LOGMETHOD_PROF_Method)>0)
+$vt_buffer:="\r"+("-"*40)+"\r"
+$vt_buffer:=$vt_buffer+("-"*40)+"\r"
+$vt_buffer:=$vt_buffer+"METHOD NAME (LOCAL)\t"
+$vt_buffer:=$vt_buffer+"Call Count\t"
+$vt_buffer:=$vt_buffer+"Min (ms)\t"
+$vt_buffer:=$vt_buffer+"Avg (ms)\t"
+$vt_buffer:=$vt_buffer+"Max (ms)\t"
+$vt_buffer:=$vt_buffer+"Total (ms)\r"  //   Mod: DB (01/28/2014)
+$vt_buffer:=$vt_buffer+("-"*40)+"\r"
+
+SORT ARRAY(_LOGMETHOD_PROF_Method;_LOGMETHOD_PROF_minTime;_LOGMETHOD_PROF_maxTime;_LOGMETHOD_PROF_totalTime;_LOGMETHOD_PROF_count)
+For ($i;1;Size of array(_LOGMETHOD_PROF_Method))
+$vt_buffer:=$vt_buffer+_LOGMETHOD_PROF_Method{$i}+Char(Tab)
+$vt_buffer:=$vt_buffer+String(_LOGMETHOD_PROF_count{$i})+Char(Tab)
+$vt_buffer:=$vt_buffer+String(_LOGMETHOD_PROF_minTime{$i})+Char(Tab)
+If (_LOGMETHOD_PROF_totalTime{$i}>0)
+$vt_buffer:=$vt_buffer+String(_LOGMETHOD_PROF_totalTime{$i}/_LOGMETHOD_PROF_count{$i};"###,###,###,###,##0.00")+Char(Tab)
+Else 
+$vt_buffer:=$vt_buffer+"0"+Char(Tab)
+End if 
+$vt_buffer:=$vt_buffer+String(_LOGMETHOD_PROF_maxTime{$i})+Char(Tab)
+$vt_buffer:=$vt_buffer+String(_LOGMETHOD_PROF_totalTime{$i})+Char(Carriage return)  //   Mod: DB (01/28/2014)
+End for 
+$vt_buffer:=$vt_buffer+("-"*40)+"\r"
+End if 
+
+$0:=$vt_buffer

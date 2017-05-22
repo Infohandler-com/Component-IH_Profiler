@@ -1,0 +1,25 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // Logging_Method_DumpProfileStats ()
+  // 
+  // DESCRIPTION
+  //   This method dumps to the log file the contents of
+  //   the profile arrays
+  //
+If (False)
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (10/29/10)
+  // ----------------------------------------------------
+End if 
+
+Init_ThreadSafe 
+
+If (Size of array(_LOGMETHOD_PROF_Method)=0)
+Log_WARN ("  No method profile statistics";"Process")
+
+Else 
+Log_WARN ("  **** "+String(Size of array(_LOGMETHOD_PROF_Method))+" Method profile statistics records saved directly to the log file";"Process")
+LogNamed_AppendToFile ("MethodStats";Logging_Method_ProfileStats2Txt )  //;"noProc#";"noTimeStamp";"beQuiet")
+
+  //Logging_Method_TrackFlameStats("dumpProfileStats")  //   Mod: DB (05/03/2016)
+End if 

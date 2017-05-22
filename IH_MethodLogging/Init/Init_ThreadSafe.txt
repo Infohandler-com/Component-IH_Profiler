@@ -1,0 +1,32 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // Init_ThreadSafe ()
+  // 
+  // DESCRIPTION
+  //   Thread Safe.
+  //   Initalized the process variables.
+  //
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (05/22/2017)
+  // ----------------------------------------------------
+
+
+C_BOOLEAN(_LogMethod_inited)
+If (Not(_LogMethod_inited))
+_LogMethod_inited:=True
+
+C_LONGINT(__incrementLevel)
+__incrementLevel:=0
+
+ARRAY TEXT(_LOGMETHOD_CallingStack;0)
+ARRAY TEXT(_LOGMETHOD_ExtraText;0)
+ARRAY LONGINT(_LOGMETHOD_msStart;0)  // Holds the start time of the method call
+ARRAY LONGINT(_LOGMETHOD_wasteTime;0)  // Holds time spent on internal calls
+
+
+ARRAY TEXT(_LOGMETHOD_PROF_Method;0)
+ARRAY LONGINT(_LOGMETHOD_PROF_minTime;0)
+ARRAY LONGINT(_LOGMETHOD_PROF_maxTime;0)
+ARRAY REAL(_LOGMETHOD_PROF_totalTime;0)
+ARRAY LONGINT(_LOGMETHOD_PROF_count;0)
+End if 
