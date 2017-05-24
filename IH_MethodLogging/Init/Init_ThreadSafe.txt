@@ -1,15 +1,23 @@
 ﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
-  // Init_ThreadSafe ()
+  // Init_ThreadSafe ({forced})
+  // Init_ThreadSafe ({boolean})
   // 
   // DESCRIPTION
   //   Thread Safe.
   //   Initalized the process variables.
   //
+C_BOOLEAN($1)
   // ----------------------------------------------------
   // HISTORY
   //   Created by: DB (05/22/2017)
+  //   Mod: DB (05/23/2017) - Added optional param to force reInit.
   // ----------------------------------------------------
 
+If (Count parameters=1)
+If ($1=True)  // force a refresh?
+_ML_STACK_inited:=False
+End if 
+End if 
 
 C_BOOLEAN(_ML_STACK_inited)
 If (Not(_ML_STACK_inited))

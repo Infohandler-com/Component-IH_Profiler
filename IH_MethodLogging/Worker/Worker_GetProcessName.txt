@@ -1,0 +1,10 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // Worker_GetProcessName () : workerName
+  // 
+C_TEXT($0)
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (05/23/2017)
+  // ----------------------------------------------------
+
+$0:="PerfLogger_TS"

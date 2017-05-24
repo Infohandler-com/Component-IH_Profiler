@@ -1,8 +1,9 @@
-﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
-  // Logging_Method_DumpCallStack ()
+﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // Profiler_LogCallStack ({errorNo})
   // 
   // DESCRIPTION
-  //   Dumps the call stack to the log
+  //   Dumps the local process's call stack to the log.
+  //   Appends the errorNo if one is passed in.
   //
 C_LONGINT($1;$vl_ERROR)
   // ----------------------------------------------------
@@ -47,5 +48,5 @@ If ($vl_ERROR#0)
 $vt_buffer:=$vt_buffer+" Lvl "+String(Size of array(_ML_STACK_CallingStack);"##00")+": "+("   "*(Size of array(_ML_STACK_CallingStack)))+"above method triggered err #"+String($vl_ERROR)+Char(Carriage return)
 End if 
 
-LogNamed_AppendToFile ("MethodStats";$vt_buffer)
+LogNamed_AppendToFile ("ProfilerStats";$vt_buffer)
 End if 

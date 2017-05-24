@@ -14,6 +14,10 @@ ON ERR CALL("OnErr_GENERIC")
 OnErr_ClearError 
 
 $size:=$1
+If ($size<0)
+$size:=0
+End if 
+
 For ($param;2;Count parameters)
 
 $array:=${$param}
@@ -21,6 +25,7 @@ $currentSize:=Size of array($array->)
 Case of 
 : ($currentSize<$size)
 INSERT IN ARRAY($array->;$currentSize+1;$size-$currentSize)
+
 : ($currentSize>$size)
 DELETE FROM ARRAY($array->;$size+1;$currentSize-$size)
 End case 

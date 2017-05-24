@@ -1,0 +1,19 @@
+﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // Profiler_ClearGlobalStats ()
+  // 
+  // DESCRIPTION
+  //   Clears the global stats. Any stored stats are logged
+  //   prior to clearing.
+  //
+If (False)
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (05/24/2017)
+  // ----------------------------------------------------
+End if 
+
+CALL WORKER(Worker_GetProcessName ;"Profiler_LogProfileStats")
+CALL WORKER(Worker_GetProcessName ;"Profiler_LogFlameStats")
+CALL WORKER(Worker_GetProcessName ;"Profiler_StoreFlameStats";"ProfilerStats GLOBAL")
+
+CALL WORKER(Worker_GetProcessName ;"Init_ThreadSafe";True)

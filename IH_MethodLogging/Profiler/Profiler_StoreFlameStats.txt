@@ -1,10 +1,10 @@
 ﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
-  // Logging_Method_TrackFlameStats ({module}) : statsAsText
-  // Logging_Method_TrackFlameStats ({text}) : text
+  // Profiler_StoreFlameStats ({module}) : statsAsText
+  // Profiler_StoreFlameStats ({text}) : text
   // 
   // DESCRIPTION
-  //   This method dumps to a text variable contents of
-  //   the profile arrays
+  //   This method stores the profiling stats in a flamegraph
+  //   safe format to the specified module file.
   //
 C_TEXT($1;$vt_moduleName)
   // ----------------------------------------------------

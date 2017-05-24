@@ -3,24 +3,35 @@ If (Process number("Log_AppLog")<1)
 Log_OpenDisplayWindow 
 End if 
 
-Logging_Method_START ("test1")
-
-Logging_Method_START ("test2")
-
-Logging_Method_START ("test3")
-Logging_Method_STOP ("test3")
-
-Logging_Method_START ("test3")
+Profiler_START ("test1")
+Profiler_START ("test2")
+Profiler_START ("test3")
+DELAY PROCESS(Current process;2)
+Profiler_STOP ("test3")
+Profiler_START ("test3")
 DELAY PROCESS(Current process;1)
-Logging_Method_STOP ("test3")
+Profiler_STOP ("test3")
+Profiler_LogCallStack 
 DELAY PROCESS(Current process;1)
-Logging_Method_STOP ("test2")
-
-Logging_Method_START ("test3")
-Logging_Method_STOP ("test3")
+Profiler_STOP ("test2")
+Profiler_START ("test3")
+Profiler_STOP ("test3")
 DELAY PROCESS(Current process;1)
+Profiler_STOP ("test1")
 
-Logging_Method_STOP ("test1")
+  //Profiler_StoreFlameStats ("ProfilerStats")  //   Mod: DB (05/03/2016)
 
-Logging_Method_DumpProfileStats 
+Profiler_START ("test1")
+Profiler_START ("test3")
+DELAY PROCESS(Current process;1)
+Profiler_STOP ("test3")
+Profiler_STOP ("test1")
 
+  //Profiler_LogProfileStats 
+  //Profiler_LogFlameStats 
+  //Profiler_StoreFlameStats ("ProfilerStats")  //   Mod: DB (05/03/2016)
+
+  //Method_DumpGlobalStats_Perf
+  //Method_DumpGlobalStats_Flame
+
+Profiler_ClearGlobalStats 

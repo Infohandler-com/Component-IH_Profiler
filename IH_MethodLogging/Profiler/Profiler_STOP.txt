@@ -1,6 +1,6 @@
 ﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
-  // Logging_Method_STOP (methodName {;optionalText})
-  // Logging_Method_STOP (text {;text})
+  // Profiler_STOP (methodName {;optionalText})
+  // Profiler_STOP (text {;text})
   // 
   // DESCRIPTION
   //   Used to log leaving a method.
@@ -53,15 +53,6 @@ $vt_msg:=$vt_msg+" and $2 = '"+_ML_STACK_ExtraText{$size}+"'"
 End if 
 Log_ERR (Current method name+$vt_msg;"Process")
 
-
-  // Try to recover
-If ($size>1)
-If ($1=_ML_STACK_CallingStack{$size-1})  // does the item before this one match?
-  // If so, then pull the "bad one" off.
-Array_SetSize ($size-1;->_ML_STACK_CallingStack;->_ML_STACK_ExtraText;->_ML_STACK_msStart;->_ML_STACK_wasteTime)
-$size:=$size-1
-End if 
-End if 
 End if 
 
 
@@ -90,8 +81,6 @@ Performance_TrackCall ($vt_MethodName_FlameGraph;$vl_timeToExecute;->_ML_Flame_M
 Array_SetSize ($size-1;->_ML_STACK_CallingStack;->_ML_STACK_ExtraText;->_ML_STACK_msStart;->_ML_STACK_wasteTime)
 End if 
 
-
-
   // Deal with tab levels
 __incrementLevel:=__incrementLevel-1
 If (__incrementLevel<0)
@@ -99,3 +88,8 @@ Log_ERR (Current method name+" has and __incrementLevel of "+String(__incrementL
 __incrementLevel:=0
 End if 
 
+  // If this STOP is the last one from the stack, push to global tracking
+If (Size of array(_ML_STACK_CallingStack)=0) & (Size of array(_ML_Perf_Method)>0)
+Performance_PushToGlobal_Perf 
+Performance_PushToGlobal_Flame 
+End if 

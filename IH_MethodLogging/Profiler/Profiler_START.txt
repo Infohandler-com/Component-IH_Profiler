@@ -1,6 +1,6 @@
 ﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
-  // Logging_Method_START (methodName {;optionalText})
-  // Logging_Method_START (text {;text})
+  // Profiler_START (methodName {;optionalText})
+  // Profiler_START (text {;text})
   // 
   // DESCRIPTION
   //   Used to log entering a method.
@@ -19,6 +19,11 @@ C_TEXT($2)  // OPTIONAL; optional text
 ASSERT(Count parameters>0)
 ASSERT(Count parameters<=2)
 Init_ThreadSafe 
+
+  // If this START is the first one for the stack and there is other stats, we want to reinit
+If (Size of array(_ML_STACK_CallingStack)=0) & (Size of array(_ML_Perf_Method)>0)
+Init_ThreadSafe (True)  // Force a Init
+End if 
 
   // Add our method to the call stack
 APPEND TO ARRAY(_ML_STACK_CallingStack;$1)
