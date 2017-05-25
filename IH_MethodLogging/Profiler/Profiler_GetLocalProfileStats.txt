@@ -16,10 +16,17 @@ C_TEXT($0;$vt_profileStatsAsText)
 Init_ThreadSafe 
 $vt_profileStatsAsText:=""
 
+C_TEXT($vt_processType)
+If (Worker_inWorker )
+$vt_processType:="GLOBAL"
+Else 
+$vt_processType:="LOCAL"
+End if 
+
 If (Size of array(_ML_Flame_Method)>0)
 $vt_profileStatsAsText:="\r"+("-"*40)+"\r"
 $vt_profileStatsAsText:=$vt_profileStatsAsText+("-"*40)+"\r"
-$vt_profileStatsAsText:=$vt_profileStatsAsText+"METHOD NAME (LOCAL)\t"
+$vt_profileStatsAsText:=$vt_profileStatsAsText+"METHOD NAME ("+$vt_processType+")\t"
 $vt_profileStatsAsText:=$vt_profileStatsAsText+"Call Count\t"
 $vt_profileStatsAsText:=$vt_profileStatsAsText+"Min (ms)\t"
 $vt_profileStatsAsText:=$vt_profileStatsAsText+"Avg (ms)\t"

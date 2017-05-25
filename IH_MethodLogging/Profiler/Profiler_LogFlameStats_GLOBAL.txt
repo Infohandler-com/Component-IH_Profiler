@@ -1,9 +1,9 @@
 ﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
-  // Profiler_ClearGlobalStats ()
+  // Profiler_LogFlameStats_GLOBAL ()
   // 
   // DESCRIPTION
-  //   Clears the global stats. Any catured stats are logged
-  //   prior to clearing.
+  //   This method dumps to the log file the contents of
+  //   the global profile arrays in a format that support flamegraphs.
   //
 If (False)
   // ----------------------------------------------------
@@ -12,8 +12,4 @@ If (False)
   // ----------------------------------------------------
 End if 
 
-Profiler_LogProfileStats_GLOBAL 
-Profiler_LogFlameStats_GLOBAL 
-CALL WORKER(Worker_GetProcessName ;"Profiler_StoreFlameStats";"ProfilerStats GLOBAL")
-
-CALL WORKER(Worker_GetProcessName ;"Init_ThreadSafe";True)
+CALL WORKER(Worker_GetProcessName ;"Profiler_LogFlameStats")

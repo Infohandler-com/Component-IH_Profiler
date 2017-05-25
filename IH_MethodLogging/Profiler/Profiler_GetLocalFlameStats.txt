@@ -16,10 +16,17 @@ C_TEXT($0;$vt_flameStats)
 Init_ThreadSafe 
 $vt_flameStats:=""
 
+C_TEXT($vt_processType)
+If (Worker_inWorker )
+$vt_processType:="GLOBAL"
+Else 
+$vt_processType:="LOCAL"
+End if 
+
 If (Size of array(_ML_Flame_Method)>0)
 $vt_flameStats:="\r"+("-"*40)+"\r"
 $vt_flameStats:=$vt_flameStats+("-"*40)+"\r"
-$vt_flameStats:=$vt_flameStats+"METHOD NAME (LOCAL)\t"
+$vt_flameStats:=$vt_flameStats+"METHOD NAME ("+$vt_processType+" FLAME)\t"
 $vt_flameStats:=$vt_flameStats+"Call Count\t"
 $vt_flameStats:=$vt_flameStats+"Min (ms)\t"
 $vt_flameStats:=$vt_flameStats+"Avg (ms)\t"
