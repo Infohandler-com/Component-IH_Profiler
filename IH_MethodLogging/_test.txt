@@ -1,4 +1,5 @@
 ﻿  //%attributes = {"lang":"en"} comment added and reserved by 4D.
+
 If (Process number("Log_AppLog")<1)
 Log_OpenDisplayWindow 
 End if 
@@ -33,5 +34,9 @@ Profiler_STOP ("test1")
 
   //Method_DumpGlobalStats_Perf
   //Method_DumpGlobalStats_Flame
+
+$path:=""
+Profiler_SaveGlobalStatsAsHTML ("flame";"test.html")
+
 
 Profiler_ClearGlobalStats 
