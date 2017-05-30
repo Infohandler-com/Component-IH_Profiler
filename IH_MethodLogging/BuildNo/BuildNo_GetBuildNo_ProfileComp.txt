@@ -1,0 +1,38 @@
+﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"incapable","lang":"en"} comment added and reserved by 4D.
+  // BuildNo_GetBuildNo_ProfileComp () : buildNoObj
+  // BuildNo_GetBuildNo_ProfileComp () : object
+  // 
+  // DESCRIPTION
+  //   Returns a build no object or the component.
+  //   For example: {"releaseYear":"2017","releaseNo":"r1","buildNo":"20170529","versionShort":"2017.r1","versionLong":"2017.r1 (build 20170529)"}
+  //
+  //   NOTE: Cannot be run in a pre-emptive process.
+  //
+C_OBJECT($0;$vo_buildNoObj)
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (05/29/2017)
+  // ----------------------------------------------------
+
+ARRAY TEXT($at_buildNo;0)
+LIST TO ARRAY("BuildNo";$at_buildNo)
+Array_SetSize (1;->$at_buildNo)  // Make sure there is at least one element
+
+C_TEXT($vt_value)
+$vt_value:=$at_buildNo{1}
+
+If ($vt_value#"") & ($vt_value="{@")
+$vo_buildNoObj:=JSON Parse($vt_value)
+Else 
+$vo_buildNoObj:=JSON Parse("{}")
+OB SET($vo_buildNoObj;"releaseYear";String(Year of(Current date)))
+OB SET($vo_buildNoObj;"releaseNo";"r1")
+OB SET($vo_buildNoObj;"buildNo";Date2String (Current date;"yyyymmdd"))
+OB SET($vo_buildNoObj;"versionShort";String(Year of(Current date))+".r1")
+OB SET($vo_buildNoObj;"versionLong";String(Year of(Current date))+".r1 (build "+Date2String (Current date;"yyyymmdd")+")")
+$at_buildNo{1}:=JSON Stringify($vo_buildNoObj)
+ARRAY TO LIST($at_buildNo;"BuildNo")
+End if 
+
+
+$0:=$vo_buildNoObj

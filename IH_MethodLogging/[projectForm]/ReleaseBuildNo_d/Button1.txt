@@ -1,0 +1,15 @@
+﻿  //%attributes = {"lang":"en"} comment added and reserved by 4D.
+C_OBJECT($vo_buildNoObj)
+$vo_buildNoObj:=BuildNo_GetBuildNo_ProfileComp 
+
+C_POINTER($vp_stringYear)
+$vp_stringYear:=OBJECT Get data source(*;"string_year")
+$vp_stringYear->:=OB Get($vo_buildNoObj;"releaseYear";Is text)
+
+C_POINTER($vp_stringReleaseNo)
+$vp_stringReleaseNo:=OBJECT Get data source(*;"string_releaseNo")
+$vp_stringReleaseNo->:=OB Get($vo_buildNoObj;"releaseNo";Is text)
+
+C_POINTER($vp_stringBuildNo)
+$vp_stringBuildNo:=OBJECT Get data source(*;"string_buildNo")
+$vp_stringBuildNo->:=OB Get($vo_buildNoObj;"buildNo";Is text)

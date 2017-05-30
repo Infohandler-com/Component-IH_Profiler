@@ -1,5 +1,9 @@
 ﻿  //%attributes = {"lang":"en"} comment added and reserved by 4D.
 
+  //C_OBJECT($vo)
+  //$vo:=BuildNo_GetBuildNo_ProfileComp 
+  //$vo:=BuildNo_GetBuildNo_LogComp 
+
 If (Process number("Log_AppLog")<1)
 Log_OpenDisplayWindow 
 End if 
