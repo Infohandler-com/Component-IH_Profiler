@@ -1,0 +1,5 @@
+﻿  //%attributes = {"lang":"en"} comment added and reserved by 4D.
+C_POINTER($vp_stringBuildNo)
+$vp_stringBuildNo:=OBJECT Get data source(*;"string_buildNo")
+
+$vp_stringBuildNo->:=Date2String (Current date;"yyyymmdd")

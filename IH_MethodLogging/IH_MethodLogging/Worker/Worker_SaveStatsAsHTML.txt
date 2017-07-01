@@ -1,0 +1,84 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // Worker_SaveStatsAsHTML (parm1; parm2; ...) : result
+  // Worker_SaveStatsAsHTML (parm1; parm2; ...) : result
+  // 
+  // DESCRIPTION
+  //   Saves the collected stats to the file.
+  //   $1 can be "flame" or "profile".
+  //
+C_TEXT($1;$vt_statsToSave)
+C_TEXT($2;$vt_filePath)
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (05/25/2017)
+  //   Mod: DB (07/01/2017) - Task 3897
+  // ----------------------------------------------------
+
+ASSERT(Count parameters=2)
+$vt_statsToSave:=$1
+$vt_filePath:=$2
+
+If (Asserted(($vt_statsToSave="flame") | ($vt_statsToSave="profile");"Expecting $2 to be \"flame\" or \"profile\".")) & ($vt_filePath#"")
+Init_ThreadSafe 
+
+C_TEXT($vt_theHTML)
+$vt_theHTML:=""
+$vt_theHTML:=$vt_theHTML+"<style> .red {color:red;}</style>"
+$vt_theHTML:=$vt_theHTML+"<table id=\"methodStats\" width=100% border=0>"
+
+$vt_theHTML:=$vt_theHTML+"<thead><tr>"
+$vt_theHTML:=$vt_theHTML+"<th>Method Name</th>"
+$vt_theHTML:=$vt_theHTML+"<th>Min (ms)</th>"
+$vt_theHTML:=$vt_theHTML+"<th>Avg (ms)</th>"
+$vt_theHTML:=$vt_theHTML+"<th>Max (ms)</th>"
+$vt_theHTML:=$vt_theHTML+"<th>Total (ms)</th>"
+$vt_theHTML:=$vt_theHTML+"<th>Call Count</th>"
+$vt_theHTML:=$vt_theHTML+"<th>Avg/Max Ratio</th>"  //   Mod: DB (02/12/2014)
+$vt_theHTML:=$vt_theHTML+"<th>Max/Total Ratio</th>"  //   Mod: DB (02/12/2014)
+$vt_theHTML:=$vt_theHTML+"</tr></thead>"
+
+SORT ARRAY(_ML_Perf_Method;_ML_Perf_minTime;_ML_Perf_maxTime;_ML_Perf_totalTime;_ML_Perf_count)  //   Mod by: Dani Beaubien (07/01/2017) - Task 3897
+
+C_REAL($vr_average;$vr_max;$vr_total;$vr_callCount;$vr_ratioTotal;$vr_min)
+C_BOOLEAN($vb_warnRatioTotal;$vb_warnRationAvg;$vb_warnAvg)
+$vt_theHTML:=$vt_theHTML+"<tbody>"
+For ($i;1;Size of array(_ML_Perf_Method))
+If (Mod($i;2)=1)
+$vt_theHTML:=$vt_theHTML+"<tr class=a>"
+Else 
+$vt_theHTML:=$vt_theHTML+"<tr class=b>"
+End if 
+$vr_total:=_ML_Perf_totalTime{$i}
+$vr_callCount:=_ML_Perf_count{$i}
+$vr_max:=_ML_Perf_maxTime{$i}
+$vr_min:=_ML_Perf_minTime{$i}
+$vr_average:=$vr_total/$vr_callCount
+$vr_ratioTotal:=$vr_average/$vr_max
+$vr_ratioAvg:=$vr_max/$vr_total
+
+$vb_warnRatioTotal:=False
+$vb_warnAvg:=False
+If ($vr_callCount>1000) & ($vr_ratioTotal>0.3)
+$vb_warnRatioTotal:=True
+End if 
+If ($vr_callCount>10000) & ($vr_average>20)
+$vb_warnAvg:=True
+End if 
+
+$vt_theHTML:=$vt_theHTML+"<td>"+_ML_Perf_Method{$i}+"</td>"  // Method Name"
+$vt_theHTML:=$vt_theHTML+"<td>"+String($vr_min;"###,###,###,##0")+"</td>"  // Min
+$vt_theHTML:=$vt_theHTML+"<td"+Choose(Num($vb_warnAvg);"";" class=\"red\"")+">"+String($vr_average;"###,###,###,##0.0")+"</td>"  // Avg
+$vt_theHTML:=$vt_theHTML+"<td>"+String($vr_max;"###,###,###,##0")+"</td>"  // Max
+$vt_theHTML:=$vt_theHTML+"<td>"+String($vr_total;"###,###,###,##0")+"</td>"  // Total
+$vt_theHTML:=$vt_theHTML+"<td>"+String($vr_callCount;"###,###,###,##0")+"</td>"  // Call Count
+$vt_theHTML:=$vt_theHTML+"<td>"+String(($vr_ratioAvg)*100;"###,###,###,##0.0")+"%</td>"  // Avg/Max Ratio
+$vt_theHTML:=$vt_theHTML+"<td"+Choose(Num($vb_warnRatioTotal);"";" class=\"red\"")+">"+String(($vr_ratioTotal)*100;"###,###,###,##0.0")+"%</td>"  // Max/Total Ratio
+$vt_theHTML:=$vt_theHTML+"</tr>"
+End for 
+$vt_theHTML:=$vt_theHTML+"</tbody>"
+
+$vt_theHTML:=$vt_theHTML+"</table>"
+
+File_Delete ($vt_filePath)
+TEXT TO DOCUMENT($vt_filePath;$vt_theHTML)
+End if 

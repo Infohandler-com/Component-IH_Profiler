@@ -1,0 +1,20 @@
+﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // Profiler_CallStack_GetCurrent () : currentMethodName
+  // Profiler_CallStack_GetCurrent () : text
+  // 
+  // DESCRIPTION
+  //   Returns the most recent method name on the calling stack.
+  //
+C_TEXT($0;$vt_previousMethodName)
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (05/24/2017)
+  // ----------------------------------------------------
+
+Init_ThreadSafe 
+
+If (Size of array(_ML_STACK_CallingStack)>1)
+$0:=_ML_STACK_CallingStack{Size of array(_ML_STACK_CallingStack)-1}
+End if 
+
+$0:=$vt_previousMethodName

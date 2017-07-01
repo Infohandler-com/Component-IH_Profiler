@@ -1,0 +1,21 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // Method: OnErr_GENERIC
+  //   The simplest error handler
+  // Modified by: Dani Beaubien (9/9/13) - Enhanced the information that is coming out
+  //   Mod: DB (05/22/2017) - Moved to v16 component
+
+C_LONGINT(gError)
+gError:=Error
+
+C_TEXT($t_alertText)
+$t_alertText:="error "+String(ERROR)+Char(Carriage return)
+Log_ERR_CRITICAL (" ** ERR ** --> "+Error method+" line #"+String(Error line)+"- "+$t_alertText;"On Err Trigger")
+
+ARRAY LONGINT($al_err_code;0)
+ARRAY TEXT($as_component;0)
+ARRAY TEXT($as_error;0)
+GET LAST ERROR STACK($al_err_code;$as_component;$as_error)
+For ($i;1;Size of array($al_err_code))
+Log_ERR_CRITICAL (" ** STACK LVL "+String($i)+" CODE: "+String($al_err_code{$i})+", COMPONENT: \""+$as_component{$i}+"\", MESSAGE: \""+$as_error{$i}+"\"";"On Err Trigger")
+End for 
+

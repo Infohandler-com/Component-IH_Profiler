@@ -1,0 +1,27 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // STR_GetFlameGraphNameFromStack (methodName; stackArrPtr) flameGraphName
+  // STR_GetFlameGraphNameFromStack (text; pointer) text
+  // 
+  // DESCRIPTION
+  //   Returns the method name in a format that supports flamegraphs.
+  //
+C_TEXT($1;$vt_methodName)
+C_POINTER($2;$vp_stackArrPtr)
+C_TEXT($0;$vt_flameGraphName)
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (05/22/2017)
+  // ----------------------------------------------------
+
+$vt_flameGraphName:=""
+ASSERT(Count parameters=2)
+ASSERT(Type($2->)=Text array)
+$vt_methodName:=$1
+$vp_stackArrPtr:=$2
+
+$vt_flameGraphName:=$vt_methodName
+For ($i;Size of array($vp_stackArrPtr->)-1;1;-1)
+$vt_flameGraphName:=$vp_stackArrPtr->{$i}+";"+$vt_flameGraphName
+End for 
+
+$0:=$vt_flameGraphName

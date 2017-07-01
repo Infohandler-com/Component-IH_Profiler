@@ -1,0 +1,32 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // File_DoesExist (path to file) : does exist
+  // File_DoesExist (text) : boolean
+  // 
+  // DESCRIPTION:
+  //   Returns true if the file exists. It will create any directories if
+  //   are missing.
+  //
+C_TEXT($1;$File_vt_fullPath)  // Path to file
+C_BOOLEAN($0;$File_vb_doesExist)  // File does exist
+  // ----------------------------------------------------
+  // MODIFICATION HISTORY:
+  //   Added: DB (7/17/03 @ 15:46:39)
+  // ----------------------------------------------------
+
+$File_vb_doesExist:=False
+If (Asserted(Count parameters=1))
+$File_vt_fullPath:=$1
+
+If ($File_vt_fullPath#"")
+  // make sure that the directory exists that this file is supposed to be in
+Folder_VerifyExistance (Folder_ParentName ($File_vt_fullPath))
+
+C_LONGINT($File_vl_pathNameTestCode)
+$File_pathNameTestCode:=Test path name($File_vt_fullPath)
+If ($File_pathNameTestCode=Is a document)
+$File_vb_doesExist:=True
+End if 
+End if 
+End if   // ASSERT
+
+$0:=$File_vb_doesExist

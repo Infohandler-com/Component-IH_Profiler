@@ -1,0 +1,54 @@
+﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // Profiler_GetLocalFlameStats () : flameStatsAsText
+  // Profiler_GetLocalFlameStats () : text
+  // 
+  // DESCRIPTION
+  //   This method returns the contents of
+  //   the profile arrays in a format that support flamegraphs.
+  //   Only the stats for the current process are returned.
+  //
+C_TEXT($0;$vt_flameStats)
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (05/24/2017)
+  // ----------------------------------------------------
+
+Init_ThreadSafe 
+$vt_flameStats:=""
+
+C_TEXT($vt_processType)
+If (Worker_inWorker )
+$vt_processType:="GLOBAL"
+Else 
+$vt_processType:="LOCAL"
+End if 
+
+If (Size of array(_ML_Flame_Method)>0)
+$vt_flameStats:="\r"+("-"*40)+"\r"
+$vt_flameStats:=$vt_flameStats+("-"*40)+"\r"
+$vt_flameStats:=$vt_flameStats+"METHOD NAME ("+$vt_processType+" FLAME)\t"
+$vt_flameStats:=$vt_flameStats+"Call Count\t"
+$vt_flameStats:=$vt_flameStats+"Min (ms)\t"
+$vt_flameStats:=$vt_flameStats+"Avg (ms)\t"
+$vt_flameStats:=$vt_flameStats+"Max (ms)\t"
+$vt_flameStats:=$vt_flameStats+"Total (ms)\r"  //   Mod: DB (01/28/2014)
+$vt_flameStats:=$vt_flameStats+("-"*40)+"\r"
+
+SORT ARRAY(_ML_Flame_Method;_ML_Flame_minTime;_ML_Flame_maxTime;_ML_Flame_totalTime;_ML_Flame_count)
+For ($i;1;Size of array(_ML_Flame_Method))
+$vt_flameStats:=$vt_flameStats+_ML_Flame_Method{$i}+Char(Tab)
+$vt_flameStats:=$vt_flameStats+String(_ML_Flame_count{$i})+Char(Tab)
+$vt_flameStats:=$vt_flameStats+String(_ML_Flame_minTime{$i})+Char(Tab)
+If (_ML_Flame_totalTime{$i}>0)
+$vt_flameStats:=$vt_flameStats+String(_ML_Flame_totalTime{$i}/_ML_Flame_count{$i};"###,###,###,###,##0.00")+Char(Tab)
+Else 
+$vt_flameStats:=$vt_flameStats+"0"+Char(Tab)
+End if 
+$vt_flameStats:=$vt_flameStats+String(_ML_Flame_maxTime{$i})+Char(Tab)
+$vt_flameStats:=$vt_flameStats+String(_ML_Flame_totalTime{$i})+Char(Carriage return)  //   Mod: DB (01/28/2014)
+End for 
+$vt_flameStats:=$vt_flameStats+("-"*40)+"\r"
+
+End if 
+
+$0:=$vt_flameStats

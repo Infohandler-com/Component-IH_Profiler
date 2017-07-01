@@ -1,0 +1,48 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // Performance_TrackCall (parm1; parm2; ...) : result
+  // Performance_TrackCall (parm1; parm2; ...) : result
+  // 
+  // DESCRIPTION
+  //   
+  //
+C_TEXT($1;$vt_FullLocalMethodName)
+C_LONGINT($2;$vl_timeToExecute)
+C_POINTER($3;$ap_MethodArrPtr)
+C_POINTER($4;$ap_minTimeArrPtr)
+C_POINTER($5;$ap_maxTimeArrPtr)
+C_POINTER($6;$ap_totalTimeArrPtr)
+C_POINTER($7;$ap_countArrPtr)
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (05/22/2017)
+  // ----------------------------------------------------
+
+ASSERT(Count parameters=7)
+$vt_FullLocalMethodName:=$1
+$vl_timeToExecute:=$2
+$ap_MethodArrPtr:=$3
+$ap_minTimeArrPtr:=$4
+$ap_maxTimeArrPtr:=$5
+$ap_totalTimeArrPtr:=$6
+$ap_countArrPtr:=$7
+
+  // # Add our tracking info to our local arrays
+$pos:=Find in array($ap_MethodArrPtr->;$vt_FullLocalMethodName)
+If ($pos<1)
+$pos:=Size of array($ap_MethodArrPtr->)+1
+APPEND TO ARRAY($ap_MethodArrPtr->;$vt_FullLocalMethodName)
+APPEND TO ARRAY($ap_minTimeArrPtr->;$vl_timeToExecute)
+APPEND TO ARRAY($ap_maxTimeArrPtr->;$vl_timeToExecute)
+APPEND TO ARRAY($ap_totalTimeArrPtr->;$vl_timeToExecute)
+APPEND TO ARRAY($ap_countArrPtr->;1)
+
+Else 
+If ($ap_minTimeArrPtr->{$pos}>$vl_timeToExecute)
+$ap_minTimeArrPtr->{$pos}:=$vl_timeToExecute
+End if 
+If ($ap_maxTimeArrPtr->{$pos}<$vl_timeToExecute)
+$ap_maxTimeArrPtr->{$pos}:=$vl_timeToExecute
+End if 
+$ap_totalTimeArrPtr->{$pos}:=$ap_totalTimeArrPtr->{$pos}+$vl_timeToExecute
+$ap_countArrPtr->{$pos}:=$ap_countArrPtr->{$pos}+1
+End if 

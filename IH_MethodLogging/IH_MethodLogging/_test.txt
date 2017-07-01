@@ -1,0 +1,46 @@
+﻿  //%attributes = {"lang":"en"} comment added and reserved by 4D.
+
+  //C_OBJECT($vo)
+  //$vo:=BuildNo_GetBuildNo_ProfileComp 
+  //$vo:=BuildNo_GetBuildNo_LogComp 
+
+If (Process number("Log_AppLog")<1)
+Log_OpenDisplayWindow 
+End if 
+
+Profiler_START ("test1")
+Profiler_START ("test2")
+Profiler_START ("test3")
+DELAY PROCESS(Current process;2)
+Profiler_STOP ("test3")
+Profiler_START ("test3")
+DELAY PROCESS(Current process;1)
+Profiler_STOP ("test3")
+Profiler_LogCallStack 
+DELAY PROCESS(Current process;1)
+Profiler_STOP ("test2")
+Profiler_START ("test3")
+Profiler_STOP ("test3")
+DELAY PROCESS(Current process;1)
+Profiler_STOP ("test1")
+
+  //Profiler_StoreFlameStats ("ProfilerStats")  //   Mod: DB (05/03/2016)
+
+Profiler_START ("test1")
+Profiler_START ("test3")
+DELAY PROCESS(Current process;1)
+Profiler_STOP ("test3")
+Profiler_STOP ("test1")
+
+  //Profiler_LogProfileStats 
+  //Profiler_LogFlameStats 
+  //Profiler_StoreFlameStats ("ProfilerStats")  //   Mod: DB (05/03/2016)
+
+  //Method_DumpGlobalStats_Perf
+  //Method_DumpGlobalStats_Flame
+
+$path:=""
+Profiler_SaveGlobalStatsAsHTML ("flame";"test.html")
+
+
+Profiler_ClearGlobalStats 

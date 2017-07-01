@@ -1,0 +1,21 @@
+﻿  //%attributes = {"lang":"en"} comment added and reserved by 4D.
+
+Case of 
+: (Form event=On Load)
+  // Code to set values is in the "Revert" button
+
+
+: (Form event=On Unload)
+C_POINTER($vp_stringYear)
+$vp_stringYear:=OBJECT Get data source(*;"string_year")
+
+C_POINTER($vp_stringReleaseNo)
+$vp_stringReleaseNo:=OBJECT Get data source(*;"string_releaseNo")
+
+C_POINTER($vp_stringBuildNo)
+$vp_stringBuildNo:=OBJECT Get data source(*;"string_buildNo")
+
+BuildNo_SetBuildNo_ProfileComp ($vp_stringYear->;$vp_stringReleaseNo->;$vp_stringBuildNo->)
+
+
+End case 
