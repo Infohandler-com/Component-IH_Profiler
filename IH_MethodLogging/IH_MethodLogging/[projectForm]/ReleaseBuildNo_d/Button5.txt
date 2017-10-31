@@ -1,6 +1,0 @@
-﻿  //%attributes = {"lang":"en"} comment added and reserved by 4D.
-
-C_POINTER($vp_stringReleaseNo)
-$vp_stringReleaseNo:=OBJECT Get data source(*;"string_releaseNo")
-
-$vp_stringReleaseNo->:="r"+String(Num($vp_stringReleaseNo->)+1)

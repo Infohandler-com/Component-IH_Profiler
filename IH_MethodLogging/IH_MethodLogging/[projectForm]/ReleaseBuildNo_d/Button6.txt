@@ -1,6 +1,0 @@
-﻿  //%attributes = {"lang":"en"} comment added and reserved by 4D.
-
-C_POINTER($vp_stringYear)
-$vp_stringYear:=OBJECT Get data source(*;"string_year")
-
-$vp_stringYear->:=String(Num($vp_stringYear->)-1)
