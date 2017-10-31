@@ -33,7 +33,7 @@ OB SET($vo_buildNoObj;"versionLong";$vt_stringYear+"."+$vt_stringReleaseNo+" (bu
 
 ARRAY TEXT($at_buildNo;1)
 $at_buildNo{1}:=JSON Stringify($vo_buildNoObj)
-SET TEXT TO PASTEBOARD($at_buildNo{1})
+  //SET TEXT TO PASTEBOARD($at_buildNo{1})
 
   // Save it into the structure
 ARRAY TO LIST($at_buildNo;"BuildNo")

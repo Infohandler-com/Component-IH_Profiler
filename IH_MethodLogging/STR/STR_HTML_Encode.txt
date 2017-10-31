@@ -1,0 +1,23 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // STR_HTML_Encode (srcTxt) : html safe txxt
+  // STR_HTML_Encode (text) : text
+  // 
+  // DESCRIPTION
+  //   Converts the supplied text to be HTML "safe".
+  //
+C_TEXT($1)
+C_TEXT($0;$vt_htmlSafeText)
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (11/05/09)
+  //   Mod: DB (04/19/2017) - Task 3827
+  // ----------------------------------------------------
+
+$vt_htmlSafeText:=""
+If (Asserted(Count parameters=1))
+$vt_htmlSafeText:=Replace string($1;"<";"&lt;")
+$vt_htmlSafeText:=Replace string($vt_htmlSafeText;">";"&gt;")
+$vt_htmlSafeText:=Replace string($vt_htmlSafeText;"\"";"&quot;")
+$vt_htmlSafeText:=Replace string($vt_htmlSafeText;"'";"&#39;")  //   Mod: DB (04/19/2017) - Task 3827
+End if   // ASSERT
+$0:=$vt_htmlSafeText
