@@ -1,5 +1,12 @@
 ﻿  //%attributes = {"lang":"en"} comment added and reserved by 4D.
+$vr_average:=300
+$vr_max:=89
+$vr_total:=102
 
+$vr_ratioTotal:=$vr_max/$vr_total
+
+ALERT(String($vr_ratioTotal*100;"###,###,###,##0.0")+"%")
+ABORT
   //C_OBJECT($vo)
   //$vo:=BuildNo_GetBuildNo_ProfileComp 
   //$vo:=BuildNo_GetBuildNo_LogComp 
