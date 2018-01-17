@@ -1,4 +1,4 @@
-﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","folder":"Profiler Shared Methods","lang":"en"} comment added and reserved by 4D.
   // Profiler_LogFlameStats_GLOBAL ()
   // 
   // DESCRIPTION

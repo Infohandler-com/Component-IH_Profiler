@@ -1,4 +1,4 @@
-﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","folder":"Utility","lang":"en"} comment added and reserved by 4D.
   //   Mod: DB (05/22/2017) - Moved to v16 component
 
 C_LONGINT(gError)

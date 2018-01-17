@@ -1,4 +1,4 @@
-﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","folder":"Utility","lang":"en"} comment added and reserved by 4D.
   // Method: Date2String ( date {; formatStr} ) : formated date as string
   // Method: Date2String ( date {; text} ) : text
 If (False)

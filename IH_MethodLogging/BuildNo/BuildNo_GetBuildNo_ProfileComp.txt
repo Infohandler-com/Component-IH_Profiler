@@ -1,4 +1,4 @@
-﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"incapable","lang":"en"} comment added and reserved by 4D.
+﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"incapable","folder":"Utility","lang":"en"} comment added and reserved by 4D.
   // BuildNo_GetBuildNo_ProfileComp () : buildNoObj
   // BuildNo_GetBuildNo_ProfileComp () : object
   // 

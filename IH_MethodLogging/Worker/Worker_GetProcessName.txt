@@ -1,4 +1,4 @@
-﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","folder":"Worker","lang":"en"} comment added and reserved by 4D.
   // Worker_GetProcessName () : workerName
   // 
 C_TEXT($0)

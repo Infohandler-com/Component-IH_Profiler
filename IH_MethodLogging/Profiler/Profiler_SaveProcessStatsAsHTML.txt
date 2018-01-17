@@ -1,9 +1,9 @@
-﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","folder":"Profiler Shared Methods","lang":"en"} comment added and reserved by 4D.
-  // Profiler_SaveGlobalStatsAsHTML (statsToSave; filePath) 
-  // Profiler_SaveGlobalStatsAsHTML (text; text) 
+﻿  //%attributes = {"invisible":true,"shared":true,"folder":"Profiler Shared Methods","lang":"en"} comment added and reserved by 4D.
+  // Profiler_SaveProcessStatsAsHTML (statsToSave; filePath) 
+  // Profiler_SaveProcessStatsAsHTML (text; text) 
   // 
   // DESCRIPTION
-  //   Saves the collected stats to the file.
+  //   Saves the collected stats for the current processes to the file.
   //   $1 can be "flame" or "profile".
   //
 C_TEXT($1;$vt_statsToSave)
@@ -18,5 +18,5 @@ $vt_statsToSave:=$1
 $vt_filePath:=$2
 
 If (Asserted(($vt_statsToSave="flame") | ($vt_statsToSave="profile");"Expecting $2 to be \"flame\" or \"profile\".")) & ($vt_filePath#"")
-CALL WORKER(Worker_GetProcessName ;"Worker_SaveStatsAsHTML";$vt_statsToSave;$vt_filePath)
+Worker_SaveStatsAsHTML ($vt_statsToSave;$vt_filePath)
 End if 

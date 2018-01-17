@@ -1,6 +1,6 @@
-﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
-  // Profiler_CallStack_GetCurrent () : currentMethodName
-  // Profiler_CallStack_GetCurrent () : text
+﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","folder":"Profiler Shared Methods","lang":"en"} comment added and reserved by 4D.
+  // Profiler_CallStack_GetPrevious () : currentMethodName
+  // Profiler_CallStack_GetPrevious () : text
   // 
   // DESCRIPTION
   //   Returns the most recent method name on the calling stack.

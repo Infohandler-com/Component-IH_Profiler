@@ -1,15 +1,13 @@
 ﻿  //%attributes = {"lang":"en"} comment added and reserved by 4D.
-$vr_average:=300
-$vr_max:=89
-$vr_total:=102
 
-$vr_ratioTotal:=$vr_max/$vr_total
-
-ALERT(String($vr_ratioTotal*100;"###,###,###,##0.0")+"%")
-ABORT
   //C_OBJECT($vo)
   //$vo:=BuildNo_GetBuildNo_ProfileComp 
   //$vo:=BuildNo_GetBuildNo_LogComp 
+
+$folder:=Folder_ParentName (Folder_ParentName (Structure file))+"IH_Profiler Tests"+Folder separator
+Folder_VerifyExistance ($folder)
+
+Profiler_ClearGlobalStats 
 
 If (Process number("Log_AppLog")<1)
 Log_OpenDisplayWindow 
@@ -31,6 +29,9 @@ Profiler_STOP ("test3")
 DELAY PROCESS(Current process;1)
 Profiler_STOP ("test1")
 
+Profiler_SaveProcessStatsAsHTML ("profile";$folder+"Test 1 - Profile.html")
+Profiler_SaveProcessStatsAsHTML ("flame";$folder+"Test 1 - Flame.html")
+
   //Profiler_StoreFlameStats ("ProfilerStats")  //   Mod: DB (05/03/2016)
 
 Profiler_START ("test1")
@@ -46,8 +47,12 @@ Profiler_STOP ("test1")
   //Method_DumpGlobalStats_Perf
   //Method_DumpGlobalStats_Flame
 
-$path:=""
-Profiler_SaveGlobalStatsAsHTML ("flame";"test.html")
+Profiler_SaveProcessStatsAsHTML ("profile";$folder+"Test 2 - Profile.html")
+Profiler_SaveProcessStatsAsHTML ("flame";$folder+"Test 2 - Flame.html")
 
+Profiler_SaveGlobalStatsAsHTML ("profile";$folder+"Global Results - Profile.html")
+Profiler_SaveGlobalStatsAsHTML ("flame";$folder+"Global Results - Flame.html")
+ALERT("done")
+SHOW ON DISK($folder;*)
 
-Profiler_ClearGlobalStats 
+  //Profiler_ClearGlobalStats 

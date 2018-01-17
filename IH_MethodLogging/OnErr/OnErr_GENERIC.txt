@@ -1,4 +1,4 @@
-﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","folder":"Utility","lang":"en"} comment added and reserved by 4D.
   // Method: OnErr_GENERIC
   //   The simplest error handler
   // Modified by: Dani Beaubien (9/9/13) - Enhanced the information that is coming out

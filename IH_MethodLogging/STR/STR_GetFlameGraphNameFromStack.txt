@@ -1,4 +1,4 @@
-﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","folder":"Utility","lang":"en"} comment added and reserved by 4D.
   // STR_GetFlameGraphNameFromStack (methodName; stackArrPtr) flameGraphName
   // STR_GetFlameGraphNameFromStack (text; pointer) text
   // 

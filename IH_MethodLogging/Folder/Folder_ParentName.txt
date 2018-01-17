@@ -1,4 +1,4 @@
-﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","folder":"Utility","lang":"en"} comment added and reserved by 4D.
   //Method: Folder_ParentName
   //Created by: Peter, Feb, 2000 11:30
   //Called from many places including StartWindows, StartMacintosh

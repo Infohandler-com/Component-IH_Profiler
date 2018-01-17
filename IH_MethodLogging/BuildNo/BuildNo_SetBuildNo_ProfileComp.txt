@@ -1,4 +1,4 @@
-﻿  //%attributes = {"invisible":true,"preemptive":"incapable","lang":"en"} comment added and reserved by 4D.
+﻿  //%attributes = {"invisible":true,"preemptive":"incapable","folder":"Utility","lang":"en"} comment added and reserved by 4D.
   // BuildNo_SetBuildNo_ProfileComp (year; releaseNo; buildNo)
   // BuildNo_SetBuildNo_ProfileComp (text; text; text)
   // 
