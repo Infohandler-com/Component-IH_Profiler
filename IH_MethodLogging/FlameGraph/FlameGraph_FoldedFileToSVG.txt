@@ -1,0 +1,57 @@
+﻿  //%attributes = {"invisible":true,"shared":true,"lang":"en"} comment added and reserved by 4D.
+  // FlameGraph_FoldedFileToSVG (foldedFilePath) : svgFilePath
+  // FlameGraph_FoldedFileToSVG (text) : text
+  // 
+  // DESCRIPTION
+  //   Creates a flamegraph svg based on the folded file.
+  //
+  //   NOTE: This uses Brendan Gregg's flamegraph.pl perl script.
+  //   https://github.com/brendangregg/FlameGraph
+  //
+C_TEXT($1;$foldedFilePath)
+C_TEXT($0;$svgFilePath)
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (05/05/2016)
+  // ----------------------------------------------------
+
+$svgFilePath:=""
+If (Asserted(Count parameters=1))
+$foldedFilePath:=$1
+
+C_TEXT($vt_pathToPerlScript)
+$vt_pathToPerlScript:=Get 4D folder(Current resources folder)+"flamegraph.pl"
+
+If (Test path name($foldedFilePath)=Is a document) & (Test path name($vt_pathToPerlScript)=Is a document)
+C_TEXT($perlScript)
+$perlScript:=Convert path system to POSIX($vt_pathToPerlScript)
+
+C_TEXT($posixFoldedFilePath)
+$posixFoldedFilePath:=Convert path system to POSIX($foldedFilePath)
+
+C_BLOB($in;$out;$err)
+C_TEXT($codeToExecute)
+$codeToExecute:="perl \""+$perlScript+"\" --countname=MSx10 \""+$posixFoldedFilePath+"\""
+LAUNCH EXTERNAL PROCESS($codeToExecute;$in;$out;$err)
+  //Log_INFO ("  $codeToExecute="+$codeToExecute)
+  //SET TEXT TO PASTEBOARD($codeToExecute)
+
+  // Look at the output & error 
+C_TEXT($outText;$errText)
+$outText:=Convert to text($out;"utf-8")
+$outText:=Substring($outText;1;Length($outText)-1)  //strip terminator
+$errText:=Convert to text($err;"utf-8")
+$errText:=Substring($errText;1;Length($errText)-1)  //strip terminator
+  //Log_INFO ("  $outText="+$outText)
+  //Log_INFO ("  $errText="+$errText)
+
+  // save the SVG
+If (BLOB size($out)>0)
+$svgFilePath:=$foldedFilePath+".svg"
+File_Delete ($svgFilePath)
+BLOB TO DOCUMENT($svgFilePath;$out)
+End if 
+End if 
+
+End if   // ASSERT
+$0:=$svgFilePath

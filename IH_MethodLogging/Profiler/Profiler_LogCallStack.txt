@@ -48,5 +48,5 @@ If ($vl_ERROR#0)
 $vt_buffer:=$vt_buffer+" Lvl "+String(Size of array(_ML_STACK_CallingStack);"##00")+": "+("   "*(Size of array(_ML_STACK_CallingStack)))+"above method triggered err #"+String($vl_ERROR)+Char(Carriage return)
 End if 
 
-LogNamed_AppendToFile ("ProfilerStats";$vt_buffer)
+LogNamed_AppendToFile ("Profiler Call Stack";$vt_buffer)
 End if 

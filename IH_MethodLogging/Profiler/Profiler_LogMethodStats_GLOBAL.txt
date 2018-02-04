@@ -1,19 +1,17 @@
 ﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","folder":"Profiler Shared Methods","lang":"en"} comment added and reserved by 4D.
-  // Profiler_ClearGlobalStats ()
+  // Profiler_LogMethodStats_GLOBAL ()
   // 
   // DESCRIPTION
-  //   Clears the global stats. Any captured stats are logged
-  //   prior to clearing.
+  //   This method dumps to the log file the globally collected method
+  //   stats of the profile arrays.
+  //
+  //   Dumps Columns: Method Name, Call Count, Min, Avg, Max Total
   //
 If (False)
   // ----------------------------------------------------
   // HISTORY
-  //   Created by: DB (05/24/2017)
+  //   Created: DB (05/22/2017)
   // ----------------------------------------------------
 End if 
 
-Profiler_LogMethodStats_GLOBAL 
-Profiler_LogCallChnStats_GLOBAL 
-Profiler_LogFlameStats_GLOBAL 
-
-CALL WORKER(Worker_GetProcessName ;"Init_ThreadSafe";True)
+CALL WORKER(Worker_GetProcessName ;"Profiler_LogMethodStats")

@@ -1,0 +1,38 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // File_GetFileName (filePath) : filename
+  // File_GetFileName (text) : text
+  //
+  // DESCRIPTION
+  //   Given the path to a document, returns the document itself.
+  //
+C_TEXT($1;$vt_docPath)  // Full path to document
+C_TEXT($0;$vt_document)  // file name
+  //---------------------------------------------------
+  // HISTORY
+  //   Created: Jeremy Sullivan (October 16, 2001  5:29 PM) - HD Industries, Inc (http://www.hdind.com)
+  //   Mod by: Dani Beaubien (01/22/2016) - Rewrote
+  //---------------------------------------------------
+
+$vt_document:=""
+If (Asserted(Count parameters=1))
+$vt_docPath:=$1
+
+Case of 
+: ($vt_docPath="")
+$vt_document:=""
+
+: ($vt_docPath=(Folder separator+"@"))
+$vt_document:=""
+
+Else 
+ARRAY TEXT($at_segments;0)
+Array_ConvertFromTextDelimited (->$at_segments;$vt_docPath;Folder separator)
+If (Size of array($at_segments)=1)
+$vt_document:=$at_segments{1}
+Else 
+$vt_document:=Substring($vt_docPath;1+Length($vt_docPath)-Length($at_segments{Size of array($at_segments)}))
+End if 
+End case 
+
+End if   // ASSERT
+$0:=$vt_document

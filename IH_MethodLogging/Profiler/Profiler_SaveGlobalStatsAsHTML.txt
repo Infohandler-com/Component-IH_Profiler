@@ -3,7 +3,7 @@
   // Profiler_SaveGlobalStatsAsHTML (text; text) 
   // 
   // DESCRIPTION
-  //   Saves the collected stats to the file.
+  //   Saves the globally collected stats to the file.
   //   $1 can be "flame" or "profile".
   //
 C_TEXT($1;$vt_statsToSave)

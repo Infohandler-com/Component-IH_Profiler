@@ -20,6 +20,8 @@ $vt_methodName:=$1
 $vp_stackArrPtr:=$2
 
 $vt_flameGraphName:=$vt_methodName
+
+C_LONGINT($i)
 For ($i;Size of array($vp_stackArrPtr->)-1;1;-1)
 $vt_flameGraphName:=$vp_stackArrPtr->{$i}+";"+$vt_flameGraphName
 End for 

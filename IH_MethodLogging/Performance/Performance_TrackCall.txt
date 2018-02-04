@@ -3,7 +3,7 @@
   // Performance_TrackCall (parm1; parm2; ...) : result
   // 
   // DESCRIPTION
-  //   
+  //   Adds the performance information onto the passed arrays.
   //
 C_TEXT($1;$vt_FullLocalMethodName)
 C_LONGINT($2;$vl_timeToExecute)
@@ -27,6 +27,7 @@ $ap_totalTimeArrPtr:=$6
 $ap_countArrPtr:=$7
 
   // # Add our tracking info to our local arrays
+C_LONGINT($pos)
 $pos:=Find in array($ap_MethodArrPtr->;$vt_FullLocalMethodName)
 If ($pos<1)
 $pos:=Size of array($ap_MethodArrPtr->)+1

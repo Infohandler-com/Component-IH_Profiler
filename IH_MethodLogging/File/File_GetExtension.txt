@@ -1,0 +1,38 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // File_GetExtension (filePath) : fileExtension
+  // File_GetExtension (text) : text
+  // 
+  // DESCRIPTION
+  //   Returns the extension from a filename
+  //
+C_TEXT($1;$path)
+C_TEXT($0)
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by:  Rob Liveau (nuggers)
+  //   Mod: DB (11/20/07) - pay attention to the folder seperator
+  // ----------------------------------------------------
+
+If (Asserted(Count parameters=1))
+$path:=$1
+
+C_LONGINT($i;$position)
+$position:=0
+For ($i;Length($path);1;-1)
+Case of 
+: ($path[[$i]]=".")
+$position:=$i
+$i:=0
+
+: ($path[[$i]]=Folder separator) & ($i#Length($path))  // end of file name
+$i:=0
+End case 
+End for 
+
+
+If ($position>0)
+$0:=Substring($path;$position+1)
+Else 
+$0:=""  // no extension
+End if 
+End if 

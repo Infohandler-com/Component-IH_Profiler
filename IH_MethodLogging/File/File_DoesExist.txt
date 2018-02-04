@@ -21,9 +21,7 @@ If ($File_vt_fullPath#"")
   // make sure that the directory exists that this file is supposed to be in
 Folder_VerifyExistance (Folder_ParentName ($File_vt_fullPath))
 
-C_LONGINT($File_vl_pathNameTestCode)
-$File_pathNameTestCode:=Test path name($File_vt_fullPath)
-If ($File_pathNameTestCode=Is a document)
+If (Test path name($File_vt_fullPath)=Is a document)
 $File_vb_doesExist:=True
 End if 
 End if 

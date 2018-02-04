@@ -1,0 +1,43 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // File_GetFolderName (filePath) : folderName
+  // File_GetFolderName (text) : text
+  // 
+  // DESCRIPTION
+  //   Given the path to a document, returns the path
+  //   to the folder the document is in.
+  //
+C_TEXT($1;$vt_docPath)  //   Full path to document
+C_TEXT($0;$vt_folderPath)  //   Path to folder document is in
+  //
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: Jeremy Sullivan (10/16/2001)
+  //   Mod: DB (11/20/07) - Improved and simplified
+  //   Mod: DB (09/18/2012) - Fixed some bugs (added Unit Tests as well)
+  //   Mod by: Dani Beaubien (01/22/2016) - Rewrote
+  // ----------------------------------------------------
+
+$vt_folderPath:=""
+If (Asserted(Count parameters=1))
+$vt_docPath:=$1
+
+If ($vt_docPath=("@"+Folder separator))
+$vt_docPath:=Substring($vt_docPath;1;Length($vt_docPath)-Length(Folder separator))
+End if 
+
+Case of 
+: ($vt_docPath="")
+$vt_folderPath:=""
+
+Else 
+ARRAY TEXT($at_segments;0)
+Array_ConvertFromTextDelimited (->$at_segments;$vt_docPath;Folder separator)
+If (Size of array($at_segments)=1)
+$vt_folderPath:=""  // $at_segments{1}
+Else 
+$vt_folderPath:=Substring($vt_docPath;1;Length($vt_docPath)-Length($at_segments{Size of array($at_segments)}))
+End if 
+End case 
+
+End if   // ASSERT
+$0:=$vt_folderPath

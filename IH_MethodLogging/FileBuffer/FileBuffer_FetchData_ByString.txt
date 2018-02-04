@@ -1,0 +1,76 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // Method: FileBuffer_FetchData_ByString ( text to match on {;text2}) : result
+
+C_LONGINT($pos;$pos2)
+C_TEXT($1;$matchOnText)
+C_TEXT($2;$matchOnText2)
+C_TEXT($0;$tmpTxt)
+$matchOnText:=$1
+$matchOnText2:=""
+If (Count parameters=2)
+$matchOnText2:=$2
+End if 
+$tmpTxt:=""
+$pos:=0
+$pos2:=0
+
+If (Asserted(Length($matchOnText)>0))  // String being passed to search for is empty.
+
+  // where is it in the string?
+$pos:=Position($matchOnText;fileBuffer_buffer;*)
+If ($matchOnText2#"")
+$pos2:=Position($matchOnText2;fileBuffer_buffer;*)
+End if 
+
+If ($pos<1) & ($pos2<1)  // top off the buffer and try to find it again
+FileBuffer_FillBuffer 
+$pos:=Position($matchOnText;fileBuffer_buffer;*)
+If ($matchOnText2#"")
+$pos2:=Position($matchOnText2;fileBuffer_buffer;*)
+End if 
+End if 
+
+If ($pos2=0)  // if nothing then force to the end
+$pos2:=Length(fileBuffer_buffer)+1
+End if 
+
+If ($pos=0)  // if nothing then force to the end
+$pos:=Length(fileBuffer_buffer)+1
+End if 
+
+If ($pos2<$pos)  // if 2nd parm was found first then use that one
+$pos:=$pos2
+$matchOnText:=$matchOnText2
+End if 
+
+  // text found, return all data PLUS the found text
+If ($pos>0)
+$pos:=$pos+(Length($matchOnText)-1)
+$tmpTxt:=Substring(fileBuffer_buffer;1;$pos)
+fileBuffer_buffer:=Substring(fileBuffer_buffer;$pos+1)  // advance to next char
+
+  // Account for unicode characters
+  //For ($i;1;Length($tmpTxt))
+  //If (Character code($tmpTxt≤$i≥)>256)
+  //fileBuffer_curPos:=fileBuffer_curPos+1
+  //End if 
+  //End for 
+Else 
+  // If buffer is less than the full size which means that we are at the
+  // end of the file. Did not find the text we are looking for so
+  // return all that is left  
+If (fileBuffer_MaxSize>Length(fileBuffer_buffer))
+$tmpTxt:=fileBuffer_buffer
+fileBuffer_buffer:=""
+End if 
+End if 
+
+  // Increment our current position in the file
+C_LONGINT(fileBuffer_curPos)
+C_BLOB($vx_tmpBuffer)
+TEXT TO BLOB($tmpTxt;$vx_tmpBuffer;UTF8 text without length)
+fileBuffer_curPos:=fileBuffer_curPos+BLOB size($vx_tmpBuffer)
+  //fileBuffer_curPos:=fileBuffer_curPos+Length($tmpTxt)
+End if   // ASSERT
+
+$0:=$tmpTxt

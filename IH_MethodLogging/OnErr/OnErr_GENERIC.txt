@@ -15,6 +15,7 @@ ARRAY LONGINT($al_err_code;0)
 ARRAY TEXT($as_component;0)
 ARRAY TEXT($as_error;0)
 GET LAST ERROR STACK($al_err_code;$as_component;$as_error)
+C_LONGINT($i)
 For ($i;1;Size of array($al_err_code))
 Log_ERR_CRITICAL (" ** STACK LVL "+String($i)+" CODE: "+String($al_err_code{$i})+", COMPONENT: \""+$as_component{$i}+"\", MESSAGE: \""+$as_error{$i}+"\"";"On Err Trigger")
 End for 

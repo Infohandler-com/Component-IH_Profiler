@@ -1,6 +1,6 @@
 ﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","folder":"Profiler Shared Methods","lang":"en"} comment added and reserved by 4D.
-  // Profiler_GetLocalFlameStats () : flameStatsAsText
-  // Profiler_GetLocalFlameStats () : text
+  // Profiler_GetLocalCallChainStats () : flameStatsAsText
+  // Profiler_GetLocalCallChainStats () : text
   // 
   // DESCRIPTION
   //   This method returns the contents of
@@ -26,7 +26,7 @@ End if
 If (Size of array(_ML_Flame_Method)>0)
 $vt_flameStats:="\r"+("-"*40)+"\r"
 $vt_flameStats:=$vt_flameStats+("-"*40)+"\r"
-$vt_flameStats:=$vt_flameStats+"METHOD NAME ("+$vt_processType+" FLAME)\t"
+$vt_flameStats:=$vt_flameStats+"CALL CHAIN ("+$vt_processType+")\t"
 $vt_flameStats:=$vt_flameStats+"Call Count\t"
 $vt_flameStats:=$vt_flameStats+"Min (ms)\t"
 $vt_flameStats:=$vt_flameStats+"Avg (ms)\t"

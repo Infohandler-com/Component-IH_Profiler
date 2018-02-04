@@ -35,6 +35,7 @@ $vt_profileStatsAsText:=$vt_profileStatsAsText+"Total (ms)\r"
 $vt_profileStatsAsText:=$vt_profileStatsAsText+("-"*40)+"\r"
 
 SORT ARRAY(_ML_Perf_Method;_ML_Perf_minTime;_ML_Perf_maxTime;_ML_Perf_totalTime;_ML_Perf_count)
+C_LONGINT($i)
 For ($i;1;Size of array(_ML_Perf_Method))
 $vt_profileStatsAsText:=$vt_profileStatsAsText+_ML_Perf_Method{$i}+Char(Tab)
 $vt_profileStatsAsText:=$vt_profileStatsAsText+String(_ML_Perf_count{$i})+Char(Tab)

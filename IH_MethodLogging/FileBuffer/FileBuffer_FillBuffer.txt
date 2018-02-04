@@ -1,0 +1,13 @@
+﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // Method: FileBuffer_FillBuffer
+
+  // Gets as much data as is possible so that the buffer is full
+
+C_TEXT($tmpTxt)
+C_LONGINT($dataSize)
+$dataSize:=fileBuffer_MaxSize-Length(fileBuffer_buffer)
+
+If ($dataSize>0)  // if there is room in the buffer
+RECEIVE PACKET(fileBuffer_DocRef;$tmpTxt;$dataSize)
+fileBuffer_buffer:=fileBuffer_buffer+$tmpTxt
+End if 

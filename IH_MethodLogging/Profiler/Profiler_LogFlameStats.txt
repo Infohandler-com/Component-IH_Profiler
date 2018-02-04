@@ -1,31 +1,51 @@
 ﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","folder":"Profiler Shared Methods","lang":"en"} comment added and reserved by 4D.
-  // Profiler_LogFlameStats ()
+  // Profiler_LogFlameStats ({module}) : statsAsText
+  // Profiler_LogFlameStats ({text}) : text
   // 
   // DESCRIPTION
-  //   This method dumps to the log file the contents of
-  //   the profile arrays in a format that support flamegraphs.
+  //   This method stores the profiling stats in a flamegraph
+  //   safe format to the specified module file.
   //
-If (False)
+C_TEXT($1;$vt_moduleName)
   // ----------------------------------------------------
   // HISTORY
-  //   Created by: DB (10/29/10)
-  //   Mod: DB (05/22/2017) - Moved to v16 component
+  //   Created by: DB (05/10/11)
+  //   Mod: DB (01/28/2014) - Added Total to output
+  //   Mod by: Dani Beaubien (03/28/2014) - Changed output to be "-"'s
   // ----------------------------------------------------
+
+If (Asserted(Count parameters<=1))
+If (Count parameters=1)
+$vt_moduleName:="Profiler Flamegraph Unfolded - "+$1
+End if 
+If ($vt_moduleName="")
+$vt_moduleName:="Profiler Flamegraph Unfolded"
 End if 
 
 Init_ThreadSafe 
 
-  // If running in the worker, then want the info to go to a different file.
-C_TEXT($vt_namedLogFile)
-$vt_namedLogFile:="ProfilerStats"
-If (Worker_inWorker )
-$vt_namedLogFile:=$vt_namedLogFile+" GLOBAL"
-End if 
-
+If (Size of array(_ML_Flame_Method)>0)
 C_TEXT($vt_buffer)
-$vt_buffer:=Profiler_GetLocalFlameStats 
+$vt_buffer:=""
+
+SORT ARRAY(_ML_Flame_Method;_ML_Flame_minTime;_ML_Flame_maxTime;_ML_Flame_totalTime;_ML_Flame_count)
+C_LONGINT($i)
+C_REAL($vr_totalTime)
+For ($i;1;Size of array(_ML_Flame_Method))
+$vr_totalTime:=(_ML_Flame_totalTime{$i})*10  // Add one level of magnitude so that we can handle zeros below
+If ($vr_totalTime=0)  // force to be non-zero
+$vr_totalTime:=1
+End if 
+$vt_buffer:=$vt_buffer+_ML_Flame_Method{$i}+" "+String($vr_totalTime)+Char(Line feed)
+
+If (Length($vt_buffer)>5120)
+LogNamed_AppendToFile_Quiet ($vt_moduleName;$vt_buffer;"noTimeStamp";"noProc#")
+$vt_buffer:=""
+End if 
+End for 
 
 If ($vt_buffer#"")
-Log_WARN ("  **** "+String(Size of array(_ML_Flame_Method))+" Method flamegraph profile statistics records saved directly to the \""+$vt_namedLogFile+"\" log file";$vt_namedLogFile)
-LogNamed_AppendToFile ($vt_namedLogFile;$vt_buffer)  //;"noProc#";"noTimeStamp";"beQuiet")
+LogNamed_AppendToFile_Quiet ($vt_moduleName;$vt_buffer;"noTimeStamp";"noProc#")
 End if 
+End if 
+End if   // ASSERT

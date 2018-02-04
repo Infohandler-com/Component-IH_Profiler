@@ -52,6 +52,7 @@ $Month:=Month of($date2Convert)
 $Year:=Year of($date2Convert)
 $WeekDay:=Day number($date2Convert)
 
+C_TEXT($DayStr;$DayStr2;$MonthStr)
 $DayStr:=String($Day)
 $DayStr2:=String($Day;"00")
 $MonthStr:=String($Month;"00")

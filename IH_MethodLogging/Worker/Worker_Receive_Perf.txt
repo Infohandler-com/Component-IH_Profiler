@@ -30,7 +30,7 @@ OB GET ARRAY($obj;"totalTime";$ar_totalTime)
 OB GET ARRAY($obj;"count";$al_count)
 End if 
 
-C_LONGINT($pos)
+C_LONGINT($pos;$i)
 For ($i;1;Size of array($at_method))
 $pos:=Find in array(_ML_Perf_Method;$at_method{$i})
 If ($pos<1)  // not found

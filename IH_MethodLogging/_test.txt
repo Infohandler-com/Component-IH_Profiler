@@ -1,58 +1,74 @@
 ﻿  //%attributes = {"lang":"en"} comment added and reserved by 4D.
-
-  //C_OBJECT($vo)
-  //$vo:=BuildNo_GetBuildNo_ProfileComp 
-  //$vo:=BuildNo_GetBuildNo_LogComp 
-
-$folder:=Folder_ParentName (Folder_ParentName (Structure file))+"IH_Profiler Tests"+Folder separator
-Folder_VerifyExistance ($folder)
-
-Profiler_ClearGlobalStats 
-
 If (Process number("Log_AppLog")<1)
 Log_OpenDisplayWindow 
 End if 
 
+
+C_TEXT($folder)
+$folder:=Folder_ParentName (Folder_ParentName (Structure file))+"IH_Profiler Tests"+Folder separator
+Folder_VerifyExistance ($folder)
+
+  // TEST #1
+If (True)
 Profiler_START ("test1")
+If (True)
 Profiler_START ("test2")
-Profiler_START ("test3")
-DELAY PROCESS(Current process;2)
-Profiler_STOP ("test3")
+If (True)
+C_LONGINT($i)
+For ($i;1;10)
 Profiler_START ("test3")
 DELAY PROCESS(Current process;1)
 Profiler_STOP ("test3")
+
+DELAY PROCESS(Current process;1)
+End for 
 Profiler_LogCallStack 
-DELAY PROCESS(Current process;1)
+End if 
 Profiler_STOP ("test2")
+
+For ($i;1;10)
 Profiler_START ("test3")
+DELAY PROCESS(Current process;4)
 Profiler_STOP ("test3")
+
 DELAY PROCESS(Current process;1)
+End for 
+
+DELAY PROCESS(Current process;1)
+End if 
 Profiler_STOP ("test1")
 
+  // Log what has been done in just this process
 Profiler_SaveProcessStatsAsHTML ("profile";$folder+"Test 1 - Profile.html")
 Profiler_SaveProcessStatsAsHTML ("flame";$folder+"Test 1 - Flame.html")
+Profiler_LogMethodStats 
+Profiler_LogCallChainStats 
+Profiler_LogFlameStats ("Local Process 1")  // Save current process stats to "FlameGraph Unfolded - Local Process Log.txt"
+End if 
 
-  //Profiler_StoreFlameStats ("ProfilerStats")  //   Mod: DB (05/03/2016)
 
+  // New Round of profiling
+If (True)
 Profiler_START ("test1")
 Profiler_START ("test3")
 DELAY PROCESS(Current process;1)
 Profiler_STOP ("test3")
 Profiler_STOP ("test1")
+Profiler_LogFlameStats ("Local Process 2")  // Save current process stats to "FlameGraph Unfolded - Local Process Log.txt"
 
-  //Profiler_LogProfileStats 
-  //Profiler_LogFlameStats 
-  //Profiler_StoreFlameStats ("ProfilerStats")  //   Mod: DB (05/03/2016)
-
-  //Method_DumpGlobalStats_Perf
-  //Method_DumpGlobalStats_Flame
-
+  // Log what has been done in just this process
 Profiler_SaveProcessStatsAsHTML ("profile";$folder+"Test 2 - Profile.html")
 Profiler_SaveProcessStatsAsHTML ("flame";$folder+"Test 2 - Flame.html")
+Profiler_LogMethodStats 
+Profiler_LogCallChainStats 
+Profiler_LogFlameStats ("ProfilerStats")  //   Mod: DB (05/03/2016)
+End if 
 
+  // Dump globally
 Profiler_SaveGlobalStatsAsHTML ("profile";$folder+"Global Results - Profile.html")
 Profiler_SaveGlobalStatsAsHTML ("flame";$folder+"Global Results - Flame.html")
+Profiler_ClearGlobalStats   // Dumps global stats and clears all global data
+Log_FlushCache   // Forces all the logs to disk
+
 ALERT("done")
 SHOW ON DISK($folder;*)
-
-  //Profiler_ClearGlobalStats 

@@ -53,7 +53,9 @@ C_REAL($vr_average;$vr_max;$vr_total;$vr_callCount;$vr_ratioTotal;$vr_min;$vr_ra
 C_BOOLEAN($vb_warnRatioTotal;$vb_warnRationAvg;$vb_warnAvg)
 $vt_theHTML:=$vt_theHTML+"<tbody>"
 
-C_TEXT($tmpHTML)
+C_TEXT($tmpHTML;$vt_methodName)
+C_LONGINT($i)
+C_REAL($vr_total;$vr_callCount;$vr_max;$vr_min;$vr_ratioAvg;$vr_ratioTotal)
 $tmpHTML:=""
 For ($i;1;$loopCount)
 

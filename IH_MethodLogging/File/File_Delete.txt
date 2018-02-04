@@ -12,14 +12,6 @@ C_TEXT($1;$vt_fileName)
 
 $vt_fileName:=$1
 
-If (False)
-$CurrentTime:=Current time+?00:00:05?
-Repeat 
-IDLE
-DELAY PROCESS(Current process;60)
-Until (Current time>$CurrentTime)
-End if 
-
 If (File_DoesExist ($vt_fileName))
 DELETE DOCUMENT($vt_fileName)
 End if 

@@ -1,9 +1,9 @@
-﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","folder":"Profiler Shared Methods","lang":"en"} comment added and reserved by 4D.
+﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
   // Profiler_LogFlameStats_GLOBAL ()
   // 
   // DESCRIPTION
-  //   This method dumps to the log file the contents of
-  //   the global profile arrays in a format that support flamegraphs.
+  //   This method stores the globally collected profiling stats in a flamegraph
+  //   safe format to the specified module file.
   //
 If (False)
   // ----------------------------------------------------
@@ -12,4 +12,4 @@ If (False)
   // ----------------------------------------------------
 End if 
 
-CALL WORKER(Worker_GetProcessName ;"Profiler_LogFlameStats")
+CALL WORKER(Worker_GetProcessName ;"Profiler_LogFlameStats";"GLOBAL")

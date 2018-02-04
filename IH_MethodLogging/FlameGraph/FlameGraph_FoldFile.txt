@@ -1,0 +1,122 @@
+﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
+  // FlameGraph_FoldFile ({srcFilePath}) : foldedFilePath
+  // FlameGraph_FoldFile (text) : text
+  // 
+  // DESCRIPTION
+  //   Takes a raw flame graph file created by this component
+  //   and folds all the results in the file into a a form that
+  //   the "FlameGraph_FoldedFileToSVG" method can then turn into a svg.
+  //
+  //   If no path is provided then a select dialog will ask for a doc.
+  //
+  //   NOTE: See Brendan Gregg's flamegraph perl scripts for more detail.
+  //   https://github.com/brendangregg/FlameGraph
+  //
+C_TEXT($1;$vt_srcFilePath)  // OPTIONAL
+C_TEXT($0;$foldedFilePath)
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (05/04/2016)
+  // ----------------------------------------------------
+
+$foldedFilePath:=""
+If (Asserted(Count parameters<=1))
+If (Count parameters>=1)
+$vt_srcFilePath:=$1
+Else 
+$vt_srcFilePath:=Select document(File_GetFolderName (Structure file(*));"";"Select RAW FlameGraph file";0)
+If (OK=1)
+$vt_srcFilePath:=Document
+Else 
+$vt_srcFilePath:=""
+End if 
+End if 
+
+
+If ($vt_srcFilePath#"")
+If (File_DoesExist ($vt_srcFilePath))
+
+ARRAY TEXT($at_label;0)
+ARRAY REAL($ar_time;0)
+
+
+  // # open the file and start importing the data
+C_TIME($docRef)
+$docRef:=Open document($vt_srcFilePath;"";Read mode)
+If (OK=1)
+FileBuffer_Init ($docRef)
+
+C_TEXT($vt_oneLine)
+Repeat 
+$vt_oneLine:=FileBuffer_FetchData_ByString (Char(Carriage return);Char(Line feed))
+$vt_oneLine:=Replace string($vt_oneLine;Char(Carriage return);"")
+$vt_oneLine:=Replace string($vt_oneLine;Char(Line feed);"")
+
+If ($vt_oneLine#"")
+  // need to figure out where the "last" space is on the line
+C_LONGINT($vl_locationOfSpace;$i)
+$vl_locationOfSpace:=0
+For ($i;Length($vt_oneLine);1;-1)
+If ($vt_oneLine[[$i]]=" ")
+$vl_locationOfSpace:=$i
+$i:=0
+End if 
+End for 
+
+If ($vl_locationOfSpace>0)
+C_TEXT($vt_label)
+C_REAL($vr_count)
+$vt_label:=Substring($vt_oneLine;1;$vl_locationOfSpace-1)
+$vr_count:=Num(Substring($vt_oneLine;$vl_locationOfSpace+1))
+
+C_LONGINT($pos)
+$pos:=Find in array($at_label;$vt_label)
+If ($pos>0)
+$ar_time{$pos}:=$ar_time{$pos}+$vr_count
+Else 
+APPEND TO ARRAY($at_label;$vt_label)
+APPEND TO ARRAY($ar_time;$vr_count)
+End if 
+
+End if 
+End if 
+Until (FileBuffer_EOF )
+CLOSE DOCUMENT($docRef)
+
+
+  // Determine what our "folded" file name is
+C_TEXT($vt_fileExtn;$vt_fileName)
+$foldedFilePath:=File_GetFolderName ($vt_srcFilePath)
+$vt_fileName:=File_GetFileName ($vt_srcFilePath)
+$vt_fileExtn:=File_GetExtension ($vt_fileName)
+If ($vt_fileExtn="")
+$foldedFilePath:=$vt_srcFilePath+" [FOLDED]"
+Else 
+$vt_fileName:=Substring($vt_fileName;1;Length($vt_fileName)-Length($vt_fileExtn)-1)  // remove the extn
+$vt_fileName:=$vt_fileName+" [FOLDED]."+$vt_fileExtn
+$foldedFilePath:=$foldedFilePath+$vt_fileName
+End if 
+
+  // Create it and output the results
+File_Delete ($foldedFilePath)
+$docRef:=Create document($foldedFilePath)
+If (OK=1)
+SORT ARRAY($at_label;$ar_time;>)
+If (Size of array($at_label)>0)
+For ($i;1;Size of array($at_label))
+SEND PACKET($docRef;$at_label{$i}+" "+String($ar_time{$i})+Char(Line feed))
+End for 
+CLOSE DOCUMENT($docRef)
+End if 
+End if 
+
+
+End if 
+
+Else 
+ALERT("File not found!\r\r"+$vt_srcFilePath)
+End if 
+End if 
+
+End if   // ASSERT
+$0:=$foldedFilePath
