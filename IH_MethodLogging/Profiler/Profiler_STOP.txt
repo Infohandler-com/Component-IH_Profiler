@@ -3,9 +3,11 @@
   // Profiler_STOP (text {;text})
   // 
   // DESCRIPTION
-  //   Used to log leaving a method.
+  //   Used to capture the end of a segment of code that
+  //   is to be monitored.
+  //   NOTE: Spaces in $1 & $2 are replaced by "_".
   //
-C_TEXT($1;$vt_callingMethod)  // method name
+C_TEXT($1;$nameToTrack)  // method name
 C_TEXT($2;$vt_extraText)  // Optional stuff
   // ----------------------------------------------------
   // HISTORY
@@ -21,13 +23,13 @@ ASSERT(Count parameters>0)
 ASSERT(Count parameters<=2)
 
 C_TEXT($vt_FullMethodName)
-$vt_callingMethod:=$1
+$nameToTrack:=Replace string($1;" ";"_")
 If (Count parameters>=2)
-$vt_extraText:=$2
+$vt_extraText:=Replace string($2;" ";"_")
 End if 
-$vt_FullMethodName:=$vt_callingMethod
+$vt_FullMethodName:=$nameToTrack
 If ($vt_extraText#"")
-$vt_FullMethodName:=$vt_FullMethodName+" ("+$vt_extraText+")"
+$vt_FullMethodName:=$vt_FullMethodName+"("+$vt_extraText+")"
 End if 
 
 
@@ -39,11 +41,11 @@ $size:=Size of array(_ML_STACK_CallingStack)
 If ($size>0)
 
   // # Make sure that the STOPPED method matches what is expected
-If ($vt_callingMethod#_ML_STACK_CallingStack{$size}) | ($vt_extraText#_ML_STACK_ExtraText{$size})
+If ($nameToTrack#_ML_STACK_CallingStack{$size}) | ($vt_extraText#_ML_STACK_ExtraText{$size})
 
   //   Mod: DB (01/28/2014) - Improved error checks
 C_TEXT($vt_msg)
-$vt_msg:=" called with $1 = '"+$vt_callingMethod+"'"
+$vt_msg:=" called with $1 = '"+$nameToTrack+"'"
 If ($vt_extraText#"")
 $vt_msg:=$vt_msg+" and $2 = '"+$vt_extraText+"'"
 End if 

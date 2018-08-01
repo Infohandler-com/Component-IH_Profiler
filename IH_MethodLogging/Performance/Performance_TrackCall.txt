@@ -18,7 +18,7 @@ C_POINTER($7;$ap_countArrPtr)
   // ----------------------------------------------------
 
 ASSERT(Count parameters=7)
-$vt_FullLocalMethodName:=$1
+$vt_FullLocalMethodName:=Replace string($1;" ";"_")
 $vl_timeToExecute:=$2
 $ap_MethodArrPtr:=$3
 $ap_minTimeArrPtr:=$4
