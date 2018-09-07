@@ -22,6 +22,11 @@ C_TEXT($2;$vt_extraText)  // Optional stuff
 ASSERT(Count parameters>0)
 ASSERT(Count parameters<=2)
 
+C_TEXT($vt_prevOnErr)
+$vt_prevOnErr:=Method called on error
+ON ERR CALL("OnErr_GENERIC")
+OnErr_ClearError 
+
 C_TEXT($vt_FullMethodName)
 $nameToTrack:=Replace string($1;" ";"_")
 If (Count parameters>=2)
@@ -95,3 +100,5 @@ If (Size of array(_ML_STACK_CallingStack)=0) & (Size of array(_ML_Perf_Method)>0
 Performance_PushToGlobal_Perf 
 Performance_PushToGlobal_Flame 
 End if 
+
+ON ERR CALL($vt_prevOnErr)
