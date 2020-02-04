@@ -14,6 +14,10 @@ C_OBJECT($1;$obj)
 ASSERT(Count parameters=1)
 $obj:=$1
 
+C_TEXT($vt_prevOnErr)
+$vt_prevOnErr:=Method called on error
+ON ERR CALL("OnErr_GENERIC")
+
 Init_ThreadSafe 
 
 ARRAY TEXT($at_method;0)
@@ -22,11 +26,19 @@ ARRAY LONGINT($al_maxTime;0)
 ARRAY REAL($ar_totalTime;0)
 ARRAY LONGINT($al_count;0)
 
+OnErr_ClearError 
+If (OB Is defined($obj;"methods"))
 OB GET ARRAY($obj;"methods";$at_method)
 OB GET ARRAY($obj;"minTime";$al_minTime)
 OB GET ARRAY($obj;"maxTime";$al_maxTime)
 OB GET ARRAY($obj;"totalTime";$ar_totalTime)
 OB GET ARRAY($obj;"count";$al_count)
+Else 
+EXECUTE METHOD("SLACK_SendWarning";*;Current method name+": encountered an issue with arrays")
+Log_ERR_CRITICAL (" ** ERR ** --> "+Current method name+" $obj is--> "+JSON Stringify($obj;*);"On Err Trigger")
+End if 
+
+If (OnErr_GetLastError =0)
 
 C_LONGINT($pos;$i)
 For ($i;1;Size of array($at_method))
@@ -51,3 +63,12 @@ _ML_Flame_totalTime{$pos}:=_ML_Flame_totalTime{$pos}+$ar_totalTime{$i}
 _ML_Flame_count{$pos}:=_ML_Flame_count{$pos}+$al_count{$i}
 End if 
 End for 
+
+Else 
+
+EXECUTE METHOD("SLACK_SendWarning";*;Current method name+": encountered an issue with arrays")
+Log_ERR_CRITICAL (" ** ERR ** --> "+Current method name+" $obj is--> "+JSON Stringify($obj;*);"On Err Trigger")
+
+End if 
+
+ON ERR CALL($vt_prevOnErr)

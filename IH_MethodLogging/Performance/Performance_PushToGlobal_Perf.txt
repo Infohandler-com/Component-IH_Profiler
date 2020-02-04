@@ -13,6 +13,7 @@
 Init_ThreadSafe 
 
 C_OBJECT($obj)
+$obj:=New object
 OB SET ARRAY($obj;"methods";_ML_Perf_Method)
 OB SET ARRAY($obj;"minTime";_ML_Perf_minTime)
 OB SET ARRAY($obj;"maxTime";_ML_Perf_maxTime)

@@ -25,7 +25,7 @@ If ($vt_rootFolder=("@.4dbase"+Folder separator))
 $vt_rootFolder:=Folder_ParentName ($vt_rootFolder)
 End if 
 $vt_rootFolder:=$vt_rootFolder+"IH_Profiler logs"+Folder separator
-LogNamed_SetDefaultFolderToSave ($vt_rootFolder;"yyyy-mm-dd"+Folder separator)
+LogConfig_SetDefaultFolder ($vt_rootFolder;"yyyy-mm-dd"+Folder separator)
 
 
 
