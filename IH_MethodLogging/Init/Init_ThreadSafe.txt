@@ -15,22 +15,19 @@ C_BOOLEAN($1)
 
 If (Count parameters=1)
 If ($1=True)  // force a refresh?
-_ML_STACK_inited:=False
+__STACK_inited:=False
 End if 
 End if 
 
-C_BOOLEAN(_ML_STACK_inited)
-If (Not(_ML_STACK_inited))
-_ML_STACK_inited:=True
+C_BOOLEAN(__STACK_inited)
+If (Not(__STACK_inited))
+__STACK_inited:=True
 
 C_LONGINT(__incrementLevel)
 __incrementLevel:=0
 
-  // arrays used for the method calling chain
-ARRAY TEXT(_ML_STACK_CallingStack;0)
-ARRAY TEXT(_ML_STACK_ExtraText;0)
-ARRAY REAL(_ML_STACK_msStart;0)  // Holds the start time of the method call
-ARRAY REAL(_ML_STACK_wasteTime;0)  // Holds time spent on internal calls
+C_COLLECTION(__STACK)
+__STACK:=New collection  // stack used for the method calling chain
 
   // arrays used to track the method performance for flamegraph
 ARRAY TEXT(_ML_Flame_Method;0)

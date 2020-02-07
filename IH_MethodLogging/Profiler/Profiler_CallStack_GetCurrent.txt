@@ -13,8 +13,8 @@ C_TEXT($0;$vt_currentMethodName)
 
 Init_ThreadSafe 
 
-If (Size of array(_ML_STACK_CallingStack)>0)
-$vt_currentMethodName:=_ML_STACK_CallingStack{Size of array(_ML_STACK_CallingStack)}
+If (__STACK.length>0)
+$vt_currentMethodName:=__STACK[__STACK.length-1].tag
 End if 
 
 If ($vt_currentMethodName="")  // Just in case, try to catch it this way.

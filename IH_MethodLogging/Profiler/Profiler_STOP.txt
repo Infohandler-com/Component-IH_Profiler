@@ -1,14 +1,16 @@
 ﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","folder":"Profiler Shared Methods","lang":"en"} comment added and reserved by 4D.
-  // Profiler_STOP (methodName {;optionalText})
+  // Profiler_STOP (profilerTag {;optionalText})
   // Profiler_STOP (text {;text})
   // 
   // DESCRIPTION
   //   Used to capture the end of a segment of code that
-  //   is to be monitored.
+  //   is to be monitored. Each start call must be balanced
+  //   with a stop call with exact same params.
+  //
   //   NOTE: Spaces in $1 & $2 are replaced by "_".
   //
-C_TEXT($1;$nameToTrack)  // method name
-C_TEXT($2;$vt_extraText)  // Optional stuff
+C_TEXT($1;$profilerTag)  // method name
+C_TEXT($2;$extraText)  // Optional stuff
   // ----------------------------------------------------
   // HISTORY
   //   Created by: DB (11/23/07)
@@ -17,75 +19,69 @@ C_TEXT($2;$vt_extraText)  // Optional stuff
   //   Mod: DB (01/20/2011) - Improved Performance of this method, significantly faster
   //   Mod: DB (01/28/2014) - Add tracking globally
   //   Mod: DB (05/22/2017) - Moved to v16 component
+  //   Mod: DB (2020-02-07) - use collection
   // ----------------------------------------------------
 
-ASSERT(Count parameters>0)
-ASSERT(Count parameters<=2)
+If (Asserted((Count parameters=1) | (Count parameters=2)))
+$profilerTag:=Replace string($1;" ";"_")
+If (Count parameters=2)
+$extraText:=Replace string($2;" ";"_")
+End if 
 
 C_TEXT($vt_prevOnErr)
 $vt_prevOnErr:=Method called on error
 ON ERR CALL("OnErr_GENERIC")
 OnErr_ClearError 
 
-C_TEXT($vt_FullMethodName)
-$nameToTrack:=Replace string($1;" ";"_")
-If (Count parameters>=2)
-$vt_extraText:=Replace string($2;" ";"_")
+C_TEXT($fullProfilerTag)
+$fullProfilerTag:=$profilerTag
+If ($extraText#"")
+$fullProfilerTag:=$fullProfilerTag+"("+$extraText+")"
 End if 
-$vt_FullMethodName:=$nameToTrack
-If ($vt_extraText#"")
-$vt_FullMethodName:=$vt_FullMethodName+"("+$vt_extraText+")"
-End if 
-
 
 Init_ThreadSafe 
 
-C_LONGINT($size)
-$size:=Size of array(_ML_STACK_CallingStack)
-
-If ($size>0)
+If (__STACK.length>0)
+C_OBJECT($event)
+$event:=__STACK.pop()
 
   // # Make sure that the STOPPED method matches what is expected
-If ($nameToTrack#_ML_STACK_CallingStack{$size}) | ($vt_extraText#_ML_STACK_ExtraText{$size})
-
-  //   Mod: DB (01/28/2014) - Improved error checks
+If ($profilerTag#$event.tag) | ($extraText#$event.extraText)
 C_TEXT($vt_msg)
-$vt_msg:=" called with $1 = '"+$nameToTrack+"'"
-If ($vt_extraText#"")
-$vt_msg:=$vt_msg+" and $2 = '"+$vt_extraText+"'"
+$vt_msg:=" called with $1 = '"+$profilerTag+"'"
+If ($extraText#"")
+$vt_msg:=$vt_msg+" and $2 = '"+$extraText+"'"
 End if 
-$vt_msg:=$vt_msg+" but expecting $1 = '"+_ML_STACK_CallingStack{$size}+"'"
-If (_ML_STACK_ExtraText{$size}#"")
-$vt_msg:=$vt_msg+" and $2 = '"+_ML_STACK_ExtraText{$size}+"'"
+$vt_msg:=$vt_msg+" but expecting $1 = '"+$event.tag+"'"
+If ($event.extraText#"")
+$vt_msg:=$vt_msg+" and $2 = '"+$event.extraText+"'"
 End if 
 Log_ERR (Current method name+$vt_msg;"Process")
-
 End if 
 
-
-C_REAL($vr_msStop)
-$vr_msStop:=Milliseconds
+C_REAL($stoppedAtMilliseconds)
+$stoppedAtMilliseconds:=Milliseconds
 
   // # Track the time
 C_LONGINT($vl_timeToExecute)
-$vl_timeToExecute:=$vr_msStop-_ML_STACK_msStart{$size}  // time between start & end
-$vl_timeToExecute:=$vl_timeToExecute-_ML_STACK_wasteTime{$size}  // remove the child method's time
-If ($size>1)  // add our execute time to the calling parent method
-_ML_STACK_wasteTime{$size-1}:=_ML_STACK_wasteTime{$size-1}+_ML_STACK_wasteTime{$size}  // add child method times
-_ML_STACK_wasteTime{$size-1}:=_ML_STACK_wasteTime{$size-1}+$vl_timeToExecute  // add current method times
+$vl_timeToExecute:=$stoppedAtMilliseconds-$event.start_ms  // time between start & end
+$vl_timeToExecute:=$vl_timeToExecute-$event.wasteTime  // remove the child method's time
+
+C_LONGINT($size)
+$size:=__STACK.length
+If ($size>0)  // add our execute time to the calling parent method
+__STACK[$size-1].wasteTime:=__STACK[$size-1].wasteTime+$event.wasteTime  // add child method times
+__STACK[$size-1].wasteTime:=__STACK[$size-1].wasteTime+$vl_timeToExecute  // add current method times
 End if 
 
   // Track by method name
-Performance_TrackCall ($vt_FullMethodName;$vl_timeToExecute;->_ML_Perf_Method;->_ML_Perf_minTime;->_ML_Perf_maxTime;->_ML_Perf_totalTime;->_ML_Perf_count)
+Performance_TrackCall ($fullProfilerTag;$vl_timeToExecute;->_ML_Perf_Method;->_ML_Perf_minTime;->_ML_Perf_maxTime;->_ML_Perf_totalTime;->_ML_Perf_count)
 
   // Track by flamegraph name
 C_TEXT($vt_MethodName_FlameGraph)
-$vt_MethodName_FlameGraph:=STR_GetFlameGraphNameFromStack ($vt_FullMethodName;->_ML_STACK_CallingStack)
+$vt_MethodName_FlameGraph:=STR_GetFlameGraphNameFromStack ($fullProfilerTag;__STACK)
 Performance_TrackCall ($vt_MethodName_FlameGraph;$vl_timeToExecute;->_ML_Flame_Method;->_ML_Flame_minTime;->_ML_Flame_maxTime;->_ML_Flame_totalTime;->_ML_Flame_count)
 
-
-  // Pull it off the list
-Array_SetSize ($size-1;->_ML_STACK_CallingStack;->_ML_STACK_ExtraText;->_ML_STACK_msStart;->_ML_STACK_wasteTime)
 End if 
 
   // Deal with tab levels
@@ -96,9 +92,12 @@ __incrementLevel:=0
 End if 
 
   // If this STOP is the last one from the stack, push to global tracking
-If (Size of array(_ML_STACK_CallingStack)=0) & (Size of array(_ML_Perf_Method)>0)
+If (__STACK.length=0) & (Size of array(_ML_Perf_Method)>0)
 Performance_PushToGlobal_Perf 
 Performance_PushToGlobal_Flame 
+
+Init_ThreadSafe (True)  // Force everyting to get reset
 End if 
 
 ON ERR CALL($vt_prevOnErr)
+End if 

@@ -13,8 +13,8 @@ C_TEXT($0;$vt_previousMethodName)
 
 Init_ThreadSafe 
 
-If (Size of array(_ML_STACK_CallingStack)>1)
-$0:=_ML_STACK_CallingStack{Size of array(_ML_STACK_CallingStack)-1}
+If (__STACK.length>1)
+$0:=__STACK[__STACK.length-2].tag
 End if 
 
 $0:=$vt_previousMethodName

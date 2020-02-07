@@ -1,5 +1,5 @@
 ﻿  //%attributes = {"invisible":true,"preemptive":"capable","lang":"en"} comment added and reserved by 4D.
-  // Performance_PushToGlobal_Perf ()
+  // Performance_PushToGlobal_Flame ()
   // 
   // DESCRIPTION
   //   Sends the current performance arrays to the main
@@ -12,6 +12,7 @@
 
 Init_ThreadSafe 
 
+If (Size of array(_ML_Flame_Method)>0)  //   Mod by: Dani Beaubien (2020-02-06) - 
 C_OBJECT($obj)
 $obj:=New object
 OB SET ARRAY($obj;"methods";_ML_Flame_Method)
@@ -21,3 +22,6 @@ OB SET ARRAY($obj;"totalTime";_ML_Flame_totalTime)
 OB SET ARRAY($obj;"count";_ML_Flame_count)
 
 CALL WORKER(Worker_GetProcessName ;"Worker_Receive_Flame";$obj)
+Else 
+Log_ERR_CRITICAL (Current method name+": called with EMPTY arrays. Investigate why (Task 6305). __incrementLevel="+String(__incrementLevel))
+End if 

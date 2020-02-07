@@ -35,7 +35,8 @@ OB GET ARRAY($obj;"totalTime";$ar_totalTime)
 OB GET ARRAY($obj;"count";$al_count)
 Else 
 EXECUTE METHOD("SLACK_SendWarning";*;Current method name+": encountered an issue with arrays")
-Log_ERR_CRITICAL (" ** ERR ** --> "+Current method name+" $obj is--> "+JSON Stringify($obj;*);"On Err Trigger")
+Log_ERR_CRITICAL ("IH_Profiler Component Error --> "+Current method name+" $obj is--> "+JSON Stringify($obj;*);"On Err Trigger")
+LogNamed_AppendToFile ("On Err Trigger";"IH_Profiler Component Error --> "+Current method name+" $obj is--> "+JSON Stringify($obj;*);"On Err Trigger")
 End if 
 
 If (OnErr_GetLastError =0)
@@ -67,7 +68,8 @@ End for
 Else 
 
 EXECUTE METHOD("SLACK_SendWarning";*;Current method name+": encountered an issue with arrays")
-Log_ERR_CRITICAL (" ** ERR ** --> "+Current method name+" $obj is--> "+JSON Stringify($obj;*);"On Err Trigger")
+Log_ERR_CRITICAL ("IH_Profiler Component Error --> "+Current method name+" $obj is--> "+JSON Stringify($obj;*);"On Err Trigger")
+LogNamed_AppendToFile ("On Err Trigger";"IH_Profiler Component Error --> "+Current method name+" $obj is--> "+JSON Stringify($obj;*);"On Err Trigger")
 
 End if 
 

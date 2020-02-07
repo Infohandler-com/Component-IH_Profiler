@@ -12,6 +12,7 @@
 
 Init_ThreadSafe 
 
+If (Size of array(_ML_Perf_Method)>0)  //   Mod by: Dani Beaubien (2020-02-06) - 
 C_OBJECT($obj)
 $obj:=New object
 OB SET ARRAY($obj;"methods";_ML_Perf_Method)
@@ -21,3 +22,8 @@ OB SET ARRAY($obj;"totalTime";_ML_Perf_totalTime)
 OB SET ARRAY($obj;"count";_ML_Perf_count)
 
 CALL WORKER(Worker_GetProcessName ;"Worker_Receive_Perf";$obj)
+
+Else 
+Log_ERR_CRITICAL (Current method name+": called with EMPTY arrays. Investigate why (Task 6305). __incrementLevel="+String(__incrementLevel))
+LogNamed_AppendToFile ("On Err Trigger";"IH_Profiler Component Error --> called with EMPTY arrays. Investigate why (Task 6305). __incrementLevel="+String(__incrementLevel))
+End if 

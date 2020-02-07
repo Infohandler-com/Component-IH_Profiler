@@ -1,14 +1,16 @@
 ﻿  //%attributes = {"invisible":true,"shared":true,"preemptive":"capable","folder":"Profiler Shared Methods","lang":"en"} comment added and reserved by 4D.
-  // Profiler_START (methodName {;optionalText})
+  // Profiler_START (profilerTag {;optionalText})
   // Profiler_START (text {;text})
   // 
   // DESCRIPTION
   //   Used to capture the start of a segment of code that
-  //   is to be monitored.
+  //   is to be monitored. Each start call must be balanced
+  //   with a stop call with exact same params.
+  //
   //   NOTE: Spaces in $1 & $2 are replaced by "_".
   //
-C_TEXT($1;$nameToTrack)  // name to track
-C_TEXT($2)  // OPTIONAL; optional text
+C_TEXT($1;$profilerTag)  // name to track
+C_TEXT($2;$extraText)  // OPTIONAL; optional text
   // ----------------------------------------------------
   // HISTORY
   //   Created by: DB (11/23/07)
@@ -16,27 +18,25 @@ C_TEXT($2)  // OPTIONAL; optional text
   //   Mod: DB (11/22/2010) - support performance tracking switch
   //   Mod: DB (01/20/2011) - Method stack always being tracked
   //   Mod: DB (05/22/2017) - Moved to v16 component
+  //   Mod: DB (2020-02-07) - use collection
   // ----------------------------------------------------
 
-ASSERT(Count parameters>0)
-ASSERT(Count parameters<=2)
+If (Asserted((Count parameters=1) | (Count parameters=2)))
+$profilerTag:=Replace string($1;" ";"_")
+If (Count parameters=2)
+$extraText:=Replace string($2;" ";"_")
+End if 
+
 Init_ThreadSafe 
 
-  // If this START is the first one for the stack and there is other stats, we want to reinit
-If (Size of array(_ML_STACK_CallingStack)=0) & (Size of array(_ML_Perf_Method)>0)
-Init_ThreadSafe (True)  // Force a Init
-End if 
+C_OBJECT($event)
+$event:=New object
+$event.tag:=$profilerTag
+$event.extraText:=$extraText
+$event.start_ms:=Milliseconds  // Holds the start time of the method call
+$event.wasteTime:=0  // Holds time spent on internal calls
 
-$nameToTrack:=Replace string($1;" ";"_")
-
-  // Add our method to the call stack
-APPEND TO ARRAY(_ML_STACK_CallingStack;$nameToTrack)
-If (Count parameters=2)
-APPEND TO ARRAY(_ML_STACK_ExtraText;Replace string($2;" ";"_"))
-Else 
-APPEND TO ARRAY(_ML_STACK_ExtraText;"")
-End if 
-APPEND TO ARRAY(_ML_STACK_msStart;Milliseconds)
-APPEND TO ARRAY(_ML_STACK_wasteTime;0)
+__STACK.push($event)  // Add our method to the call stack
 
 __incrementLevel:=__incrementLevel+1
+End if 

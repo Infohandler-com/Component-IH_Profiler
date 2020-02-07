@@ -5,7 +5,7 @@
   //   Dumps the local process's call stack to the log.
   //   Appends the errorNo if one is passed in.
   //
-C_LONGINT($1;$vl_ERROR)
+C_LONGINT($1;$err)
   // ----------------------------------------------------
   // HISTORY
   //   Created by: DB (01/14/09)
@@ -14,11 +14,11 @@ C_LONGINT($1;$vl_ERROR)
 
 Init_ThreadSafe 
 
-If (Size of array(_ML_STACK_CallingStack)>0)
+If (__STACK.length>0)
 If (Count parameters>=1)
-$vl_ERROR:=$1
+$err:=$1
 Else 
-$vl_ERROR:=0
+$err:=0
 End if 
 
 C_TEXT($vt_buffer)
@@ -35,17 +35,17 @@ $vt_buffer:=$vt_buffer+"]: ###### CALLING CHAIN DUMP"+Char(Carriage return)
 
   // Output the calling chain
 C_LONGINT($i)
-For ($i;1;Size of array(_ML_STACK_CallingStack))
-$vt_buffer:=$vt_buffer+" Lvl "+String($i;"##00")+": "+("   "*($i-1))+_ML_STACK_CallingStack{$i}
-If (_ML_STACK_ExtraText{$i}#"")
-$vt_buffer:=$vt_buffer+" -- "+_ML_STACK_ExtraText{$i}
+For ($i;0;__STACK.length-1)
+$vt_buffer:=$vt_buffer+" Lvl "+String($i;"##00")+": "+("   "*($i))+__STACK[$i].tag
+If (__STACK[$i].extraText#"")
+$vt_buffer:=$vt_buffer+" -- "+__STACK[$i].extraText
 End if 
 $vt_buffer:=$vt_buffer+Char(Carriage return)
 End for 
 
   // Output our ERROR # 
-If ($vl_ERROR#0)
-$vt_buffer:=$vt_buffer+" Lvl "+String(Size of array(_ML_STACK_CallingStack);"##00")+": "+("   "*(Size of array(_ML_STACK_CallingStack)))+"above method triggered err #"+String($vl_ERROR)+Char(Carriage return)
+If ($err#0)
+$vt_buffer:=$vt_buffer+" Lvl "+String(__STACK.length;"##00")+": "+("   "*(__STACK.length))+"above method triggered err #"+String($err)+Char(Carriage return)
 End if 
 
 LogNamed_AppendToFile ("Profiler Call Stack";$vt_buffer)

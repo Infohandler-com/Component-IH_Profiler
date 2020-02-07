@@ -9,7 +9,8 @@ gError:=Error
 
 C_TEXT($t_alertText)
 $t_alertText:="error "+String(ERROR)+Char(Carriage return)
-Log_ERR_CRITICAL (" ** ERR ** --> "+Error method+" line #"+String(Error line)+"- "+$t_alertText;"On Err Trigger")
+Log_ERR_CRITICAL (" ** IH_Profiler Component Error Error ** --> "+Error method+" line #"+String(Error line)+"- "+$t_alertText;"On Err Trigger")
+LogNamed_AppendToFile ("On Err Trigger";"IH_Profiler Component Error --> "+Error method+" line #"+String(Error line)+"- "+$t_alertText)
 
   //ARRAY LONGINT($al_err_code;0)
   //ARRAY TEXT($as_component;0)
