@@ -1,5 +1,14 @@
 ﻿  //%attributes = {"invisible":true,"preemptive":"capable","folder":"Utility","lang":"en"} comment added and reserved by 4D.
-  //   Mod: DB (05/22/2017) - Moved to v16 component
+  // OnErr_Clear ()
+  // 
+  // DESCRIPTION
+  //   Clears the internal error var
+  //
+  // ----------------------------------------------------
+  // HISTORY
+  //   Created by: DB (09/13/2016)
+  // ----------------------------------------------------
 
+ARRAY TEXT(gErrorTextArr;0)
 C_LONGINT(gError)
 gError:=0

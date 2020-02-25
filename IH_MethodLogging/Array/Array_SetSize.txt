@@ -7,11 +7,7 @@
 C_LONGINT($1;$size;$param;$currentSize)
 C_POINTER(${2};$array)
 
-C_TEXT($vt_prevOnErr)
-$vt_prevOnErr:=Method called on error
-
-ON ERR CALL("OnErr_GENERIC")
-OnErr_ClearError 
+OnErr_Install_Handler ("OnErr_GENERIC")
 
 $size:=$1
 If ($size<0)
@@ -32,4 +28,4 @@ End case
 
 End for 
 
-ON ERR CALL($vt_prevOnErr)
+OnErr_Install_Handler ("OnErr_GENERIC")
