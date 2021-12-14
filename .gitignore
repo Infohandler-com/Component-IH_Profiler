@@ -1,0 +1,32 @@
+# No user preferences
+userPreferences.*/
+
+# No Trash
+Project/Trash/
+
+# No derived data
+DerivedData/
+
+# 4D Folders
+Components/
+Plugins/
+
+# Special EEM Folders
+_Not on Git/*
+Code Analysis Logs/
+Settings/
+
+# No data
+[dD][aA][tT][aA]/
+Data/
+
+# No logs
+App Logs/
+Logs/
+
+Settings/buildApp.4DSettings
+
+# System files
+.DS_Store
+ehthumbs.db
+Thumbs.db
