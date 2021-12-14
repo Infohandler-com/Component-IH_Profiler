@@ -1,0 +1,1 @@
+   OnErr_GetLastErrorMessages () : errorMessages         DESCRIPTION       Returns the text of the last error encountered.      

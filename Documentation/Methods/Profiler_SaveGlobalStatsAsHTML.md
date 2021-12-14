@@ -1,0 +1,1 @@
+   Profiler_SaveGlobalStatsAsHTML (statsToSave; filePath)      Profiler_SaveGlobalStatsAsHTML (text; text)           DESCRIPTION       Saves the globally collected stats to the file.       $1 can be "flame" or "profile".      

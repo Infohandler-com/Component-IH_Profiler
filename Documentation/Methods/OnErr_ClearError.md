@@ -1,0 +1,1 @@
+   OnErr_Clear ()          DESCRIPTION       Clears the internal error var         ----------------------------------------------------     HISTORY       Created by: DB (09/13/2016)     ----------------------------------------------------  

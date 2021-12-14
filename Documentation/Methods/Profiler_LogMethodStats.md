@@ -1,0 +1,1 @@
+   Profiler_LogMethodStats ()          DESCRIPTION       This method dumps to the log file the collected method stats       of the current process' profile arrays.           Dumps Columns: Method Name, Call Count, Min, Avg, Max Total      

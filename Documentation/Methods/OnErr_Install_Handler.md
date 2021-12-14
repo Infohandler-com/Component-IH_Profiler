@@ -1,0 +1,1 @@
+   OnErr_Install_Handler ({errorHandlerMethodName})     OnErr_Install_Handler ({text})         DESCRIPTION       If a errorHandlerMethodName is specified, then the       "ON ERR CALL" method is called with that value.           If no parms are passed, then the previous handler       is restored.      

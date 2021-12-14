@@ -1,0 +1,1 @@
+   Init_ThreadSafe ({forced})     Init_ThreadSafe ({boolean})          DESCRIPTION       Thread Safe.       Initalized the process variables.      

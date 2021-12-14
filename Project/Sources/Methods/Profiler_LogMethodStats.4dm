@@ -1,0 +1,33 @@
+//%attributes = {"invisible":true,"shared":true,"preemptive":"capable"}
+// Profiler_LogMethodStats ()
+// 
+// DESCRIPTION
+//   This method dumps to the log file the collected method stats
+//   of the current process' profile arrays.
+//
+//   Dumps Columns: Method Name, Call Count, Min, Avg, Max Total
+//
+If (False:C215)
+	// ----------------------------------------------------
+	// HISTORY
+	//   Created by: DB (10/29/10)
+	//   Mod: DB (05/22/2017) - Moved to v16 component
+	// ----------------------------------------------------
+End if 
+
+Init_ThreadSafe
+
+// If running in the worker, then want the info to go to a different file.
+C_TEXT:C284($vt_namedLogFile)
+$vt_namedLogFile:="Profiler Method Stats"
+If (Worker_inWorker)
+	$vt_namedLogFile:=$vt_namedLogFile+" GLOBAL"
+End if 
+
+C_TEXT:C284($vt_buffer)
+$vt_buffer:=Profiler_GetLocalProfileStats
+
+If ($vt_buffer#"")
+	Log_WARN("  **** Method profile statistics records saved directly to the \""+$vt_namedLogFile+"\" Log file"; $vt_namedLogFile)
+	LogNamed_AppendToFile($vt_namedLogFile; $vt_buffer)  //;"noProc#";"noTimeStamp";"beQuiet")
+End if 

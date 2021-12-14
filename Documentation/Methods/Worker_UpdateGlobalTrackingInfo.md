@@ -1,0 +1,1 @@
+   Worker_UpdateGlobalTrackingInfo (performanceObj, flameObj)     Worker_UpdateGlobalTrackingInfo (object, object)         DESCRIPTION       Captures the performance information and adds it to       the global tracking objects.      

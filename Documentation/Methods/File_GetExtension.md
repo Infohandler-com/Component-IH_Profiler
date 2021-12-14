@@ -1,0 +1,1 @@
+   File_GetExtension (filePath) : fileExtension     File_GetExtension (text) : text          DESCRIPTION       Returns the extension from a filename      

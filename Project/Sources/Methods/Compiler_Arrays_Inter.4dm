@@ -1,0 +1,6 @@
+//%attributes = {"invisible":true}
+ARRAY LONGINT:C221(<>__STACK_GLBL_PROF_count; 0)
+ARRAY LONGINT:C221(<>__STACK_GLBL_PROF_maxTime; 0)
+ARRAY TEXT:C222(<>__STACK_GLBL_PROF_Method; 0)
+ARRAY LONGINT:C221(<>__STACK_GLBL_PROF_minTime; 0)
+ARRAY REAL:C219(<>__STACK_GLBL_PROF_totalTime; 0)

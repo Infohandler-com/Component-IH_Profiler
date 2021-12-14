@@ -1,0 +1,1 @@
+   Method: FileBuffer_FetchData_ByString ( text to match on {;text2}) : result  

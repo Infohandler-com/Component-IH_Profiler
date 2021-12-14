@@ -1,0 +1,313 @@
+﻿{
+	"map": [
+		{
+			"id": 2147483647,
+			"path": "Sources/Methods/Profiler_START.4dm"
+		},
+		{
+			"id": 2147483646,
+			"path": "Sources/Methods/Profiler_LogCallStack.4dm"
+		},
+		{
+			"id": 2147483645,
+			"path": "Sources/Methods/Profiler_LogFlameStats_GLOBAL.4dm"
+		},
+		{
+			"id": 2147483644,
+			"path": "Sources/Methods/Init_ThreadSafe.4dm"
+		},
+		{
+			"id": 2147483643,
+			"path": "Sources/Methods/Profiler_ClearProcessStats.4dm"
+		},
+		{
+			"id": 2147483642,
+			"path": "Sources/Methods/Profiler_GetLocalCallChainStats.4dm"
+		},
+		{
+			"id": 2147483641,
+			"path": "Sources/Methods/Profiler_ClearGlobalStats.4dm"
+		},
+		{
+			"id": 2147483640,
+			"path": "Sources/Methods/Profiler_SaveProcessStatsAsHTML.4dm"
+		},
+		{
+			"id": 2147483639,
+			"path": "Sources/Methods/FileBuffer_FetchData_ByString.4dm"
+		},
+		{
+			"id": 2147483638,
+			"path": "Sources/Methods/Folder_VerifyExistance.4dm"
+		},
+		{
+			"id": 2147483637,
+			"path": "Sources/Methods/OnErr_GetLastError.4dm"
+		},
+		{
+			"id": 2147483636,
+			"path": "Sources/Methods/Folder_ParentName.4dm"
+		},
+		{
+			"id": 2147483635,
+			"path": "Sources/Methods/Performance_PushToGlobal.4dm"
+		},
+		{
+			"id": 2147483634,
+			"path": "Sources/Methods/Profiler_LogMethodStats_GLOBAL.4dm"
+		},
+		{
+			"id": 2147483633,
+			"path": "Sources/Methods/Profiler_LogFlameStats.4dm"
+		},
+		{
+			"id": 2147483632,
+			"path": "Sources/Methods/File_DoesExist.4dm"
+		},
+		{
+			"id": 2147483631,
+			"path": "Sources/Methods/File_GetFileName.4dm"
+		},
+		{
+			"id": 2147483630,
+			"path": "Sources/Methods/Profiler_GetLocalProfileStats.4dm"
+		},
+		{
+			"id": 2147483629,
+			"path": "Sources/Methods/Performance_SaveTrackingAsHTML.4dm"
+		},
+		{
+			"id": 2147483628,
+			"path": "Sources/Methods/Array_SetSize.4dm"
+		},
+		{
+			"id": 2147483627,
+			"path": "Sources/Methods/File_GetFolderName.4dm"
+		},
+		{
+			"id": 2147483626,
+			"path": "Sources/Methods/Worker_SaveStatsAsHTML.4dm"
+		},
+		{
+			"id": 2147483625,
+			"path": "Sources/Methods/Performance_UpdateTrackingObj.4dm"
+		},
+		{
+			"id": 2147483624,
+			"path": "Sources/Methods/Worker_GetProcessName.4dm"
+		},
+		{
+			"id": 2147483623,
+			"path": "Sources/Methods/OnErr_GetLastErrorMessages.4dm"
+		},
+		{
+			"id": 2147483622,
+			"path": "Sources/Methods/Init_GlobalTracking.4dm"
+		},
+		{
+			"id": 2147483621,
+			"path": "Sources/Methods/Worker_UpdateGlobalTrackingInfo.4dm"
+		},
+		{
+			"id": 2147483620,
+			"path": "Sources/Methods/Date2String.4dm"
+		},
+		{
+			"id": 2147483619,
+			"path": "Sources/Methods/Compiler_Arrays.4dm"
+		},
+		{
+			"id": 2147483618,
+			"path": "Sources/Methods/Profiler_STOP.4dm"
+		},
+		{
+			"id": 2147483617,
+			"path": "Sources/Methods/_GPL_LICENSED.4dm"
+		},
+		{
+			"id": 2147483616,
+			"path": "Sources/Methods/OnErr_GENERIC_Profiler_Minimal.4dm"
+		},
+		{
+			"id": 2147483615,
+			"path": "Sources/Methods/FileBuffer_FillBuffer.4dm"
+		},
+		{
+			"id": 2147483614,
+			"path": "Sources/Methods/Worker_inWorker.4dm"
+		},
+		{
+			"id": 2147483613,
+			"path": "Sources/Methods/FlameGraph_FoldFilesInFolder.4dm"
+		},
+		{
+			"id": 2147483612,
+			"path": "Sources/Methods/Folder_DoesExist.4dm"
+		},
+		{
+			"id": 2147483611,
+			"path": "Sources/Methods/FileBuffer_EOF.4dm"
+		},
+		{
+			"id": 2147483610,
+			"path": "Sources/Methods/FileBuffer_Init.4dm"
+		},
+		{
+			"id": 2147483609,
+			"path": "Sources/Methods/Performance_Global_AddTrackObj.4dm"
+		},
+		{
+			"id": 2147483608,
+			"path": "Sources/Methods/STR_HTML_Encode.4dm"
+		},
+		{
+			"id": 2147483607,
+			"path": "Sources/Methods/Profiler_LogCallChainStats.4dm"
+		},
+		{
+			"id": 2147483606,
+			"path": "Sources/Methods/File_Delete.4dm"
+		},
+		{
+			"id": 2147483605,
+			"path": "Sources/Methods/OnErr_GENERIC_Profiler.4dm"
+		},
+		{
+			"id": 2147483604,
+			"path": "Sources/Methods/Performance_TrackCall.4dm"
+		},
+		{
+			"id": 2147483603,
+			"path": "Sources/Methods/Profiler_LogCallChnStats_GLOBAL.4dm"
+		},
+		{
+			"id": 2147483602,
+			"path": "Sources/Methods/Compiler_Variables_Inter.4dm"
+		},
+		{
+			"id": 2147483601,
+			"path": "Sources/Methods/Profiler_CallStack_GetCurrent.4dm"
+		},
+		{
+			"id": 2147483600,
+			"path": "Sources/Methods/BuildNo_GetBuildNo_ProfileComp.4dm"
+		},
+		{
+			"id": 2147483599,
+			"path": "Sources/Methods/Compiler_Variables.4dm"
+		},
+		{
+			"id": 2147483598,
+			"path": "Sources/Methods/STR_GetFlameGraphNameFromStack.4dm"
+		},
+		{
+			"id": 2147483597,
+			"path": "Sources/Methods/FlameGraph_FoldFile.4dm"
+		},
+		{
+			"id": 2147483596,
+			"path": "Sources/Methods/Compiler_Methods.4dm"
+		},
+		{
+			"id": 2147483595,
+			"path": "Sources/Methods/Performance_GetTrackingAsTSV.4dm"
+		},
+		{
+			"id": 2147483594,
+			"path": "Sources/Methods/_Test_2.4dm"
+		},
+		{
+			"id": 2147483593,
+			"path": "Sources/Methods/_test.4dm"
+		},
+		{
+			"id": 2147483592,
+			"path": "Sources/Methods/Profiler_LogMethodStats.4dm"
+		},
+		{
+			"id": 2147483591,
+			"path": "Sources/Methods/Profiler_CallStack_GetPrevious.4dm"
+		},
+		{
+			"id": 2147483590,
+			"path": "Sources/Methods/BuildNo_SetBuildNo_ProfileComp.4dm"
+		},
+		{
+			"id": 2147483589,
+			"path": "Sources/Methods/FlameGraph_FoldedFileToSVG.4dm"
+		},
+		{
+			"id": 2147483588,
+			"path": "Sources/Methods/Compiler_Arrays_Inter.4dm"
+		},
+		{
+			"id": 2147483587,
+			"path": "Sources/Methods/File_GetExtension.4dm"
+		},
+		{
+			"id": 2147483586,
+			"path": "Sources/Methods/OnErr_Install_Handler.4dm"
+		},
+		{
+			"id": 2147483585,
+			"path": "Sources/Methods/Profiler_SaveGlobalStatsAsHTML.4dm"
+		},
+		{
+			"id": 2147483584,
+			"path": "Sources/Methods/OnErr_ClearError.4dm"
+		},
+		{
+			"id": 2147483583,
+			"path": "Sources/Methods/Array_ConvertFromTextDelimited.4dm"
+		},
+		{
+			"id": 2147483582,
+			"path": "Trash/Methods/(Worker_Receive_Perf).4dm"
+		},
+		{
+			"id": 2147483581,
+			"path": "Trash/Methods/(Worker_Receive_Flame).4dm"
+		},
+		{
+			"id": 2147483580,
+			"path": "Trash/Methods/(CodeAnalysis_GetAssetInfo).4dm"
+		},
+		{
+			"id": 2147483579,
+			"path": "Trash/Methods/(Performance_PushToGlobal_Perf).4dm"
+		},
+		{
+			"id": 2147483578,
+			"path": "Sources/DatabaseMethods/onStartup.4dm"
+		},
+		{
+			"id": 2147483577,
+			"path": "Sources/Forms/ReleaseBuildNo_d/method.4dm"
+		},
+		{
+			"id": 2147483576,
+			"path": "Sources/Forms/ReleaseBuildNo_d/ObjectMethods/Button6.4dm"
+		},
+		{
+			"id": 2147483575,
+			"path": "Sources/Forms/ReleaseBuildNo_d/ObjectMethods/Button2.4dm"
+		},
+		{
+			"id": 2147483574,
+			"path": "Sources/Forms/ReleaseBuildNo_d/ObjectMethods/Button3.4dm"
+		},
+		{
+			"id": 2147483573,
+			"path": "Sources/Forms/ReleaseBuildNo_d/ObjectMethods/Button5.4dm"
+		},
+		{
+			"id": 2147483572,
+			"path": "Sources/Forms/ReleaseBuildNo_d/ObjectMethods/Button4.4dm"
+		},
+		{
+			"id": 2147483571,
+			"path": "Sources/Forms/ReleaseBuildNo_d/ObjectMethods/Button1.4dm"
+		}
+	],
+	"arch64": true
+}

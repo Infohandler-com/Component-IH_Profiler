@@ -1,0 +1,1 @@
+   Worker_inWorker () boolean          DESCRIPTION       Returns true if the current process is the worker process.      

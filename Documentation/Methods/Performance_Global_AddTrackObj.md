@@ -1,0 +1,1 @@
+   Performance_Global_AddTrackObj (performanceObj, globalPerformanceObj)     Performance_Global_AddTrackObj (object, object)         DESCRIPTION       Adds the performance information provided into the       global performance object.      

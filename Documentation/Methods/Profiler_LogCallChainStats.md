@@ -1,0 +1,1 @@
+   Profiler_LogCallChainStats ()          DESCRIPTION       This method dumps to the log file the current process'; collected method call chain       stats of the profile arrays.           Dumps Columns: Call Chain, Call Count, Min, Avg, Max Total      

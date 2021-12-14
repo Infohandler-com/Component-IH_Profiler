@@ -1,0 +1,1 @@
+   Profiler_SaveProcessStatsAsHTML (statType; filePath)      Profiler_SaveProcessStatsAsHTML (text; text)           DESCRIPTION       Saves the collected stats for the current processes to the file.       $1 can be "flame" or "profile".      

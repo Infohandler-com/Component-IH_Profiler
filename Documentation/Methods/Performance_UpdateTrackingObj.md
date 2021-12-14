@@ -1,0 +1,1 @@
+   Performance_UpdateTrackingObj (trackingObject, trackingName, timeSpentInMethod)      Performance_UpdateTrackingObj (object, text, longint)          DESCRIPTION       Capture the current metrics into the performance tracking object.      

@@ -1,0 +1,63 @@
+{
+	"Profiler Shared Methods": {
+		"methods": [
+			"Profiler_CallStack_GetCurrent",
+			"Profiler_CallStack_GetPrevious",
+			"Profiler_ClearGlobalStats",
+			"Profiler_GetLocalCallChainStats",
+			"Profiler_GetLocalProfileStats",
+			"Profiler_LogCallChainStats",
+			"Profiler_LogCallChnStats_GLOBAL",
+			"Profiler_LogCallStack",
+			"Profiler_LogFlameStats",
+			"Profiler_LogMethodStats",
+			"Profiler_LogMethodStats_GLOBAL",
+			"Profiler_SaveGlobalStatsAsHTML",
+			"Profiler_SaveProcessStatsAsHTML",
+			"Profiler_START",
+			"Profiler_STOP"
+		]
+	},
+	"Utility": {
+		"methods": [
+			"Array_ConvertFromTextDelimited",
+			"Array_SetSize",
+			"BuildNo_GetBuildNo_ProfileComp",
+			"BuildNo_SetBuildNo_ProfileComp",
+			"Compiler_Arrays",
+			"Compiler_Arrays_Inter",
+			"Compiler_Methods",
+			"Compiler_Variables",
+			"Compiler_Variables_Inter",
+			"Date2String",
+			"File_Delete",
+			"File_DoesExist",
+			"File_GetExtension",
+			"File_GetFileName",
+			"File_GetFolderName",
+			"FileBuffer_EOF",
+			"FileBuffer_FetchData_ByString",
+			"FileBuffer_FillBuffer",
+			"FileBuffer_Init",
+			"Folder_DoesExist",
+			"Folder_ParentName",
+			"Folder_VerifyExistance",
+			"OnErr_ClearError",
+			"OnErr_GENERIC_Profiler",
+			"OnErr_GetLastError",
+			"STR_GetFlameGraphNameFromStack",
+			"STR_HTML_Encode"
+		],
+		"forms": [
+			"ReleaseBuildNo_d"
+		]
+	},
+	"Worker": {
+		"methods": [
+			"Worker_GetProcessName",
+			"Worker_inWorker",
+			"Worker_SaveStatsAsHTML"
+		]
+	},
+	"trash": {}
+}

@@ -1,0 +1,1 @@
+   Profiler_START (profilerTag {;optionalText})     Profiler_START (text {;text})          DESCRIPTION       Used to capture the start of a segment of code that       is to be monitored. Each start call must be balanced       with a stop call with exact same params.           NOTE: Spaces in $1 & $2 are replaced by "_".      

@@ -1,0 +1,1 @@
+   STR_GetFlameGraphNameFromStack (methodName; callingStack) : flameGraphName     STR_GetFlameGraphNameFromStack (text; pointer) text          DESCRIPTION       Returns the method name in a format that supports flamegraphs.      

@@ -1,0 +1,1 @@
+   STR_HTML_Encode (srcTxt) : html safe txxt     STR_HTML_Encode (text) : text          DESCRIPTION       Converts the supplied text to be HTML "safe".      

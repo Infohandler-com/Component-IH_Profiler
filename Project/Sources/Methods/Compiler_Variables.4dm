@@ -1,0 +1,18 @@
+//%attributes = {"invisible":true}
+
+C_LONGINT:C283(Button)
+C_TEXT:C284(fileBuffer_buffer)
+C_LONGINT:C283(fileBuffer_curPos)
+C_TIME:C306(fileBuffer_DocRef)
+C_LONGINT:C283(fileBuffer_DocSize)
+C_LONGINT:C283(fileBuffer_MaxSize)
+C_LONGINT:C283(gError)
+C_TEXT:C284(WEB_t_userName)
+C_BOOLEAN:C305(__STACK_inited)
+C_LONGINT:C283(__incrementLevel)
+C_COLLECTION:C1488(__STACK)
+C_COLLECTION:C1488(_OnErr_MethodStack)
+C_OBJECT:C1216(__Global_PerfFlameObj)
+C_OBJECT:C1216(__Global_PerfObj)
+C_OBJECT:C1216(__PerfFlameObj)
+C_OBJECT:C1216(__PerfObj)

@@ -1,0 +1,1 @@
+   Worker_SaveStatsAsHTML (parm1; parm2; ...) : result     Worker_SaveStatsAsHTML (parm1; parm2; ...) : result          DESCRIPTION       Saves the collected stats to the file.       $1 can be "flame" or "profile".      

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE macros SYSTEM "http://www.4d.com/dtd/2007/macros.dtd" >
+
+<!--
+4DPop v11
+vincent@de-lachaux.net
+-->
+
+<macros>
+    
+    <!-- Installation -->
+    <macro name="Install 4DPop" in_menu="false" in_toolbar="false" type_ahead="true" type_ahead_text="Install 4DPop" version="2">
+    	<text><method>macro_INSTALL_4DPOP</method></text>
+    </macro>
+
+ </macros>

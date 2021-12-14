@@ -1,0 +1,1 @@
+   FileBuffer_EOF () : isEOF     FileBuffer_EOF () : boolean          DESCRIPTION       Returns true if we are at the end of file.      

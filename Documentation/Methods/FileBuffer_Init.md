@@ -1,0 +1,1 @@
+   Method: FileBuffer_Init (docRef {; buffer size})     Method: FileBuffer_Init (time {; longint})  

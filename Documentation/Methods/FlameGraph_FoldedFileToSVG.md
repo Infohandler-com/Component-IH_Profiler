@@ -1,0 +1,1 @@
+   FlameGraph_FoldedFileToSVG (foldedFilePath) : svgFilePath     FlameGraph_FoldedFileToSVG (text) : text          DESCRIPTION       Creates a flamegraph svg based on the folded file.           NOTE: This uses Brendan Gregg's flamegraph.pl perl script.       https:github.com/brendangregg/FlameGraph      

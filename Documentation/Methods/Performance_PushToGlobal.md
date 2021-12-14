@@ -1,0 +1,1 @@
+   Performance_PushToGlobal ()         DESCRIPTION       This method sends the performance information       captured in the current process to the global       performance stats.         ----------------------------------------------------     HISTORY       Created by: Dani Beaubien (04/06/2020)     ----------------------------------------------------  

@@ -1,0 +1,1 @@
+   File_Delete (path to file)     File_Delete (text)          DESCRIPTION       Deletes the document pass to it.      

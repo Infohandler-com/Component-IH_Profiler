@@ -1,0 +1,1 @@
+   Profiler_ClearGlobalStats ()          DESCRIPTION       Clears the global stats. Any captured stats are logged       prior to clearing.      

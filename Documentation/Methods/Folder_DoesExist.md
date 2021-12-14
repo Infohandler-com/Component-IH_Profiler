@@ -1,0 +1,1 @@
+   Folder_DoesExist (path to folder) : doesExist          DESCRIPTION:       Returns true if the folder exists      

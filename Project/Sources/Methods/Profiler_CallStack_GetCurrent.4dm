@@ -1,0 +1,29 @@
+//%attributes = {"invisible":true,"shared":true,"preemptive":"capable"}
+// Profiler_CallStack_GetCurrent () : currentMethodName
+// Profiler_CallStack_GetCurrent () : text
+// 
+// DESCRIPTION
+//   Returns the most recent method name on the calling stack.
+//
+C_TEXT:C284($0; $vt_currentMethodName)
+// ----------------------------------------------------
+// HISTORY
+//   Created by: DB (05/24/2017)
+// ----------------------------------------------------
+
+Init_ThreadSafe
+
+If (__STACK.length>0)
+	$vt_currentMethodName:=__STACK[__STACK.length-1].tag
+End if 
+
+If ($vt_currentMethodName="")  // Just in case, try to catch it this way.
+	C_TEXT:C284(Error method)
+	$vt_currentMethodName:=Error method
+End if 
+
+If ($vt_currentMethodName="")
+	$vt_currentMethodName:="unknown method"
+End if 
+
+$0:=$vt_currentMethodName

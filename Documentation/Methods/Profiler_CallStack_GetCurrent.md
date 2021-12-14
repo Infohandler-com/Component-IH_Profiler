@@ -1,0 +1,1 @@
+   Profiler_CallStack_GetCurrent () : currentMethodName     Profiler_CallStack_GetCurrent () : text          DESCRIPTION       Returns the most recent method name on the calling stack.      

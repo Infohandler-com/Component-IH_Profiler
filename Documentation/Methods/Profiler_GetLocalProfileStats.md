@@ -1,0 +1,1 @@
+   Profiler_GetLocalProfileStats () : profileStatsAsText     Profiler_GetLocalProfileStats () : text          DESCRIPTION       This method returns the contents of       the profile arrays in a standard format.       Only the stats for the current process are returned.      

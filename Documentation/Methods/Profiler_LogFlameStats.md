@@ -1,0 +1,1 @@
+   Profiler_LogFlameStats ({module}) : statsAsText     Profiler_LogFlameStats ({text}) : text          DESCRIPTION       This method stores the profiling stats in a flamegraph       safe format to the specified module file.      

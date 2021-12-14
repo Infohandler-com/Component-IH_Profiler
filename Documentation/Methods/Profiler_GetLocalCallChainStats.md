@@ -1,0 +1,1 @@
+   Profiler_GetLocalCallChainStats () : flameStatsAsText     Profiler_GetLocalCallChainStats () : text          DESCRIPTION       This method returns the contents of       the profile arrays in a format that support flamegraphs.       Only the stats for the current process are returned.      
