@@ -5,21 +5,13 @@
 // DESCRIPTION
 //   Capture the current metrics into the performance tracking object.
 //
-C_OBJECT:C1216($1; $trackingObject)
-C_TEXT:C284($2; $trackingName)
-C_LONGINT:C283($3; $timeSpentInMethod)
-// ----------------------------------------------------
-// HISTORY
-//   Created by: Dani Beaubien (04/03/2020)
-// ----------------------------------------------------
+#DECLARE($trackingObject : Object; $trackingName : Text; $timeSpentInMethod : Integer)
 
 If (Asserted:C1132(Count parameters:C259=3))
-	$trackingObject:=$1
-	$trackingName:=Replace string:C233($2; " "; "_")
-	$timeSpentInMethod:=$3
+	$trackingName:=Replace string:C233($trackingName; " "; "_")
 	
 	If ($trackingName="_numItems")  // work around a potential collision with our counter
-		$trackingName:=$trackingName+" "
+		$trackingName+=" "
 	End if 
 	
 	ASSERT:C1129($trackingObject#Null:C1517)
@@ -33,7 +25,7 @@ If (Asserted:C1132(Count parameters:C259=3))
 		$perfObj.callCount:=1
 		$trackingObject[$trackingName]:=$perfObj
 		
-		$trackingObject._numItems:=$trackingObject._numItems+1
+		$trackingObject._numItems+=1
 		
 	Else 
 		$perfObj:=$trackingObject[$trackingName]
@@ -45,8 +37,8 @@ If (Asserted:C1132(Count parameters:C259=3))
 			$perfObj.max:=$timeSpentInMethod
 		End if 
 		
-		$perfObj.total:=$perfObj.total+$timeSpentInMethod
-		$perfObj.callCount:=$perfObj.callCount+1
+		$perfObj.total+=$timeSpentInMethod
+		$perfObj.callCount+=1
 	End if 
 	
 End if 

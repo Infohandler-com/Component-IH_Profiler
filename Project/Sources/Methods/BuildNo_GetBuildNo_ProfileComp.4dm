@@ -8,11 +8,8 @@
 //
 //   NOTE: Cannot be run in a pre-emptive process.
 //
+#DECLARE()->$vo_buildNoObj : Object
 C_OBJECT:C1216($0; $vo_buildNoObj)
-// ----------------------------------------------------
-// HISTORY
-//   Created by: DB (05/29/2017)
-// ----------------------------------------------------
 
 ARRAY TEXT:C222($at_buildNo; 0)
 LIST TO ARRAY:C288("BuildNo"; $at_buildNo)
@@ -33,6 +30,3 @@ Else
 	$at_buildNo{1}:=JSON Stringify:C1217($vo_buildNoObj)
 	ARRAY TO LIST:C287($at_buildNo; "BuildNo")
 End if 
-
-
-$0:=$vo_buildNoObj

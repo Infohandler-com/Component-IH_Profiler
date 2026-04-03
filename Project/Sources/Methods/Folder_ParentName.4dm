@@ -5,18 +5,10 @@
 //Returns the Parent Name of the file pathname we pass in
 //
 // Last Modified by: DB (7/25/03 @ 09:28:20) - added alternate seperator
-
-C_TEXT:C284($0; $HFS_ParentName)
-$HFS_ParentName:=""
+#DECLARE($HFS_FullPath : Text; $HFS_AltSeperator : Text)->$HFS_ParentName : Text
 
 If (Asserted:C1132((Count parameters:C259>=1) & (Count parameters:C259<=2)))
-	C_TEXT:C284($1; $HFS_FullPath)
-	C_TEXT:C284($2)
-	C_TEXT:C284($HFS_AltSeperator)
-	$HFS_FullPath:=$1
-	If (Count parameters:C259=2)
-		$HFS_AltSeperator:=$2
-	Else 
+	If (Count parameters:C259<2)
 		$HFS_AltSeperator:=Folder separator:K24:12
 	End if 
 	
@@ -28,6 +20,3 @@ If (Asserted:C1132((Count parameters:C259>=1) & (Count parameters:C259<=2)))
 		End if 
 	End for 
 End if   // ASSERT
-
-$0:=$HFS_ParentName
-

@@ -3,13 +3,13 @@
 // Changes the size of one or multiple arrays
 // $1 = Size
 // $2 etc. = Pointers to arrays
-
-C_LONGINT:C283($1; $size; $param; $currentSize)
-C_POINTER:C301(${2}; $array)
+#DECLARE($size : Integer)
+var ${2} : Pointer  // TODO: Convert to variadic declaration in 21 LTS
+var $param; $currentSize : Integer
+var $array : Pointer
 
 OnErr_Install_Handler("OnErr_GENERIC_Profiler")
 
-$size:=$1
 If ($size<0)
 	$size:=0
 End if 

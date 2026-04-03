@@ -7,16 +7,11 @@
 //   the profile arrays in a format that support flamegraphs.
 //   Only the stats for the current process are returned.
 //
-C_TEXT:C284($0)
-// ----------------------------------------------------
-// HISTORY
-//   Created by: DB (05/24/2017)
-// ----------------------------------------------------
-
+#DECLARE()->$flame_stats_as_text : Text
 If (Worker_inWorker)
 	Init_GlobalTracking
-	$0:=Performance_GetTrackingAsTSV("GLOBAL"; __Global_PerfFlameObj)
+	$flame_stats_as_text:=Performance_GetTrackingAsTSV("GLOBAL"; __Global_PerfFlameObj)
 Else 
 	Init_ThreadSafe
-	$0:=Performance_GetTrackingAsTSV("Local"; __PerfFlameObj)
+	$flame_stats_as_text:=Performance_GetTrackingAsTSV("Local"; __PerfFlameObj)
 End if 

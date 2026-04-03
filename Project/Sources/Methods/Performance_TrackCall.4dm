@@ -5,26 +5,9 @@
 // DESCRIPTION
 //   Adds the performance information onto the passed arrays.
 //
-C_TEXT:C284($1; $vt_FullLocalMethodName)
-C_LONGINT:C283($2; $vl_timeToExecute)
-C_POINTER:C301($3; $ap_MethodArrPtr)
-C_POINTER:C301($4; $ap_minTimeArrPtr)
-C_POINTER:C301($5; $ap_maxTimeArrPtr)
-C_POINTER:C301($6; $ap_totalTimeArrPtr)
-C_POINTER:C301($7; $ap_countArrPtr)
-// ----------------------------------------------------
-// HISTORY
-//   Created by: DB (05/22/2017)
-// ----------------------------------------------------
-
+#DECLARE($vt_FullLocalMethodName : Text; $vl_timeToExecute : Integer; $ap_MethodArrPtr : Pointer; $ap_minTimeArrPtr : Pointer; $ap_maxTimeArrPtr : Pointer; $ap_totalTimeArrPtr : Pointer; $ap_countArrPtr : Pointer)
 ASSERT:C1129(Count parameters:C259=7)
-$vt_FullLocalMethodName:=Replace string:C233($1; " "; "_")
-$vl_timeToExecute:=$2
-$ap_MethodArrPtr:=$3
-$ap_minTimeArrPtr:=$4
-$ap_maxTimeArrPtr:=$5
-$ap_totalTimeArrPtr:=$6
-$ap_countArrPtr:=$7
+$vt_FullLocalMethodName:=Replace string:C233($vt_FullLocalMethodName; " "; "_")
 
 // # Add our tracking info to our local arrays
 C_LONGINT:C283($pos)

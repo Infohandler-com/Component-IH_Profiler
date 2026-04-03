@@ -12,18 +12,10 @@
 //   NOTE: See Brendan Gregg's flamegraph perl scripts for more detail.
 //   https://github.com/brendangregg/FlameGraph
 //
-C_TEXT:C284($1; $vt_srcFilePath)  // OPTIONAL
-C_TEXT:C284($0; $foldedFilePath)
-// ----------------------------------------------------
-// HISTORY
-//   Created by: DB (05/04/2016)
-// ----------------------------------------------------
+#DECLARE($vt_srcFilePath : Text)->$foldedFilePath : Text
 
-$foldedFilePath:=""
 If (Asserted:C1132(Count parameters:C259<=1))
-	If (Count parameters:C259>=1)
-		$vt_srcFilePath:=$1
-	Else 
+	If (Count parameters:C259<1)
 		$vt_srcFilePath:=Select document:C905(File_GetFolderName(Structure file:C489(*)); ""; "Select RAW FlameGraph file"; 0)
 		If (OK=1)
 			$vt_srcFilePath:=Document
@@ -119,4 +111,3 @@ If (Asserted:C1132(Count parameters:C259<=1))
 	End if 
 	
 End if   // ASSERT
-$0:=$foldedFilePath
