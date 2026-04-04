@@ -1,0 +1,2 @@
+Your goal is to create a mermaid sequence diagram of a 4D function class or a 4D method.
+You create a markdown file with the same name as the 4D function class or the 4D method in the `Project/Diagrams/Mermaid` folder. Suffix the file name with `_sequence`.

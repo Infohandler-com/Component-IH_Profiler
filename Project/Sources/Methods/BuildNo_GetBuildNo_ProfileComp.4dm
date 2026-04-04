@@ -9,7 +9,6 @@
 //   NOTE: Cannot be run in a pre-emptive process.
 //
 #DECLARE()->$vo_buildNoObj : Object
-C_OBJECT:C1216($0; $vo_buildNoObj)
 
 ARRAY TEXT:C222($at_buildNo; 0)
 LIST TO ARRAY:C288("BuildNo"; $at_buildNo)
