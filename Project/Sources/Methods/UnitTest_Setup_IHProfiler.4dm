@@ -1,4 +1,4 @@
-//%attributes = {"shared":true,"preemptive":"incapable"}
+//%attributes = {"invisible":true,"preemptive":"incapable"}
 // UnitTest_Setup_IHProfiler
 //
 // This is the place to setup your testcases
