@@ -7,11 +7,5 @@
 //
 //   Dumps Columns: Call Chain, Call Count, Min, Avg, Max Total
 //
-If (False:C215)
-	// ----------------------------------------------------
-	// HISTORY
-	//   Created by: DB (05/24/2017)
-	// ----------------------------------------------------
-End if 
 
 CALL WORKER:C1389(Worker_GetProcessName; "Profiler_LogCallChainStats")

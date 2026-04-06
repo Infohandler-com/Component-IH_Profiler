@@ -9,5 +9,5 @@ $dataSize:=fileBuffer_MaxSize-Length:C16(fileBuffer_buffer)
 
 If ($dataSize>0)  // if there is room in the buffer
 	RECEIVE PACKET:C104(fileBuffer_DocRef; $tmpTxt; $dataSize)
-	fileBuffer_buffer:=fileBuffer_buffer+$tmpTxt
+	fileBuffer_buffer+=$tmpTxt
 End if 

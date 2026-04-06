@@ -30,3 +30,6 @@ Settings/buildApp.4DSettings
 .DS_Store
 ehthumbs.db
 Thumbs.db
+
+# AI Chat History
+*.specstory

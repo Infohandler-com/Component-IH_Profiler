@@ -6,16 +6,10 @@
 //   Adds the performance information provided into the
 //   global performance object.
 //
-C_OBJECT:C1216($1; $performanceObj)
-C_OBJECT:C1216($2; $globalPerformanceObj)
-// ----------------------------------------------------
-// HISTORY
-//   Created by: Dani Beaubien (04/06/2020)
-// ----------------------------------------------------
+#DECLARE($performanceObj : Object; $globalPerformanceObj : Object)
+
 
 If (Asserted:C1132(Count parameters:C259=2))
-	$performanceObj:=$1
-	$globalPerformanceObj:=$2
 	
 	ARRAY TEXT:C222($objectPropertyNames; 0)
 	OB GET PROPERTY NAMES:C1232($performanceObj; $objectPropertyNames)
@@ -27,7 +21,7 @@ If (Asserted:C1132(Count parameters:C259=2))
 				
 			: ($globalPerformanceObj[$objectPropertyNames{$i}]=Null:C1517)
 				$globalPerformanceObj[$objectPropertyNames{$i}]:=$performanceObj[$objectPropertyNames{$i}]
-				$globalPerformanceObj._numItems:=$globalPerformanceObj._numItems+1
+				$globalPerformanceObj._numItems+=1
 				
 			Else 
 				C_OBJECT:C1216($obj; $globalObj)
@@ -40,8 +34,8 @@ If (Asserted:C1132(Count parameters:C259=2))
 				If ($globalObj.max<$obj.max)
 					$globalObj.max:=$obj.max
 				End if 
-				$globalObj.total:=$globalObj.total+$obj.total
-				$globalObj.callCount:=$globalObj.callCount+$obj.callCount
+				$globalObj.total+=$obj.total
+				$globalObj.callCount+=$obj.callCount
 		End case 
 	End for 
 	

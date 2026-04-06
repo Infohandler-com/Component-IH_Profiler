@@ -9,18 +9,10 @@
 //
 //   If no path is provided then a select dialog will ask for a folder.
 //
-C_TEXT:C284($1; $vt_folderPath)  // OPTIONAL
-C_LONGINT:C283($0; $vl_numFileSummarized)
-// ----------------------------------------------------
-// HISTORY
-//   Created by: DB (05/05/2016)
-// ----------------------------------------------------
+#DECLARE($vt_folderPath : Text)->$vl_numFileSummarized : Integer
 
-$vl_numFileSummarized:=0
 If (Asserted:C1132(Count parameters:C259<=1))
-	If (Count parameters:C259>=1)
-		$vt_folderPath:=$1
-	Else 
+	If (Count parameters:C259<1)
 		$vt_folderPath:=Select folder:C670("Select RAW FlameGraph folder"; File_GetFolderName(Structure file:C489(*)))
 		If (OK=0)
 			$vt_folderPath:=""
@@ -52,4 +44,3 @@ If (Asserted:C1132(Count parameters:C259<=1))
 	End if 
 	
 End if   // ASSERT
-$0:=$vl_numFileSummarized

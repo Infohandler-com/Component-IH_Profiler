@@ -5,12 +5,7 @@
 // DESCRIPTION
 //   Returns the most recent method name on the calling stack.
 //
-C_TEXT:C284($0; $vt_currentMethodName)
-// ----------------------------------------------------
-// HISTORY
-//   Created by: DB (05/24/2017)
-// ----------------------------------------------------
-
+#DECLARE()->$vt_currentMethodName : Text
 Init_ThreadSafe
 
 If (__STACK.length>0)
@@ -25,5 +20,3 @@ End if
 If ($vt_currentMethodName="")
 	$vt_currentMethodName:="unknown method"
 End if 
-
-$0:=$vt_currentMethodName

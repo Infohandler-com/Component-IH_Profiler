@@ -9,22 +9,12 @@
 //
 //   NOTE: Spaces in $1 & $2 are replaced by "_".
 //
-C_TEXT:C284($1; $profilerTag)  // name to track
-C_TEXT:C284($2; $extraText)  // OPTIONAL; optional text
-// ----------------------------------------------------
-// HISTORY
-//   Created by: DB (11/23/07)
-//   Mod: DB (10/29/2010) - Track start time
-//   Mod: DB (11/22/2010) - support performance tracking switch
-//   Mod: DB (01/20/2011) - Method stack always being tracked
-//   Mod: DB (05/22/2017) - Moved to v16 component
-//   Mod: DB (2020-02-07) - use collection
-// ----------------------------------------------------
+#DECLARE($profilerTag : Text; $extraText : Text)
 
-If (Asserted:C1132((Count parameters:C259=1) | (Count parameters:C259=2)))
-	$profilerTag:=Replace string:C233($1; " "; "_")
+If (Asserted:C1132((Count parameters:C259=1) || (Count parameters:C259=2)))
+	$profilerTag:=Replace string:C233($profilerTag; " "; "_")
 	If (Count parameters:C259=2)
-		$extraText:=Replace string:C233($2; " "; "_")
+		$extraText:=Replace string:C233($extraText; " "; "_")
 	End if 
 	
 	C_COLLECTION:C1488(__STACK)
@@ -46,5 +36,5 @@ If (Asserted:C1132((Count parameters:C259=1) | (Count parameters:C259=2)))
 	
 	__STACK.push($event)  // Add our method to the call stack
 	
-	__incrementLevel:=__incrementLevel+1
+	__incrementLevel+=1
 End if 

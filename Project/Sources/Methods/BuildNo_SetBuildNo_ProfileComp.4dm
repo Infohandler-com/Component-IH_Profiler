@@ -9,18 +9,8 @@
 //   NOTE: Cannot be run in a pre-emptive process.
 //   NOTE: Private to the component
 //
-C_TEXT:C284($1; $vt_stringYear)
-C_TEXT:C284($2; $vt_stringReleaseNo)
-C_TEXT:C284($3; $vt_stringBuildNo)
-// ----------------------------------------------------
-// HISTORY
-//   Created by: DB (05/29/2017)
-// ----------------------------------------------------
-
+#DECLARE($vt_stringYear : Text; $vt_stringReleaseNo : Text; $vt_stringBuildNo : Text)
 ASSERT:C1129(Count parameters:C259=3)
-$vt_stringYear:=$1
-$vt_stringReleaseNo:=$2
-$vt_stringBuildNo:=$3
 
 // Construct the bulid No obj
 C_OBJECT:C1216($vo_buildNoObj)
@@ -33,7 +23,6 @@ OB SET:C1220($vo_buildNoObj; "versionLong"; $vt_stringYear+"."+$vt_stringRelease
 
 ARRAY TEXT:C222($at_buildNo; 1)
 $at_buildNo{1}:=JSON Stringify:C1217($vo_buildNoObj)
-//SET TEXT TO PASTEBOARD($at_buildNo{1})
 
 // Save it into the structure
 ARRAY TO LIST:C287($at_buildNo; "BuildNo")

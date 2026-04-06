@@ -5,18 +5,9 @@
 // DESCRIPTION
 //   
 //
-C_TEXT:C284($1; $statType)
-C_OBJECT:C1216($2; $performanceObj)
-C_TEXT:C284($3; $filePath)
-// ----------------------------------------------------
-// HISTORY
-//   Created by: Dani Beaubien (04/06/2020)
-// ----------------------------------------------------
+#DECLARE($statType : Text; $performanceObj : Object; $filePath : Text)
 
 If (Asserted:C1132(Count parameters:C259=3))
-	$statType:=$1
-	$performanceObj:=$2
-	$filePath:=$3
 	
 	File_Delete($filePath)
 	
@@ -27,27 +18,27 @@ If (Asserted:C1132(Count parameters:C259=3))
 	C_TEXT:C284($html)
 	$html:="<style> .red {color:red;}</style>"
 	If ($statType="flame")
-		$html:=$html+"<h1>Method Profiler Stats - Flamegraph</h1>"
+		$html+="<h1>Method Profiler Stats - Flamegraph</h1>"
 	Else 
-		$html:=$html+"<h1>Method Profiler Stats - Profile</h1>"
+		$html+="<h1>Method Profiler Stats - Profile</h1>"
 	End if 
 	
-	$html:=$html+"<table id=\"methodStats\" width=100% border=0>"
-	$html:=$html+"<thead><tr>"
-	$html:=$html+"<th>Method Name</th>"
-	$html:=$html+"<th>Min (ms)</th>"
-	$html:=$html+"<th>Avg (ms)</th>"
-	$html:=$html+"<th>Max (ms)</th>"
-	$html:=$html+"<th>Total (ms)</th>"
-	$html:=$html+"<th>Call Count</th>"
-	$html:=$html+"<th>Avg/Max Ratio</th>"
-	$html:=$html+"<th>Max/Total Ratio</th>"
-	$html:=$html+"</tr></thead>"
+	$html+="<table id=\"methodStats\" width=100% border=0>"
+	$html+="<thead><tr>"
+	$html+="<th>Method Name</th>"
+	$html+="<th>Min (ms)</th>"
+	$html+="<th>Avg (ms)</th>"
+	$html+="<th>Max (ms)</th>"
+	$html+="<th>Total (ms)</th>"
+	$html+="<th>Call Count</th>"
+	$html+="<th>Avg/Max Ratio</th>"
+	$html+="<th>Max/Total Ratio</th>"
+	$html+="</tr></thead>"
 	
 	C_LONGINT:C283($callCount)
 	C_REAL:C285($vr_average; $vr_max; $vr_total; $vr_ratioTotal; $vr_min; $vr_ratioAvg)
 	C_BOOLEAN:C305($vb_warnRatioTotal; $vb_warnAvg)
-	$html:=$html+"<tbody>"
+	$html+="<tbody>"
 	
 	C_TEXT:C284($tmpHTML; $methodName)
 	C_LONGINT:C283($i; $rowNo)
@@ -85,27 +76,27 @@ If (Asserted:C1132(Count parameters:C259=3))
 			End if 
 			
 			If (True:C214)  // output the HTML
-				$tmpHTML:=$tmpHTML+"<tr class="+Choose:C955((Mod:C98($rowNo; 2)=1); "a"; "b")+">"
-				$tmpHTML:=$tmpHTML+"<td>"+STR_HTML_Encode($methodName)+"</td>"  // Method Name"
-				$tmpHTML:=$tmpHTML+"<td>"+String:C10($vr_min; "###,###,###,##0")+"</td>"  // Min
-				$tmpHTML:=$tmpHTML+"<td"+Choose:C955(Num:C11($vb_warnAvg); ""; " class=\"red\"")+">"+String:C10($vr_average; "###,###,###,##0.0")+"</td>"  // Avg
-				$tmpHTML:=$tmpHTML+"<td>"+String:C10($vr_max; "###,###,###,##0")+"</td>"  // Max
-				$tmpHTML:=$tmpHTML+"<td>"+String:C10($vr_total; "###,###,###,##0")+"</td>"  // Total
-				$tmpHTML:=$tmpHTML+"<td>"+String:C10($callCount; "###,###,###,##0")+"</td>"  // Call Count
-				$tmpHTML:=$tmpHTML+"<td>"+String:C10(($vr_ratioAvg*100); "###,###,###,##0.0")+"%</td>"  // Avg/Max Ratio
-				$tmpHTML:=$tmpHTML+"<td"+Choose:C955(Num:C11($vb_warnRatioTotal); ""; " class=\"red\"")+">"+String:C10(($vr_ratioTotal*100); "###,###,###,##0.0")+"%</td>"  // Max/Total Ratio
-				$tmpHTML:=$tmpHTML+"</tr>"
+				$tmpHTML+="<tr class="+Choose:C955((Mod:C98($rowNo; 2)=1); "a"; "b")+">"
+				$tmpHTML+="<td>"+STR_HTML_Encode($methodName)+"</td>"  // Method Name"
+				$tmpHTML+="<td>"+String:C10($vr_min; "###,###,###,##0")+"</td>"  // Min
+				$tmpHTML+="<td"+Choose:C955(Num:C11($vb_warnAvg); ""; " class=\"red\"")+">"+String:C10($vr_average; "###,###,###,##0.0")+"</td>"  // Avg
+				$tmpHTML+="<td>"+String:C10($vr_max; "###,###,###,##0")+"</td>"  // Max
+				$tmpHTML+="<td>"+String:C10($vr_total; "###,###,###,##0")+"</td>"  // Total
+				$tmpHTML+="<td>"+String:C10($callCount; "###,###,###,##0")+"</td>"  // Call Count
+				$tmpHTML+="<td>"+String:C10(($vr_ratioAvg*100); "###,###,###,##0.0")+"%</td>"  // Avg/Max Ratio
+				$tmpHTML+="<td"+Choose:C955(Num:C11($vb_warnRatioTotal); ""; " class=\"red\"")+">"+String:C10(($vr_ratioTotal*100); "###,###,###,##0.0")+"%</td>"  // Max/Total Ratio
+				$tmpHTML+="</tr>"
 			End if 
 			
 			If (Length:C16($tmpHTML)>2048)
-				$html:=$html+$tmpHTML
+				$html+=$tmpHTML
 				$tmpHTML:=""
 			End if 
 		End if 
 	End for 
-	$html:=$html+$tmpHTML
+	$html+=$tmpHTML
 	
-	$html:=$html+"</tbody>"
-	$html:=$html+"</table>"
+	$html+="</tbody>"
+	$html+="</table>"
 	TEXT TO DOCUMENT:C1237($filePath; $html)
 End if 

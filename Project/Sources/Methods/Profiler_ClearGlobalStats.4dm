@@ -5,13 +5,6 @@
 //   Clears the global stats. Any captured stats are logged
 //   prior to clearing.
 //
-If (False:C215)
-	// ----------------------------------------------------
-	// HISTORY
-	//   Created by: DB (05/24/2017)
-	// ----------------------------------------------------
-End if 
-
 Profiler_LogMethodStats_GLOBAL
 Profiler_LogCallChnStats_GLOBAL
 Profiler_LogFlameStats_GLOBAL

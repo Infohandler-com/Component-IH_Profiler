@@ -9,23 +9,12 @@
 //
 //   NOTE: Spaces in $1 & $2 are replaced by "_".
 //
-C_TEXT:C284($1; $profilerTag)  // method name
-C_TEXT:C284($2; $extraText)  // Optional stuff
-// ----------------------------------------------------
-// HISTORY
-//   Created by: DB (11/23/07)
-//   Mod: DB (10/26/2010) - Make sure that we get the method name that we are expecting
-//   Mod: DB (11/22/2010) - support performance tracking switch
-//   Mod: DB (01/20/2011) - Improved Performance of this method, significantly faster
-//   Mod: DB (01/28/2014) - Add tracking globally
-//   Mod: DB (05/22/2017) - Moved to v16 component
-//   Mod: DB (2020-02-07) - use collection
-// ----------------------------------------------------
+#DECLARE($profilerTag : Text; $extraText : Text)
 
-If (Asserted:C1132((Count parameters:C259=1) | (Count parameters:C259=2)))
-	$profilerTag:=Replace string:C233($1; " "; "_")
+If (Asserted:C1132((Count parameters:C259=1) || (Count parameters:C259=2)))
+	$profilerTag:=Replace string:C233($profilerTag; " "; "_")
 	If (Count parameters:C259=2)
-		$extraText:=Replace string:C233($2; " "; "_")
+		$extraText:=Replace string:C233($extraText; " "; "_")
 	End if 
 	
 	OnErr_Install_Handler("OnErr_GENERIC_Profiler")
@@ -47,11 +36,11 @@ If (Asserted:C1132((Count parameters:C259=1) | (Count parameters:C259=2)))
 			C_TEXT:C284($errorLogMessage)
 			$errorLogMessage:=" called with $1 = '"+$profilerTag+"'"
 			If ($extraText#"")
-				$errorLogMessage:=$errorLogMessage+" and $2 = '"+$extraText+"'"
+				$errorLogMessage+=" and $2 = '"+$extraText+"'"
 			End if 
-			$errorLogMessage:=$errorLogMessage+" but expecting $1 = '"+$event.tag+"'"
+			$errorLogMessage+=" but expecting $1 = '"+$event.tag+"'"
 			If ($event.extraText#"")
-				$errorLogMessage:=$errorLogMessage+" and $2 = '"+$event.extraText+"'"
+				$errorLogMessage+=" and $2 = '"+$event.extraText+"'"
 			End if 
 			LogNamed_AppendToFile("On Err Trigger"; Current method name:C684+$errorLogMessage)
 		End if 
@@ -62,7 +51,7 @@ If (Asserted:C1132((Count parameters:C259=1) | (Count parameters:C259=2)))
 		// # Track the time
 		C_LONGINT:C283($timeSpentInMethod)
 		$timeSpentInMethod:=$stoppedAtMilliseconds-$event.start_ms  // time between start & end
-		$timeSpentInMethod:=$timeSpentInMethod-$event.wasteTime  // remove the child method's time
+		$timeSpentInMethod-=$event.wasteTime  // remove the child method's time
 		
 		C_LONGINT:C283($size)
 		$size:=__STACK.length

@@ -6,17 +6,11 @@
 //   This method stores the profiling stats in a flamegraph
 //   safe format to the specified module file.
 //
-C_TEXT:C284($1; $vt_moduleName)
-// ----------------------------------------------------
-// HISTORY
-//   Created by: DB (05/10/11)
-//   Mod: DB (01/28/2014) - Added Total to output
-//   Mod by: Dani Beaubien (03/28/2014) - Changed output to be "-"'s
-// ----------------------------------------------------
+#DECLARE($vt_moduleName : Text)
 
 If (Asserted:C1132(Count parameters:C259<=1))
 	If (Count parameters:C259=1)
-		$vt_moduleName:="Profiler Flamegraph Unfolded - "+$1
+		$vt_moduleName:="Profiler Flamegraph Unfolded - "+$vt_moduleName
 	End if 
 	If ($vt_moduleName="")
 		$vt_moduleName:="Profiler Flamegraph Unfolded"
@@ -48,7 +42,7 @@ If (Asserted:C1132(Count parameters:C259<=1))
 				If ($vr_totalTime=0)  // force to be non-zero
 					$vr_totalTime:=1
 				End if 
-				$vt_buffer:=$vt_buffer+$objectPropertyNames{$i}+" "+String:C10($vr_totalTime)+Char:C90(Line feed:K15:40)
+				$vt_buffer+=$objectPropertyNames{$i}+" "+String:C10($vr_totalTime)+Char:C90(Line feed:K15:40)
 				
 				If (Length:C16($vt_buffer)>5120)
 					LogNamed_AppendToFile_Quiet($vt_moduleName; $vt_buffer; "noTimeStamp"; "noProc#")
