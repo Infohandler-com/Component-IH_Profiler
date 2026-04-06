@@ -22,11 +22,7 @@ fileBuffer_MaxSize:=$fileBuffer_MaxSize
 var fileBuffer_buffer : Text
 
 // set the max size of the buffer
-If (Count parameters:C259=2)
-	If (Asserted:C1132(fileBuffer_MaxSize>32000))  // The max size of the buffer must be below 32000 bytes
-		fileBuffer_MaxSize:=32000
-	End if   // ASSERT
-Else 
+If (fileBuffer_MaxSize<=0)
 	fileBuffer_MaxSize:=10240  // default to buffer to 10k
 End if 
 

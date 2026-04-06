@@ -15,7 +15,7 @@ Case of
 		UnitTest_StartTime:=Milliseconds:C459
 		
 	: ($action="stop")
-		UnitTest_TotalDuration:=Round:C94(Milliseconds:C459-UnitTest_StartTime/1000; 3)
+		UnitTest_TotalDuration:=Round:C94((Milliseconds:C459-UnitTest_StartTime)/1000; 3)
 		UnitTest_TotalTests:=0
 		UnitTest_TotalPassed:=0
 		UnitTest_TotalFailed:=0
