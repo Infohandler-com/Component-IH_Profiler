@@ -33,3 +33,5 @@ Thumbs.db
 
 # AI Chat History
 *.specstory
+Project/DerivedData
+Libraries
