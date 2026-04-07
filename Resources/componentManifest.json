@@ -1,8 +1,8 @@
 ﻿{
 	"author": "Dani Beaubien",
 	"copyrights": "Copyright 2026 Infohandler.com",
-	"version": "2026.r1 (build 20260406)",
-	"buildDate": "2026-04-06",
+	"version": "2026.r1 (build 20260407)",
+	"buildDate": "2026-04-07",
 	"url": "http://infohandler.com",
 	"manifestFormatVersion": "1.0",
 	"buildWith4DVersion": "v20.8 final (build 102029)",
@@ -27,12 +27,6 @@
 		"Profiler_SaveGlobalStatsAsHTML",
 		"Profiler_SaveProcessStatsAsHTML",
 		"Profiler_START",
-		"Profiler_STOP",
-		"UnitTest_AddTestCase",
-		"UnitTest_Assert",
-		"UnitTest_Init",
-		"UnitTest_RunTest",
-		"UnitTest_Setup_IHProfiler",
-		"UnitTest_ShowDialog"
+		"Profiler_STOP"
 	]
 }
