@@ -1,6 +1,5 @@
 //%attributes = {"invisible":true,"shared":true,"preemptive":"capable"}
 // Profiler_GetLocalCallChainStats () : flameStatsAsText
-// Profiler_GetLocalCallChainStats () : text
 // 
 // DESCRIPTION
 //   This method returns the contents of
@@ -8,9 +7,12 @@
 //   Only the stats for the current process are returned.
 //
 #DECLARE()->$flame_stats_as_text : Text
+// ----------------------------------------------------
+
 If (Worker_inWorker)
 	Init_GlobalTracking
 	$flame_stats_as_text:=Performance_GetTrackingAsTSV("GLOBAL"; __Global_PerfFlameObj)
+	
 Else 
 	Init_ThreadSafe
 	$flame_stats_as_text:=Performance_GetTrackingAsTSV("Local"; __PerfFlameObj)

@@ -7,11 +7,8 @@
 //   performance stats.
 //
 // ----------------------------------------------------
-// HISTORY
-//   Created by: Dani Beaubien (04/06/2020)
-// ----------------------------------------------------
 
-C_OBJECT:C1216(__PerfObj; __PerfFlameObj)  // defined by Init_ThreadSafe
+var __PerfObj; __PerfFlameObj : Object  // defined by Init_ThreadSafe
 
 CALL WORKER:C1389(Worker_GetProcessName; "Worker_UpdateGlobalTrackingInfo"; __PerfObj; __PerfFlameObj)
 
