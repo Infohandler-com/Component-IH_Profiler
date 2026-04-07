@@ -1,16 +1,6 @@
 
 // Must be non compiled and not as a component
-If (Not:C34(Is compiled mode:C492)) & (Structure file:C489(*)=Structure file:C489)
-	//Run 4DPop
-	//This code is available even if the component is not present like in the final application.
-	If (Not:C34(Is compiled mode:C492))
-		ARRAY TEXT:C222($tTxt_Components; 0)
-		COMPONENT LIST:C1001($tTxt_Components)
-		If (Find in array:C230($tTxt_Components; "4DPop")>0)
-			EXECUTE METHOD:C1007("4DPop_Palette")
-		End if 
-	End if 
-	
+If (Not:C34(Is compiled mode:C492)) && (Structure file:C489(*)=Structure file:C489)
 	// Set a defaul that is not inside the component dbase folder
 	C_TEXT:C284($vt_rootFolder)
 	$vt_rootFolder:=Folder_ParentName(Structure file:C489)
