@@ -1,5 +1,7 @@
 //%attributes = {}
 
+Profiler_SaveGlobalStatsAsHTML
+
 If (Process number:C372("Log_AppLog")<1)
 	Log_OpenDisplayWindow
 End if 

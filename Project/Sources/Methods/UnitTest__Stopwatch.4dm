@@ -8,6 +8,8 @@
 var $totalDuration; $index : Integer
 
 Case of 
+	: ($action="")
+		UnitTest_Setup_IHProfiler()
 		
 	: ($action="start")
 		UnitTest_LogMessage("Start: "+String:C10(Current date:C33; Internal date short:K1:7)+" "+String:C10(Current time:C178; HH MM SS:K7:1))
