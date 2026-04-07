@@ -9,17 +9,9 @@
 //   If no parms are passed, then the previous handler
 //   is restored.
 //
-C_TEXT:C284($1; $errorHandlerMethodName)  // optional
-// ----------------------------------------------------
-// HISTORY
-//   Created by: Dani Beaubien (11/02/2018)
-//   Mod by: Dani Beaubien (02/24/2020) - Convert to collections, do some extra testing
-// ----------------------------------------------------
+#DECLARE($errorHandlerMethodName : Text)
 
 If (Asserted:C1132(Count parameters:C259<=1))
-	If (Count parameters:C259=1)
-		$errorHandlerMethodName:=$1
-	End if 
 	
 	C_COLLECTION:C1488(_OnErr_MethodStack)
 	If (_OnErr_MethodStack=Null:C1517)

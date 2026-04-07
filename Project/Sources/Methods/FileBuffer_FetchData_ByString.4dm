@@ -1,18 +1,7 @@
 //%attributes = {"invisible":true,"preemptive":"capable"}
 // Method: FileBuffer_FetchData_ByString ( text to match on {;text2}) : result
-
-C_LONGINT:C283($pos; $pos2)
-C_TEXT:C284($1; $matchOnText)
-C_TEXT:C284($2; $matchOnText2)
-C_TEXT:C284($0; $tmpTxt)
-$matchOnText:=$1
-$matchOnText2:=""
-If (Count parameters:C259=2)
-	$matchOnText2:=$2
-End if 
-$tmpTxt:=""
-$pos:=0
-$pos2:=0
+#DECLARE($matchOnText : Text; $matchOnText2 : Text)->$tmpTxt : Text
+var $pos; $pos2 : Integer
 
 If (Asserted:C1132(Length:C16($matchOnText)>0))  // String being passed to search for is empty.
 	
@@ -49,12 +38,6 @@ If (Asserted:C1132(Length:C16($matchOnText)>0))  // String being passed to searc
 		$tmpTxt:=Substring:C12(fileBuffer_buffer; 1; $pos)
 		fileBuffer_buffer:=Substring:C12(fileBuffer_buffer; $pos+1)  // advance to next char
 		
-		// Account for unicode characters
-		//For ($i;1;Length($tmpTxt))
-		//If (Character code($tmpTxt≤$i≥)>256)
-		//fileBuffer_curPos:=fileBuffer_curPos+1
-		//End if 
-		//End for 
 	Else 
 		// If buffer is less than the full size which means that we are at the
 		// end of the file. Did not find the text we are looking for so
@@ -70,7 +53,4 @@ If (Asserted:C1132(Length:C16($matchOnText)>0))  // String being passed to searc
 	C_BLOB:C604($vx_tmpBuffer)
 	TEXT TO BLOB:C554($tmpTxt; $vx_tmpBuffer; UTF8 text without length:K22:17)
 	fileBuffer_curPos:=fileBuffer_curPos+BLOB size:C605($vx_tmpBuffer)
-	//fileBuffer_curPos:=fileBuffer_curPos+Length($tmpTxt)
 End if   // ASSERT
-
-$0:=$tmpTxt

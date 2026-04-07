@@ -6,15 +6,10 @@
 //   Thread Safe.
 //   Initalized the process variables.
 //
-C_BOOLEAN:C305($1)
-// ----------------------------------------------------
-// HISTORY
-//   Created by: DB (05/22/2017)
-//   Mod: DB (05/23/2017) - Added optional param to force reInit.
-// ----------------------------------------------------
+#DECLARE($forced : Boolean)
 
 If (Count parameters:C259=1)
-	If ($1=True:C214)  // force a refresh?
+	If ($forced)  // force a refresh?
 		__STACK_inited:=False:C215
 	End if 
 End if 

@@ -1,0 +1,1 @@
+Your goal is to explain this 4D class, its constructor and all its functions and properties.

@@ -6,16 +6,9 @@
 //   Returns true if the file exists. It will create any directories if
 //   are missing.
 //
-C_TEXT:C284($1; $File_vt_fullPath)  // Path to file
-C_BOOLEAN:C305($0; $File_vb_doesExist)  // File does exist
-// ----------------------------------------------------
-// MODIFICATION HISTORY:
-//   Added: DB (7/17/03 @ 15:46:39)
-// ----------------------------------------------------
+#DECLARE($File_vt_fullPath : Text)->$File_vb_doesExist : Boolean
 
-$File_vb_doesExist:=False:C215
 If (Asserted:C1132(Count parameters:C259=1))
-	$File_vt_fullPath:=$1
 	
 	If ($File_vt_fullPath#"")
 		// make sure that the directory exists that this file is supposed to be in
@@ -26,5 +19,3 @@ If (Asserted:C1132(Count parameters:C259=1))
 		End if 
 	End if 
 End if   // ASSERT
-
-$0:=$File_vb_doesExist

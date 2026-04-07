@@ -1,0 +1,13 @@
+//%attributes = {"invisible":true,"preemptive":"incapable"}
+// (PM) UnitTest_AddTestCase
+// Adds a testcase to the unit tests
+// $1 = Test case (=project method)
+
+#DECLARE($testcase : Text)
+
+If (Find in array:C230(UnitTest_TestCases; $testcase)<1)
+	APPEND TO ARRAY:C911(UnitTest_TestCaseEnabled; True:C214)
+	APPEND TO ARRAY:C911(UnitTest_TestCases; $testcase)
+End if 
+
+SORT ARRAY:C229(UnitTest_TestCases; UnitTest_TestCaseEnabled; >)

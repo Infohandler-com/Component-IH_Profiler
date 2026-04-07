@@ -1,11 +1,13 @@
 //%attributes = {}
 
+Profiler_SaveGlobalStatsAsHTML
+
 If (Process number:C372("Log_AppLog")<1)
 	Log_OpenDisplayWindow
 End if 
-
+FileBuffer_Init()
 Log_SetUserNameForProcess("dbeaubien")
-
+UnitTest__Stopwatch()
 C_TEXT:C284($folder)
 $folder:=Folder_ParentName(Folder_ParentName(Structure file:C489))+"IH_Profiler Tests"+Folder separator:K24:12
 Folder_VerifyExistance($folder)

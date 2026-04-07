@@ -1,11 +1,11 @@
 ﻿{
 	"author": "Dani Beaubien",
-	"copyrights": "Copyright 2021 Infohandler.com",
-	"version": "2021.r1 (build 20211012)",
-	"buildDate": "2021-12-14",
+	"copyrights": "Copyright 2026 Infohandler.com",
+	"version": "2026.r1 (build 20260407)",
+	"buildDate": "2026-04-07",
 	"url": "http://infohandler.com",
 	"manifestFormatVersion": "1.0",
-	"buildWith4DVersion": "v18 R6 final (build 264867)",
+	"buildWith4DVersion": "v20.8 final (build 102029)",
 	"methodList": [
 		"BuildNo_GetBuildNo_ProfileComp",
 		"FlameGraph_FoldedFileToSVG",

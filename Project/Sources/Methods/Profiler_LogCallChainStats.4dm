@@ -7,21 +7,13 @@
 //
 //   Dumps Columns: Call Chain, Call Count, Min, Avg, Max Total
 //
-If (False:C215)
-	// ----------------------------------------------------
-	// HISTORY
-	//   Created by: DB (10/29/10)
-	//   Mod: DB (05/22/2017) - Moved to v16 component
-	// ----------------------------------------------------
-End if 
-
 Init_ThreadSafe
 
 // If running in the worker, then want the info to go to a different file.
 C_TEXT:C284($vt_namedLogFile)
 $vt_namedLogFile:="Profiler Call Chain Stats"
 If (Worker_inWorker)
-	$vt_namedLogFile:=$vt_namedLogFile+" GLOBAL"
+	$vt_namedLogFile+=" GLOBAL"
 End if 
 
 C_TEXT:C284($vt_buffer)

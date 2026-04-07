@@ -8,10 +8,8 @@
 // 
 //
 // Parameters
-C_LONGINT:C283($0; gError)
-// ----------------------------------------------------
-//   Mod: DB (05/22/2017) - Moved to v16 component
-// ----------------------------------------------------
+#DECLARE() : Integer
+var gError : Integer
 
 // gError is set by the other OnErr methods.
-$0:=gError
+return gError

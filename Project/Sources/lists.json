@@ -1,10 +1,10 @@
-﻿{
+{
 	"BuildNo": {
 		"lineHeight": 18,
 		"editable": false,
 		"items": [
 			{
-				"text": "{\"releaseYear\":\"2021\",\"releaseNo\":\"r1\",\"buildNo\":\"20211012\",\"versionShort\":\"2021.r1\",\"versionLong\":\"2021.r1 (build 20211012)\"}",
+				"text": "{\"releaseYear\":\"2026\",\"releaseNo\":\"r1\",\"buildNo\":\"20260407\",\"versionShort\":\"2026.r1\",\"versionLong\":\"2026.r1 (build 20260407)\"}",
 				"ref": 1,
 				"editable": true,
 				"collapsed": true

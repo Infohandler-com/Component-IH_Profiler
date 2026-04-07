@@ -5,17 +5,9 @@
 // DESCRIPTION
 //   Given the path to a document, returns the document itself.
 //
-C_TEXT:C284($1; $vt_docPath)  // Full path to document
-C_TEXT:C284($0; $vt_document)  // file name
-//---------------------------------------------------
-// HISTORY
-//   Created: Jeremy Sullivan (October 16, 2001  5:29 PM) - HD Industries, Inc (http://www.hdind.com)
-//   Mod by: Dani Beaubien (01/22/2016) - Rewrote
-//---------------------------------------------------
+#DECLARE($vt_docPath : Text)->$vt_document : Text
 
-$vt_document:=""
 If (Asserted:C1132(Count parameters:C259=1))
-	$vt_docPath:=$1
 	
 	Case of 
 		: ($vt_docPath="")
@@ -35,4 +27,3 @@ If (Asserted:C1132(Count parameters:C259=1))
 	End case 
 	
 End if   // ASSERT
-$0:=$vt_document

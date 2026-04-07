@@ -14,11 +14,8 @@
 // MODIFICATION HISTORY:
 //   Added: DB (7/17/03 @ 15:28:57)
 // ----------------------------------------------------
-
+#DECLARE($Folder_vt_fullPath : Text)
 If (Asserted:C1132(Count parameters:C259=1))
-	C_TEXT:C284($1; $Folder_vt_fullPath)
-	$Folder_vt_fullPath:=$1
-	
 	If ($Folder_vt_fullPath#"")
 		If (Not:C34(Folder_DoesExist($Folder_vt_fullPath)))
 			
