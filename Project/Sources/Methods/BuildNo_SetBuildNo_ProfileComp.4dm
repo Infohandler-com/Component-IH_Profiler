@@ -13,7 +13,7 @@
 ASSERT:C1129(Count parameters:C259=3)
 
 // Construct the bulid No obj
-C_OBJECT:C1216($vo_buildNoObj)
+var $vo_buildNoObj : Object
 $vo_buildNoObj:=JSON Parse:C1218("{}")
 OB SET:C1220($vo_buildNoObj; "releaseYear"; $vt_stringYear)
 OB SET:C1220($vo_buildNoObj; "releaseNo"; $vt_stringReleaseNo)

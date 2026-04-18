@@ -16,7 +16,7 @@ End if
 
 Array_SetSize(0; $vp_arrayPtr)
 
-C_LONGINT:C283($vl_delSize; $pos)
+var $vl_delSize; $pos : Integer
 $vl_delSize:=Length:C16($theDelimiter)
 
 If ($vt_srcTxt#"")

@@ -3,8 +3,8 @@
 // Changes the size of one or multiple arrays
 // $1 = Size
 // $2 etc. = Pointers to arrays
-#DECLARE($size : Integer)
-var ${2} : Pointer  // TODO: Convert to variadic declaration in 21 LTS
+#DECLARE($size : Integer;  ...  : Pointer)
+
 var $param; $currentSize : Integer
 var $array : Pointer
 

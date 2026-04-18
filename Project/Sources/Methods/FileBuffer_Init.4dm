@@ -27,7 +27,7 @@ If (fileBuffer_MaxSize<=0)
 End if 
 
 // record the size of the document
-C_LONGINT:C283(fileBuffer_DocSize; fileBuffer_curPos)
+var fileBuffer_DocSize; fileBuffer_curPos : Integer
 fileBuffer_DocSize:=Get document size:C479(fileBuffer_DocRef)
 fileBuffer_curPos:=1
 

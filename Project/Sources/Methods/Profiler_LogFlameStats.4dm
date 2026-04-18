@@ -33,8 +33,8 @@ If ($performanceObj._numItems>1)
 	OB GET PROPERTY NAMES:C1232($performanceObj; $objectPropertyNames)
 	SORT ARRAY:C229($objectPropertyNames; >)
 	
-	C_LONGINT:C283($i)
-	C_REAL:C285($vr_totalTime)
+	var $i : Integer
+	var $vr_totalTime : Real
 	For ($i; 1; Size of array:C274($objectPropertyNames))
 		If ($objectPropertyNames{$i}#"_NumItems")
 			$vr_totalTime:=$performanceObj[$objectPropertyNames{$i}].total*10

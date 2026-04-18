@@ -12,23 +12,23 @@
 
 If (Asserted:C1132(Count parameters:C259=1))
 	
-	C_TEXT:C284($vt_pathToPerlScript)
+	var $vt_pathToPerlScript : Text
 	$vt_pathToPerlScript:=Get 4D folder:C485(Current resources folder:K5:16)+"flamegraph.pl"
 	
 	If (Test path name:C476($foldedFilePath)=Is a document:K24:1) & (Test path name:C476($vt_pathToPerlScript)=Is a document:K24:1)
-		C_TEXT:C284($perlScript)
+		var $perlScript : Text
 		$perlScript:=Convert path system to POSIX:C1106($vt_pathToPerlScript)
 		
-		C_TEXT:C284($posixFoldedFilePath)
+		var $posixFoldedFilePath : Text
 		$posixFoldedFilePath:=Convert path system to POSIX:C1106($foldedFilePath)
 		
-		C_BLOB:C604($in; $out; $err)
-		C_TEXT:C284($codeToExecute)
+		var $in; $out; $err : Blob
+		var $codeToExecute : Text
 		$codeToExecute:="perl \""+$perlScript+"\" --countname=MSx10 \""+$posixFoldedFilePath+"\""
 		LAUNCH EXTERNAL PROCESS:C811($codeToExecute; $in; $out; $err)
 		
 		// Look at the output & error 
-		C_TEXT:C284($outText; $errText)
+		var $outText; $errText : Text
 		$outText:=Convert to text:C1012($out; "utf-8")
 		$outText:=Substring:C12($outText; 1; Length:C16($outText)-1)  //strip terminator
 		$errText:=Convert to text:C1012($err; "utf-8")

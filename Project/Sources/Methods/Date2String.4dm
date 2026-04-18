@@ -45,7 +45,7 @@ Else
 	$Year:=Year of:C25($date2Convert)
 	$WeekDay:=Day number:C114($date2Convert)
 	
-	C_TEXT:C284($DayStr; $DayStr2; $MonthStr)
+	var $DayStr; $DayStr2; $MonthStr : Text
 	$DayStr:=String:C10($Day)
 	$DayStr2:=String:C10($Day; "00")
 	$MonthStr:=String:C10($Month; "00")
