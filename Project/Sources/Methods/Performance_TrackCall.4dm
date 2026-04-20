@@ -10,7 +10,7 @@ ASSERT:C1129(Count parameters:C259=7)
 $vt_FullLocalMethodName:=Replace string:C233($vt_FullLocalMethodName; " "; "_")
 
 // # Add our tracking info to our local arrays
-C_LONGINT:C283($pos)
+var $pos : Integer
 $pos:=Find in array:C230($ap_MethodArrPtr->; $vt_FullLocalMethodName)
 If ($pos<1)
 	$pos:=Size of array:C274($ap_MethodArrPtr->)+1

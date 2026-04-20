@@ -10,13 +10,13 @@
 Init_ThreadSafe
 
 // If running in the worker, then want the info to go to a different file.
-C_TEXT:C284($vt_namedLogFile)
+var $vt_namedLogFile : Text
 $vt_namedLogFile:="Profiler Call Chain Stats"
 If (Worker_inWorker)
 	$vt_namedLogFile+=" GLOBAL"
 End if 
 
-C_TEXT:C284($vt_buffer)
+var $vt_buffer : Text
 $vt_buffer:=Profiler_GetLocalCallChainStats
 
 If ($vt_buffer#"")

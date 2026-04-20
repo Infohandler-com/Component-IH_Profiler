@@ -16,7 +16,7 @@ If (Asserted:C1132(Count parameters:C259=3))
 	
 	ASSERT:C1129($trackingObject#Null:C1517)
 	
-	C_OBJECT:C1216($perfObj)
+	var $perfObj : Object
 	If ($trackingObject[$trackingName]=Null:C1517)
 		$perfObj:=New object:C1471
 		$perfObj.min:=$timeSpentInMethod  // starting values

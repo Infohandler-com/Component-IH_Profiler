@@ -9,7 +9,7 @@
 
 If (Asserted:C1132(Count parameters:C259=1))
 	
-	C_LONGINT:C283($i; $position)
+	var $i; $position : Integer
 	$position:=0
 	For ($i; Length:C16($path); 1; -1)
 		Case of 

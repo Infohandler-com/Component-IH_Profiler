@@ -14,17 +14,17 @@ If (Count parameters:C259=1)
 	End if 
 End if 
 
-C_BOOLEAN:C305(__STACK_inited)
+var __STACK_inited : Boolean
 If (Not:C34(__STACK_inited))
 	__STACK_inited:=True:C214
 	
-	C_LONGINT:C283(__incrementLevel)
+	var __incrementLevel : Integer
 	__incrementLevel:=0
 	
-	C_COLLECTION:C1488(__STACK)
+	var __STACK : Collection
 	__STACK:=New collection:C1472  // stack used for the method calling chain
 	
-	C_OBJECT:C1216(__PerfObj; __PerfFlameObj)
+	var __PerfObj; __PerfFlameObj : Object
 	__PerfObj:=New object:C1471("_numItems"; 0)
 	__PerfFlameObj:=New object:C1471("_numItems"; 0)
 End if 

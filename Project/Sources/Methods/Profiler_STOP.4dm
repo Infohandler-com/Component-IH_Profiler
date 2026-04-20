@@ -19,7 +19,7 @@ End if
 
 OnErr_Install_Handler("OnErr_GENERIC_Profiler")
 
-C_TEXT:C284($fullProfilerTag)
+var $fullProfilerTag : Text
 $fullProfilerTag:=$profilerTag
 If ($extraText#"")
 	$fullProfilerTag:=$fullProfilerTag+"("+$extraText+")"
@@ -28,12 +28,12 @@ End if
 Init_ThreadSafe
 
 If (__STACK.length>0)
-	C_OBJECT:C1216($event)
+	var $event : Object
 	$event:=__STACK.pop()
 	
 	// # Make sure that the STOPPED method matches what is expected
 	If ($profilerTag#$event.tag) | ($extraText#$event.extraText)
-		C_TEXT:C284($errorLogMessage)
+		var $errorLogMessage : Text
 		$errorLogMessage:=" called with $1 = '"+$profilerTag+"'"
 		If ($extraText#"")
 			$errorLogMessage+=" and $2 = '"+$extraText+"'"
@@ -45,15 +45,15 @@ If (__STACK.length>0)
 		LogNamed_AppendToFile("On Err Trigger"; Current method name:C684+$errorLogMessage)
 	End if 
 	
-	C_REAL:C285($stoppedAtMilliseconds)
+	var $stoppedAtMilliseconds : Real
 	$stoppedAtMilliseconds:=Milliseconds:C459
 	
 	// # Track the time
-	C_LONGINT:C283($timeSpentInMethod)
+	var $timeSpentInMethod : Integer
 	$timeSpentInMethod:=$stoppedAtMilliseconds-$event.start_ms  // time between start & end
 	$timeSpentInMethod-=$event.wasteTime  // remove the child method's time
 	
-	C_LONGINT:C283($size)
+	var $size : Integer
 	$size:=__STACK.length
 	If ($size>0)  // add our execute time to the calling parent method
 		__STACK[$size-1].wasteTime:=__STACK[$size-1].wasteTime+$event.wasteTime  // add child method times
@@ -64,7 +64,7 @@ If (__STACK.length>0)
 	Performance_UpdateTrackingObj(__PerfObj; $fullProfilerTag; $timeSpentInMethod)
 	
 	// Track by flamegraph name
-	C_TEXT:C284($vt_MethodName_FlameGraph)
+	var $vt_MethodName_FlameGraph : Text
 	$vt_MethodName_FlameGraph:=STR_GetFlameGraphNameFromStack($fullProfilerTag; __STACK)
 	Performance_UpdateTrackingObj(__PerfFlameObj; $vt_MethodName_FlameGraph; $timeSpentInMethod)
 	

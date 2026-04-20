@@ -26,11 +26,11 @@ If (Asserted:C1132(Count parameters:C259<=1))
 			ARRAY TEXT:C222($at_fileNames; 0)
 			DOCUMENT LIST:C474($vt_folderPath; $at_fileNames)
 			
-			C_TEXT:C284($vt_svg)
-			C_LONGINT:C283($i)
+			var $vt_svg : Text
+			var $i : Integer
 			For ($i; 1; Size of array:C274($at_fileNames))
 				If ($at_fileNames{$i}="@flamegraph@.txt") & ($at_fileNames{$i}#"@[SUMMARY]@")
-					C_TEXT:C284($vt)
+					var $vt : Text
 					$vt:=FlameGraph_FoldFile($vt_folderPath+$at_fileNames{$i})
 					If (File_DoesExist($vt))
 						$vl_numFileSummarized:=$vl_numFileSummarized+1

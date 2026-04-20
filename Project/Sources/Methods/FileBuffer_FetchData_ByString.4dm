@@ -49,8 +49,8 @@ If (Asserted:C1132(Length:C16($matchOnText)>0))  // String being passed to searc
 	End if 
 	
 	// Increment our current position in the file
-	C_LONGINT:C283(fileBuffer_curPos)
-	C_BLOB:C604($vx_tmpBuffer)
+	var fileBuffer_curPos : Integer
+	var $vx_tmpBuffer : Blob
 	TEXT TO BLOB:C554($tmpTxt; $vx_tmpBuffer; UTF8 text without length:K22:17)
 	fileBuffer_curPos:=fileBuffer_curPos+BLOB size:C605($vx_tmpBuffer)
 End if   // ASSERT

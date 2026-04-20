@@ -15,7 +15,7 @@ If (Asserted:C1132(Count parameters:C259=3))
 	OB GET PROPERTY NAMES:C1232($performanceObj; $objectPropertyNames)
 	SORT ARRAY:C229($objectPropertyNames; >)
 	
-	C_TEXT:C284($html)
+	var $html : Text
 	$html:="<style> .red {color:red;}</style>"
 	If ($statType="flame")
 		$html+="<h1>Method Profiler Stats - Flamegraph</h1>"
@@ -35,14 +35,13 @@ If (Asserted:C1132(Count parameters:C259=3))
 	$html+="<th>Max/Total Ratio</th>"
 	$html+="</tr></thead>"
 	
-	C_LONGINT:C283($callCount)
-	C_REAL:C285($vr_average; $vr_max; $vr_total; $vr_ratioTotal; $vr_min; $vr_ratioAvg)
-	C_BOOLEAN:C305($vb_warnRatioTotal; $vb_warnAvg)
+	var $callCount : Integer
+	var $vr_average; $vr_max; $vr_total; $vr_ratioTotal; $vr_min; $vr_ratioAvg : Real
+	var $vb_warnRatioTotal; $vb_warnAvg : Boolean
 	$html+="<tbody>"
 	
-	C_TEXT:C284($tmpHTML; $methodName)
-	C_LONGINT:C283($i; $rowNo)
-	C_REAL:C285($vr_total; $vr_max; $vr_min; $vr_ratioAvg; $vr_ratioTotal)
+	var $tmpHTML; $methodName : Text
+	var $i; $rowNo : Integer
 	$tmpHTML:=""
 	$rowNo:=0
 	For ($i; 1; Size of array:C274($objectPropertyNames))

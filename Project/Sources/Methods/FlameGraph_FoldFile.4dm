@@ -33,12 +33,12 @@ If (Asserted:C1132(Count parameters:C259<=1))
 			
 			
 			// # open the file and start importing the data
-			C_TIME:C306($docRef)
+			var $docRef : Time
 			$docRef:=Open document:C264($vt_srcFilePath; ""; Read mode:K24:5)
 			If (OK=1)
 				FileBuffer_Init($docRef)
 				
-				C_TEXT:C284($vt_oneLine)
+				var $vt_oneLine : Text
 				Repeat 
 					$vt_oneLine:=FileBuffer_FetchData_ByString(Char:C90(Carriage return:K15:38); Char:C90(Line feed:K15:40))
 					$vt_oneLine:=Replace string:C233($vt_oneLine; Char:C90(Carriage return:K15:38); "")
@@ -46,7 +46,7 @@ If (Asserted:C1132(Count parameters:C259<=1))
 					
 					If ($vt_oneLine#"")
 						// need to figure out where the "last" space is on the line
-						C_LONGINT:C283($vl_locationOfSpace; $i)
+						var $vl_locationOfSpace; $i : Integer
 						$vl_locationOfSpace:=0
 						For ($i; Length:C16($vt_oneLine); 1; -1)
 							If ($vt_oneLine[[$i]]=" ")
@@ -56,12 +56,12 @@ If (Asserted:C1132(Count parameters:C259<=1))
 						End for 
 						
 						If ($vl_locationOfSpace>0)
-							C_TEXT:C284($vt_label)
-							C_REAL:C285($vr_count)
+							var $vt_label : Text
+							var $vr_count : Real
 							$vt_label:=Substring:C12($vt_oneLine; 1; $vl_locationOfSpace-1)
 							$vr_count:=Num:C11(Substring:C12($vt_oneLine; $vl_locationOfSpace+1))
 							
-							C_LONGINT:C283($pos)
+							var $pos : Integer
 							$pos:=Find in array:C230($at_label; $vt_label)
 							If ($pos>0)
 								$ar_time{$pos}:=$ar_time{$pos}+$vr_count
@@ -77,7 +77,7 @@ If (Asserted:C1132(Count parameters:C259<=1))
 				
 				
 				// Determine what our "folded" file name is
-				C_TEXT:C284($vt_fileExtn; $vt_fileName)
+				var $vt_fileExtn; $vt_fileName : Text
 				$foldedFilePath:=File_GetFolderName($vt_srcFilePath)
 				$vt_fileName:=File_GetFileName($vt_srcFilePath)
 				$vt_fileExtn:=File_GetExtension($vt_fileName)

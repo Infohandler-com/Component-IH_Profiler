@@ -5,11 +5,11 @@
 
 #DECLARE($what : Text)
 
-C_TEXT:C284(UnitTest_CurrentTestCase; UnitTest_Log)
-C_LONGINT:C283(UnitTest_StartTime; UnitTest_TotalTests; UnitTest_TotalPassed; UnitTest_TotalFailed)
-C_REAL:C285(UnitTest_TotalDuration)
+var UnitTest_CurrentTestCase; UnitTest_Log : Text
+var UnitTest_StartTime; UnitTest_TotalTests; UnitTest_TotalPassed; UnitTest_TotalFailed : Integer
+var UnitTest_TotalDuration : Real
 
-C_BOOLEAN:C305(UnitTest_hasInited)
+var UnitTest_hasInited : Boolean
 
 If (Count parameters:C259#1)
 	$what:="all"

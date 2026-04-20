@@ -4,9 +4,10 @@
 
 #DECLARE($action : Text)
 
-C_COLLECTION:C1488(__STACK)
-C_OBJECT:C1216(__PerfObj; __PerfFlameObj)
-C_LONGINT:C283(__incrementLevel)
+var __STACK : Collection
+var __incrementLevel : Integer
+var __PerfObj; __PerfFlameObj : Object
+var __Global_PerfObj; __Global_PerfFlameObj : Object
 
 Case of 
 	: ($action="RunTests")
@@ -65,14 +66,12 @@ Case of
 	: ($action="Init_GlobalTracking_CreatesObjects")
 		Init_GlobalTracking(True:C214)
 		
-		C_OBJECT:C1216(__Global_PerfObj; __Global_PerfFlameObj)
 		UnitTest_Assert(__Global_PerfObj#Null:C1517; "__Global_PerfObj should be non-null after Init_GlobalTracking")
 		UnitTest_Assert(__Global_PerfFlameObj#Null:C1517; "__Global_PerfFlameObj should be non-null after Init_GlobalTracking")
 		UnitTest_Assert(__Global_PerfObj._numItems=0; "__Global_PerfObj._numItems should be 0, got: "+String:C10(__Global_PerfObj._numItems))
 		UnitTest_Assert(__Global_PerfFlameObj._numItems=0; "__Global_PerfFlameObj._numItems should be 0, got: "+String:C10(__Global_PerfFlameObj._numItems))
 		
 	: ($action="Init_GlobalTracking_ForcedReinitClearsExisting")
-		C_OBJECT:C1216(__Global_PerfObj; __Global_PerfFlameObj)
 		Init_GlobalTracking(True:C214)
 		__Global_PerfObj._numItems:=5  // simulate accumulated data
 		Init_GlobalTracking(True:C214)  // forced reinit should reset
@@ -80,7 +79,6 @@ Case of
 			"Forced Init_GlobalTracking should reset _numItems to 0, got: "+String:C10(__Global_PerfObj._numItems))
 		
 	: ($action="Init_GlobalTracking_IdempotentWithoutForce")
-		C_OBJECT:C1216(__Global_PerfObj; __Global_PerfFlameObj)
 		Init_GlobalTracking(True:C214)
 		__Global_PerfObj._numItems:=7  // simulate accumulated data
 		Init_GlobalTracking  // no force - should not reset
