@@ -13,7 +13,6 @@ If (__STACK.length>0)
 End if 
 
 If ($vt_currentMethodName="")  // Just in case, try to catch it this way.
-	C_TEXT:C284(Error method)
 	$vt_currentMethodName:=Error method
 End if 
 

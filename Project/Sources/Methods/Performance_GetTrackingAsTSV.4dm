@@ -21,7 +21,7 @@ If (Asserted:C1132(Count parameters:C259=2))
 		$csv+="Max (ms)\t"
 		$csv+="Total (ms)\r"
 		
-		C_LONGINT:C283($i)
+		var $i : Integer
 		For ($i; 1; Size of array:C274($objectPropertyNames))
 			If ($objectPropertyNames{$i}#"_NumItems")
 				$csv+=$objectPropertyNames{$i}+Char:C90(Tab:K15:37)

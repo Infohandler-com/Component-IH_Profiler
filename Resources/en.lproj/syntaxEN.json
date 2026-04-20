@@ -1,0 +1,270 @@
+{
+	"_method_": {
+		"Profiler_START": {
+			"Syntax": "**Profiler_START**( *profilerTag* : Text; *extraText* : Text )",
+			"Params": [
+				[
+					"profilerTag",
+					"Text",
+					"->"
+				],
+				[
+					"extraText",
+					"Text",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_LogCallStack": {
+			"Syntax": "**Profiler_LogCallStack**( *err* : Integer )",
+			"Params": [
+				[
+					"err",
+					"Integer",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_LogFlameStats_GLOBAL": {
+			"Syntax": "**Profiler_LogFlameStats_GLOBAL**() : Variant",
+			"Params": [
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_ClearProcessStats": {
+			"Syntax": "**Profiler_ClearProcessStats**() : Variant",
+			"Params": [
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_GetLocalCallChainStats": {
+			"Syntax": "**Profiler_GetLocalCallChainStats**()->flame_stats_as_text : Text",
+			"Params": [
+				[
+					"flame_stats_as_text",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_ClearGlobalStats": {
+			"Syntax": "**Profiler_ClearGlobalStats**() : Variant",
+			"Params": [
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_SaveProcessStatsAsHTML": {
+			"Syntax": "**Profiler_SaveProcessStatsAsHTML**( *statType* : Text; *filePath* : Text )",
+			"Params": [
+				[
+					"statType",
+					"Text",
+					"->"
+				],
+				[
+					"filePath",
+					"Text",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_LogMethodStats_GLOBAL": {
+			"Syntax": "**Profiler_LogMethodStats_GLOBAL**() : Variant",
+			"Params": [
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_LogFlameStats": {
+			"Syntax": "**Profiler_LogFlameStats**( *vt_moduleName* : Text )",
+			"Params": [
+				[
+					"vt_moduleName",
+					"Text",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_GetLocalProfileStats": {
+			"Syntax": "**Profiler_GetLocalProfileStats**()->profile_stats_as_text : Text",
+			"Params": [
+				[
+					"profile_stats_as_text",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_STOP": {
+			"Syntax": "**Profiler_STOP**( *profilerTag* : Text; *extraText* : Text )",
+			"Params": [
+				[
+					"profilerTag",
+					"Text",
+					"->"
+				],
+				[
+					"extraText",
+					"Text",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"FlameGraph_FoldFilesInFolder": {
+			"Syntax": "**FlameGraph_FoldFilesInFolder**( *vt_folderPath* : Text )->vl_numFileSummarized : Integer",
+			"Params": [
+				[
+					"vt_folderPath",
+					"Text",
+					"->"
+				],
+				[
+					"vl_numFileSummarized",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_LogCallChainStats": {
+			"Syntax": "**Profiler_LogCallChainStats**() : Variant",
+			"Params": [
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_LogCallChnStats_GLOBAL": {
+			"Syntax": "**Profiler_LogCallChnStats_GLOBAL**() : Variant",
+			"Params": [
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_CallStack_GetCurrent": {
+			"Syntax": "**Profiler_CallStack_GetCurrent**()->vt_currentMethodName : Text",
+			"Params": [
+				[
+					"vt_currentMethodName",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"BuildNo_GetBuildNo_ProfileComp": {
+			"Syntax": "**BuildNo_GetBuildNo_ProfileComp**()->vo_buildNoObj : Object",
+			"Params": [
+				[
+					"vo_buildNoObj",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"FlameGraph_FoldFile": {
+			"Syntax": "**FlameGraph_FoldFile**( *vt_srcFilePath* : Text )->foldedFilePath : Text",
+			"Params": [
+				[
+					"vt_srcFilePath",
+					"Text",
+					"->"
+				],
+				[
+					"foldedFilePath",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_LogMethodStats": {
+			"Syntax": "**Profiler_LogMethodStats**() : Variant",
+			"Params": [
+				[
+					"",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_CallStack_GetPrevious": {
+			"Syntax": "**Profiler_CallStack_GetPrevious**()->vt_previousMethodName : Text",
+			"Params": [
+				[
+					"vt_previousMethodName",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"FlameGraph_FoldedFileToSVG": {
+			"Syntax": "**FlameGraph_FoldedFileToSVG**( *foldedFilePath* : Text )->svgFilePath : Text",
+			"Params": [
+				[
+					"foldedFilePath",
+					"Text",
+					"->"
+				],
+				[
+					"svgFilePath",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Profiler_SaveGlobalStatsAsHTML": {
+			"Syntax": "**Profiler_SaveGlobalStatsAsHTML**( *vt_statsToSave* : Text; *vt_filePath* : Text )",
+			"Params": [
+				[
+					"vt_statsToSave",
+					"Text",
+					"->"
+				],
+				[
+					"vt_filePath",
+					"Text",
+					"->"
+				]
+			],
+			"Summary": ""
+		}
+	}
+}

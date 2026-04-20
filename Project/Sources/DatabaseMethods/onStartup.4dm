@@ -2,7 +2,7 @@
 // Must be non compiled and not as a component
 If (Not:C34(Is compiled mode:C492)) && (Structure file:C489(*)=Structure file:C489)
 	// Set a defaul that is not inside the component dbase folder
-	C_TEXT:C284($vt_rootFolder)
+	var $vt_rootFolder : Text
 	$vt_rootFolder:=Folder_ParentName(Structure file:C489)
 	If ($vt_rootFolder=("@.4dbase"+Folder separator:K24:12))
 		$vt_rootFolder:=Folder_ParentName($vt_rootFolder)
@@ -12,7 +12,7 @@ If (Not:C34(Is compiled mode:C492)) && (Structure file:C489(*)=Structure file:C4
 	
 	
 	
-	C_LONGINT:C283($Window_lref)
+	var $Window_lref : Integer
 	$Window_lref:=Open form window:C675("ReleaseBuildNo_d"; Regular window:K27:1; 420; 250)
 	BRING TO FRONT:C326($Window_lref)
 	DIALOG:C40("ReleaseBuildNo_d")

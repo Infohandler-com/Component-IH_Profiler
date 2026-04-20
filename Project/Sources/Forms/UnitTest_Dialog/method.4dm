@@ -7,8 +7,8 @@ Case of
 		
 		
 	: (Form event code:C388=On Data Change:K2:15) | (Form event code:C388=On Clicked:K2:4)
-		C_BOOLEAN:C305($isOneSelected)
-		C_LONGINT:C283($i)
+		var $isOneSelected : Boolean
+		var $i : Integer
 		$isOneSelected:=False:C215
 		For ($i; 1; Size of array:C274(UnitTest_TestCaseEnabled))
 			$isOneSelected:=$isOneSelected | UnitTest_TestCaseEnabled{$i}

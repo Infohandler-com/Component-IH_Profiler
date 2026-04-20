@@ -2,7 +2,7 @@
 // (PM) UnitTest_RunAll
 // Runs all unit tests
 
-C_LONGINT:C283($index)
+var $index : Integer
 
 // Initialise our variables and setup the test cases
 UnitTest_Init("all")

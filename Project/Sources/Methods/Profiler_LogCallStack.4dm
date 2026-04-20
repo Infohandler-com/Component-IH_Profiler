@@ -9,12 +9,12 @@
 Init_ThreadSafe
 
 If (__STACK.length>0)
-	C_TEXT:C284($vt_buffer)
+	var $vt_buffer : Text
 	$vt_buffer:=String:C10(Current date:C33; 7)+" "+String:C10(Current time:C178; HH MM SS:K7:1)+" "  // Add the date & time
 	$vt_buffer+="[p"+String:C10(Current process:C322; "000")
 	
 	// Output the user name if it is defined.
-	C_TEXT:C284(WEB_t_userName)
+	var WEB_t_userName : Text
 	If (WEB_t_userName#"")
 		$vt_buffer+=", "+WEB_t_userName
 	End if 
@@ -22,7 +22,7 @@ If (__STACK.length>0)
 	$vt_buffer+="]: ###### CALLING CHAIN DUMP"+Char:C90(Carriage return:K15:38)
 	
 	// Output the calling chain
-	C_LONGINT:C283($i)
+	var $i : Integer
 	For ($i; 0; __STACK.length-1)
 		$vt_buffer+=" Lvl "+String:C10($i; "##00")+": "+("   "*($i))+__STACK[$i].tag
 		If (__STACK[$i].extraText#"")

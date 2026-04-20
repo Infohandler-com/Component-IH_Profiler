@@ -13,7 +13,7 @@
 ARRAY TEXT:C222(gErrorTextArr; 0)
 OnErr_GENERIC_Profiler_Minimal
 
-C_LONGINT:C283($i)
+var $i : Integer
 For ($i; 1; Size of array:C274(gErrorTextArr))
 	If ($i=1)
 		Log_ERR_CRITICAL(gErrorTextArr{$i}+" Check On Err log for more detail.")

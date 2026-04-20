@@ -13,7 +13,7 @@
 
 If (Asserted:C1132(Count parameters:C259<=1))
 	
-	C_COLLECTION:C1488(_OnErr_MethodStack)
+	var _OnErr_MethodStack : Collection
 	If (_OnErr_MethodStack=Null:C1517)
 		_OnErr_MethodStack:=New collection:C1472
 	End if 

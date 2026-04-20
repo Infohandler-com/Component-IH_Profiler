@@ -14,7 +14,7 @@ ARRAY TEXT:C222($at_buildNo; 0)
 LIST TO ARRAY:C288("BuildNo"; $at_buildNo)
 Array_SetSize(1; ->$at_buildNo)  // Make sure there is at least one element
 
-C_TEXT:C284($vt_value)
+var $vt_value : Text
 $vt_value:=$at_buildNo{1}
 
 If ($vt_value#"") & ($vt_value="{@")

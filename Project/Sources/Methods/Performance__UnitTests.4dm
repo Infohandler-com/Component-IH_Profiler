@@ -4,6 +4,7 @@
 
 #DECLARE($action : Text)
 
+var $obj : Object
 Case of 
 		
 	: ($action="")
@@ -22,7 +23,6 @@ Case of
 		
 		
 	: ($action="Performance_UpdateTrackingObj_CreatesFirstEntry")
-		var $obj : Object
 		$obj:=New object:C1471("_numItems"; 0)
 		Performance_UpdateTrackingObj($obj; "testMethod"; 100)
 		
@@ -34,7 +34,6 @@ Case of
 		
 		
 	: ($action="Performance_UpdateTrackingObj_UpdatesSecondCall")
-		var $obj : Object
 		$obj:=New object:C1471("_numItems"; 0)
 		Performance_UpdateTrackingObj($obj; "testMethod"; 100)
 		Performance_UpdateTrackingObj($obj; "testMethod"; 200)
@@ -44,7 +43,6 @@ Case of
 		
 		
 	: ($action="Performance_UpdateTrackingObj_UpdatesMinWhenLower")
-		var $obj : Object
 		$obj:=New object:C1471("_numItems"; 0)
 		Performance_UpdateTrackingObj($obj; "m"; 100)
 		Performance_UpdateTrackingObj($obj; "m"; 50)  // lower value should update min
@@ -54,7 +52,6 @@ Case of
 		
 		
 	: ($action="Performance_UpdateTrackingObj_UpdatesMaxWhenHigher")
-		var $obj : Object
 		$obj:=New object:C1471("_numItems"; 0)
 		Performance_UpdateTrackingObj($obj; "m"; 100)
 		Performance_UpdateTrackingObj($obj; "m"; 250)  // higher value should update max
@@ -64,7 +61,6 @@ Case of
 		
 		
 	: ($action="Performance_UpdateTrackingObj_AccumulatesTotal")
-		var $obj : Object
 		$obj:=New object:C1471("_numItems"; 0)
 		Performance_UpdateTrackingObj($obj; "m"; 10)
 		Performance_UpdateTrackingObj($obj; "m"; 20)
@@ -75,7 +71,6 @@ Case of
 		
 		
 	: ($action="Performance_UpdateTrackingObj_IncrementsNumItems")
-		var $obj : Object
 		$obj:=New object:C1471("_numItems"; 0)
 		Performance_UpdateTrackingObj($obj; "method1"; 10)
 		Performance_UpdateTrackingObj($obj; "method2"; 20)
@@ -85,7 +80,6 @@ Case of
 		
 		
 	: ($action="Performance_UpdateTrackingObj_MultipleKeys")
-		var $obj : Object
 		$obj:=New object:C1471("_numItems"; 0)
 		Performance_UpdateTrackingObj($obj; "alpha"; 10)
 		Performance_UpdateTrackingObj($obj; "beta"; 20)
@@ -98,7 +92,6 @@ Case of
 		
 	: ($action="Performance_UpdateTrackingObj_SpacesReplacedByUnderscores")
 		// Method names with spaces should have spaces replaced by underscores
-		var $obj : Object
 		$obj:=New object:C1471("_numItems"; 0)
 		Performance_UpdateTrackingObj($obj; "my method"; 50)
 		
@@ -108,7 +101,6 @@ Case of
 		
 	: ($action="Performance_UpdateTrackingObj_NumItemsKeyCollision")
 		// Tracking an item named "_numItems" should not corrupt the counter
-		var $obj : Object
 		$obj:=New object:C1471("_numItems"; 0)
 		Performance_UpdateTrackingObj($obj; "_numItems"; 10)
 		

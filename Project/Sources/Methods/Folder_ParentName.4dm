@@ -12,7 +12,7 @@ If (Asserted:C1132((Count parameters:C259>=1) & (Count parameters:C259<=2)))
 		$HFS_AltSeperator:=Folder separator:K24:12
 	End if 
 	
-	C_LONGINT:C283($i)
+	var $i : Integer
 	For ($i; Length:C16($HFS_FullPath); 1; -1)
 		If ($HFS_FullPath[[$i]]=$HFS_AltSeperator) & ($i#Length:C16($HFS_FullPath))
 			$HFS_ParentName:=Substring:C12($HFS_FullPath; 1; $i)

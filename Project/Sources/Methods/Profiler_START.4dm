@@ -17,7 +17,7 @@ If (Asserted:C1132((Count parameters:C259=1) || (Count parameters:C259=2)))
 		$extraText:=Replace string:C233($extraText; " "; "_")
 	End if 
 	
-	C_COLLECTION:C1488(__STACK)
+	var __STACK : Collection
 	Case of 
 		: (__STACK=Null:C1517)  // first time being called, set everything up
 			Init_ThreadSafe
@@ -27,7 +27,7 @@ If (Asserted:C1132((Count parameters:C259=1) || (Count parameters:C259=2)))
 	End case 
 	
 	
-	C_OBJECT:C1216($event)
+	var $event : Object
 	$event:=New object:C1471
 	$event.tag:=$profilerTag
 	$event.extraText:=$extraText

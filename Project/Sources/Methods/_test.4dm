@@ -8,7 +8,7 @@ End if
 FileBuffer_Init()
 Log_SetUserNameForProcess("dbeaubien")
 UnitTest__Stopwatch()
-C_TEXT:C284($folder)
+var $folder : Text
 $folder:=Folder_ParentName(Folder_ParentName(Structure file:C489))+"IH_Profiler Tests"+Folder separator:K24:12
 Folder_VerifyExistance($folder)
 
@@ -18,7 +18,7 @@ If (True:C214)
 	If (True:C214)
 		Profiler_START("test 2")
 		If (True:C214)
-			C_LONGINT:C283($i)
+			var $i : Integer
 			For ($i; 1; 10)
 				Profiler_START("test3")
 				DELAY PROCESS:C323(Current process:C322; 1)
