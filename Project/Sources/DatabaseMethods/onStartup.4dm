@@ -24,13 +24,11 @@ If (Not:C34(Is compiled mode:C492)) && (Structure file:C489(*)=Structure file:C4
 	If (Find in array:C230($at_components; "Code Analysis")>0)
 		EXECUTE FORMULA:C63("CA_ShowQuickLauncher")
 	End if 
-	If (Find in array:C230($at_components; "Mainfest Generator")>0)
-		EXECUTE METHOD:C1007("Manifest_SetAuthor"; *; "Dani Beaubien")
-		EXECUTE METHOD:C1007("Manifest_SetBuildDate"; *; Current date:C33)
-		EXECUTE METHOD:C1007("Manifest_SetURL"; *; "http://infohandler.com")
-		EXECUTE METHOD:C1007("Manifest_SetCopyright"; *; "Copyright "+String:C10(Year of:C25(Current date:C33))+" Infohandler.com")
-		EXECUTE METHOD:C1007("Manifest_SetVersion"; *; BuildNo_GetBuildNo_ProfileComp.versionLong; True:C214)
-	End if 
 	
+	Manifest_SetAuthor("Dani Beaubien")
+	Manifest_SetBuildDate(Current date:C33)
+	Manifest_SetURL("http://infohandler.com")
+	Manifest_SetCopyright("Copyright "+String:C10(Year of:C25(Current date:C33))+" Infohandler.com")
+	Manifest_SetVersion(BuildNo_GetBuildNo_ProfileComp.versionLong; True:C214)
 End if 
 
